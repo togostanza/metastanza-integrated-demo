@@ -27,41 +27,40 @@
 
   <togostanza--container>
 
-    <togostanza--data-source url="http://localhost:5500/data.json"
-      receiver="togostanza-pagination-table, togostanza-barchart" target-attribute="data-url"></togostanza--data-source>
-    <togostanza--data-source url="http://localhost:5500/tree-data.json"
+    <togostanza--data-source url="./data.json" receiver="togostanza-pagination-table, togostanza-barchart"
+      target-attribute="data-url"></togostanza--data-source>
+    <togostanza--data-source url="./tree-data.json"
       receiver="togostanza-treemap,togostanza-sunburst,togostanza-column-tree"
       target-attribute="data-url"></togostanza--data-source>
 
     <div style="display: flex;">
 
-      <script type="module" src="http://localhost:8080/treemap.js" async></script>
+      <script type="module" src="https://togostanza.github.io/metastanza-devel/treemap.js" async></script>
 
-      <togostanza-treemap data-url="http://localhost:5500/tree-data.json" data-type="json" node-label_key="label"
-        node-value_key="size" node-log_scale togostanza-custom_css_url="" event-incoming_change_selected_nodes
+      <togostanza-treemap data-url="./tree-data.json" data-type="json" node-label_key="label" node-value_key="size"
+        node-log_scale togostanza-custom_css_url="" event-incoming_change_selected_nodes
         event-outgoing_change_selected_nodes></togostanza-treemap>
 
-      <script type="module" src="http://localhost:8080/sunburst.js" async></script>
+      <script type="module" src="https://togostanza.github.io/metastanza-devel/sunburst.js" async></script>
 
-      <togostanza-sunburst data-url="http://localhost:5500/tree-data.json" data-type="json" node-value_key="size"
-        node-label_key="label" node-values_visible node-levels_gap_width="2" node-gap_width="8" node-corner_radius="0"
-        scaling="By value" max_depth="3" togostanza-custom_css_url="" event-incoming_change_selected_nodes
+      <togostanza-sunburst data-url="./tree-data.json" data-type="json" node-value_key="size" node-label_key="label"
+        node-values_visible node-levels_gap_width="2" node-gap_width="8" node-corner_radius="0" scaling="By value"
+        max_depth="3" togostanza-custom_css_url="" event-incoming_change_selected_nodes
         event-outgoing_change_selected_nodes></togostanza-sunburst>
 
-      <script type="module" src="http://localhost:8080/column-tree.js" async></script>
+      <script type="module" src="https://togostanza.github.io/metastanza-devel/column-tree.js" async></script>
 
-      <togostanza-column-tree data-url="http://localhost:5500/tree-data.json" data-type="json" node-label_key="label"
-        node-value_key="size" node-value_alignment="horizontal" node-value_fallback="no data" search_key="value"
-        togostanza-custom_css_url="" event-incoming_change_selected_nodes
-        event-outgoing_change_selected_nodes></togostanza-column-tree>
+      <togostanza-column-tree data-url="./tree-data.json" data-type="json" node-label_key="label" node-value_key="size"
+        node-value_alignment="horizontal" node-value_fallback="no data" search_key="value" togostanza-custom_css_url=""
+        event-incoming_change_selected_nodes event-outgoing_change_selected_nodes></togostanza-column-tree>
     </div>
 
 
 
-    <script type="module" src="http://localhost:8080/barchart.js" async></script>
+    <script type="module" src="https://togostanza.github.io/metastanza-devel/barchart.js" async></script>
 
-    <togostanza-barchart data-url="http://localhost:5500/data.json" data-type="json" data-interpretation="distribution"
-      data-bin-count="10" axis-x-key="pop_2020" axis-x-placement="bottom" axis-x-title="都道府県" axis-x-title_padding="25"
+    <togostanza-barchart data-url="./data.json" data-type="json" data-interpretation="distribution" data-bin-count="10"
+      axis-x-key="pop_2020" axis-x-placement="bottom" axis-x-title="都道府県" axis-x-title_padding="25"
       axis-x-ticks_label_angle="-45" axis-x-ticks_interval="" axis-x-ticks_labels_format=",.2r"
       axis-x-gridlines_interval="" axis-y-key="pop_2020" axis-y-placement="left" axis-y-title="人口"
       axis-y-title_padding="40" axis-y-ticks_label_angle="0" axis-y-ticks_interval="" axis-y-ticks_labels_format=""
@@ -69,7 +68,7 @@
       error_bars-key="error" tooltips-key="count" legend-visible legend-title="Category" togostanza-custom_css_url=""
       event-outgoing_change_selected_nodes event-incoming_change_selected_nodes></togostanza-barchart>
 
-    <script type="module" src="http://localhost:8080/pagination-table.js" async></script>
+    <script type="module" src="https://togostanza.github.io/metastanza-devel/pagination-table.js" async></script>
 
     <togostanza-pagination-table
       data-url="https://raw.githubusercontent.com/togostanza/togostanza-data/main/samples/json/pagination-table.disease-gwas.json"
