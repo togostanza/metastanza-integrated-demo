@@ -1,5 +1,4 @@
 const isLocal = location.hostname === "localhost";
-console.log("isLocal:", isLocal);
 // ローカルなら http://localhost:8080/、それ以外なら https://togostanza.github.io/metastanza-devel/
 const baseURL = isLocal ? "http://localhost:8080/" : "https://togostanza.github.io/metastanza-devel/";
 
@@ -18,80 +17,72 @@ document.addEventListener("DOMContentLoaded", () => {
       {
         "tag": "togostanza--data-source",
         "attributes": {
-          "url": "./data.json",
+          "url": "./multi-data.json",
           "receiver": "togostanza-pagination-table, togostanza-barchart",
           "target-attribute": "data-url"
         }
-      },
-      {
-        "tag": "togostanza--data-source",
-        "attributes": {
-          "url": "./tree-data.json",
-          "receiver": "togostanza-treemap,togostanza-sunburst,togostanza-column-tree",
-          "target-attribute": "data-url"
-        }
       }
     ],
-    "flexContainer": [
-      {
-        "type": "script",
-        "src": "treemap.js"
-      },
-      {
-        "tag": "togostanza-treemap",
-        "attributes": {
-          "data-url": "./tree-data.json",
-          "data-type": "json",
-          "node-label_key": "label",
-          "node-value_key": "size",
-          "node-log_scale": "",
-          "togostanza-custom_css_url": "",
-          "event-incoming_change_selected_nodes": "",
-          "event-outgoing_change_selected_nodes": ""
-        }
-      },
-      {
-        "type": "script",
-        "src": "sunburst.js"
-      },
-      {
-        "tag": "togostanza-sunburst",
-        "attributes": {
-          "data-url": "./tree-data.json",
-          "data-type": "json",
-          "node-value_key": "size",
-          "node-label_key": "label",
-          "node-values_visible": "",
-          "node-levels_gap_width": "2",
-          "node-gap_width": "8",
-          "node-corner_radius": "0",
-          "scaling": "By value",
-          "max_depth": "3",
-          "togostanza-custom_css_url": "",
-          "event-incoming_change_selected_nodes": "",
-          "event-outgoing_change_selected_nodes": ""
-        }
-      },
-      {
-        "type": "script",
-        "src": "column-tree.js"
-      },
-      {
-        "tag": "togostanza-column-tree",
-        "attributes": {
-          "data-url": "./tree-data.json",
-          "data-type": "json",
-          "node-label_key": "label",
-          "node-value_key": "size",
-          "node-value_alignment": "horizontal",
-          "node-value_fallback": "no data",
-          "search_key": "value",
-          "togostanza-custom_css_url": "",
-          "event-incoming_change_selected_nodes": "",
-          "event-outgoing_change_selected_nodes": ""
-        }
-      }
-    ],
+    // "flexContainer": [
+    //   {
+    //     "type": "script",
+    //     "src": "treemap.js"
+    //   },
+    //   {
+    //     "tag": "togostanza-treemap",
+    //     "attributes": {
+    //       "data-url": "./tree-data.json",
+    //       "data-type": "json",
+    //       "node-label_key": "label",
+    //       "node-value_key": "size",
+    //       "node-log_scale": "",
+    //       "togostanza-custom_css_url": "",
+    //       "event-incoming_change_selected_nodes": "",
+    //       "event-outgoing_change_selected_nodes": ""
+    //     }
+    //   },
+    //   {
+    //     "type": "script",
+    //     "src": "sunburst.js"
+    //   },
+    //   {
+    //     "tag": "togostanza-sunburst",
+    //     "attributes": {
+    //       "data-url": "./tree-data.json",
+    //       "data-type": "json",
+    //       "node-value_key": "size",
+    //       "node-label_key": "label",
+    //       "node-values_visible": "",
+    //       "node-levels_gap_width": "2",
+    //       "node-gap_width": "8",
+    //       "node-corner_radius": "0",
+    //       "scaling": "By value",
+    //       "max_depth": "3",
+    //       "togostanza-custom_css_url": "",
+    //       "event-incoming_change_selected_nodes": "",
+    //       "event-outgoing_change_selected_nodes": ""
+    //     }
+    //   },
+    //   {
+    //     "type": "script",
+    //     "src": "column-tree.js"
+    //   },
+    //   {
+    //     "tag": "togostanza-column-tree",
+    //     "attributes": {
+    //       "data-url": "./tree-data.json",
+    //       "data-type": "json",
+    //       "node-label_key": "label",
+    //       "node-value_key": "size",
+    //       "node-value_alignment": "horizontal",
+    //       "node-value_fallback": "no data",
+    //       "search_key": "value",
+    //       "togostanza-custom_css_url": "",
+    //       "event-incoming_change_selected_nodes": "",
+    //       "event-outgoing_change_selected_nodes": ""
+    //     }
+    //   }
+    // ],
     "others": [
       {
         "type": "script",
@@ -106,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
           "data-bin-count": "10",
           "axis-x-key": "pop_2020",
           "axis-x-placement": "bottom",
-          "axis-x-title": "都道府県",
+          "axis-x-title": "人口",
           "axis-x-title_padding": "25",
           "axis-x-ticks_label_angle": "-45",
           "axis-x-ticks_interval": "",
@@ -114,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
           "axis-x-gridlines_interval": "",
           "axis-y-key": "pop_2020",
           "axis-y-placement": "left",
-          "axis-y-title": "人口",
+          "axis-y-title": "自治体数",
           "axis-y-title_padding": "40",
           "axis-y-ticks_label_angle": "0",
           "axis-y-ticks_interval": "",
@@ -130,6 +121,10 @@ document.addEventListener("DOMContentLoaded", () => {
           "togostanza-custom_css_url": "",
           "event-outgoing_change_selected_nodes": "",
           "event-incoming_change_selected_nodes": ""
+        },
+        "cssVariables": {
+          "--togostanza-canvas-width": 300,
+          "--togostanza-canvas-height": 200
         }
       },
       {
@@ -157,6 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // JSON の各項目から要素を生成する共通関数
+  const style = document.createElement("style");
   function createElement(item) {
     if (item.type === "script") {
       const script = document.createElement("script");
@@ -170,10 +166,23 @@ document.addEventListener("DOMContentLoaded", () => {
       for (const attr in item.attributes) {
         elem.setAttribute(attr, item.attributes[attr]);
       }
+      // CSS 変数を設定
+      if (item.cssVariables) {
+        console.log(item)
+        // 当該要素のCSSルールを生成し、スタイル定義を追加
+        let cssRule = `${item.tag} {`;
+        for (const varName in item.cssVariables) {
+          cssRule += `${varName}: ${item.cssVariables[varName]};`;
+        }
+        cssRule += `}`;
+        console.log(cssRule)
+        style.appendChild(document.createTextNode(cssRule));
+      }
       return elem;
     }
     return null;
   }
+  document.head.appendChild(style);
 
   // dataSources: container に直接追加
   config.dataSources.forEach(item => {
@@ -181,17 +190,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (el) container.appendChild(el);
   });
 
-  // flexContainer の要素をフレックスコンテナに追加
-  const flexDiv = document.createElement("div");
-  flexDiv.style.display = "flex";
-  config.flexContainer.forEach(item => {
-    const el = createElement(item);
-    if (el) flexDiv.appendChild(el);
-  });
-  container.appendChild(flexDiv);
-
   // others: container に直接追加
   config.others.forEach(item => {
+    console.log(item);
     const el = createElement(item);
     if (el) container.appendChild(el);
   });
