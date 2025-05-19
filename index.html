@@ -1,112 +1,19 @@
 <!DOCTYPE html>
-<html class="no-js" lang="">
+<html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title></title>
-  <link rel="stylesheet" href="css/style.css" />
-  <meta name="description" content="" />
-
-  <meta property="og:title" content="" />
-  <meta property="og:type" content="" />
-  <meta property="og:url" content="" />
-  <meta property="og:image" content="" />
-
-  <link rel="icon" href="/favicon.ico" sizes="any" />
-  <link rel="icon" href="/icon.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="icon.png" />
-
-  <link rel="manifest" href="site.webmanifest" />
-  <meta name="theme-color" content="#fafafa" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Togostanza App</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-  <!-- Add your site or application content here -->
-  <p>Hello world! This is HTML5 Boilerplate.</p>
+  <h1>Togostanza Application</h1>
 
-  <togostanza--container>
+  <togostanza--container></togostanza--container>
 
-    <togostanza--data-source url="./data.json" receiver="togostanza-pagination-table, togostanza-barchart"
-      target-attribute="data-url"></togostanza--data-source>
-    <togostanza--data-source url="./tree-data.json"
-      receiver="togostanza-treemap,togostanza-sunburst,togostanza-column-tree"
-      target-attribute="data-url"></togostanza--data-source>
-
-    <div style="display: flex;">
-
-      <script type="module" src="https://togostanza.github.io/metastanza-devel/treemap.js" async></script>
-
-      <togostanza-treemap data-url="./tree-data.json" data-type="json" node-label_key="label" node-value_key="size"
-        node-log_scale togostanza-custom_css_url="" event-incoming_change_selected_nodes
-        event-outgoing_change_selected_nodes></togostanza-treemap>
-
-      <script type="module" src="https://togostanza.github.io/metastanza-devel/sunburst.js" async></script>
-
-      <togostanza-sunburst data-url="./tree-data.json" data-type="json" node-value_key="size" node-label_key="label"
-        node-values_visible node-levels_gap_width="2" node-gap_width="8" node-corner_radius="0" scaling="By value"
-        max_depth="3" togostanza-custom_css_url="" event-incoming_change_selected_nodes
-        event-outgoing_change_selected_nodes></togostanza-sunburst>
-
-      <script type="module" src="https://togostanza.github.io/metastanza-devel/column-tree.js" async></script>
-
-      <togostanza-column-tree data-url="./tree-data.json" data-type="json" node-label_key="label" node-value_key="size"
-        node-value_alignment="horizontal" node-value_fallback="no data" search_key="value" togostanza-custom_css_url=""
-        event-incoming_change_selected_nodes event-outgoing_change_selected_nodes></togostanza-column-tree>
-    </div>
-
-
-
-    <script type="module" src="https://togostanza.github.io/metastanza-devel/barchart.js" async></script>
-
-    <togostanza-barchart data-url="./data.json" data-type="json" data-interpretation="distribution" data-bin-count="10"
-      axis-x-key="pop_2020" axis-x-placement="bottom" axis-x-title="都道府県" axis-x-title_padding="25"
-      axis-x-ticks_label_angle="-45" axis-x-ticks_interval="" axis-x-ticks_labels_format=",.2r"
-      axis-x-gridlines_interval="" axis-y-key="pop_2020" axis-y-placement="left" axis-y-title="人口"
-      axis-y-title_padding="40" axis-y-ticks_label_angle="0" axis-y-ticks_interval="" axis-y-ticks_labels_format=""
-      axis-y-gridlines_interval="" grouping-key="regional_block" grouping-arrangement="stacked" color_by-key="color"
-      error_bars-key="error" tooltips-key="count" legend-visible legend-title="Category" togostanza-custom_css_url=""
-      event-outgoing_change_selected_nodes event-incoming_change_selected_nodes></togostanza-barchart>
-
-    <script type="module" src="https://togostanza.github.io/metastanza-devel/pagination-table.js" async></script>
-
-    <togostanza-pagination-table
-      data-url="https://raw.githubusercontent.com/togostanza/togostanza-data/main/samples/json/pagination-table.disease-gwas.json"
-      data-type="json" width="" fixed-columns="1" padding="0px" page-size-option="10,20,50,100" page-slider="true"
-      no_data_message="fugafuga"
-      columns="[{&quot;id&quot;:&quot;prefecture&quot;,&quot;label&quot;:&quot;都道府県&quot;},{&quot;id&quot;:&quot;regional_block&quot;,&quot;label&quot;:&quot;地域&quot;},{&quot;id&quot;:&quot;pop_2011&quot;,&quot;label&quot;:&quot;人口（2011）&quot;,&quot;type&quot;:&quot;number&quot;},{&quot;id&quot;:&quot;pop_2012&quot;,&quot;label&quot;:&quot;人口（2012）&quot;,&quot;type&quot;:&quot;number&quot;},{&quot;id&quot;:&quot;pop_2013&quot;,&quot;label&quot;:&quot;人口（2013）&quot;,&quot;type&quot;:&quot;number&quot;},{&quot;id&quot;:&quot;pop_2014&quot;,&quot;label&quot;:&quot;人口（2014）&quot;,&quot;type&quot;:&quot;number&quot;},{&quot;id&quot;:&quot;pop_2015&quot;,&quot;label&quot;:&quot;人口（2015）&quot;,&quot;type&quot;:&quot;number&quot;},{&quot;id&quot;:&quot;pop_2016&quot;,&quot;label&quot;:&quot;人口（2016）&quot;,&quot;type&quot;:&quot;number&quot;},{&quot;id&quot;:&quot;pop_2017&quot;,&quot;label&quot;:&quot;人口（2017）&quot;,&quot;type&quot;:&quot;number&quot;},{&quot;id&quot;:&quot;pop_2018&quot;,&quot;label&quot;:&quot;人口（2018）&quot;,&quot;type&quot;:&quot;number&quot;},{&quot;id&quot;:&quot;pop_2019&quot;,&quot;label&quot;:&quot;人口（2019）&quot;,&quot;type&quot;:&quot;number&quot;},{&quot;id&quot;:&quot;pop_2020&quot;,&quot;label&quot;:&quot;人口（2020）&quot;,&quot;type&quot;:&quot;number&quot;},{&quot;id&quot;:&quot;income_2011&quot;,&quot;label&quot;:&quot;収入（2011）&quot;,&quot;type&quot;:&quot;number&quot;},{&quot;id&quot;:&quot;income_2012&quot;,&quot;label&quot;:&quot;収入（2012）&quot;,&quot;type&quot;:&quot;number&quot;},{&quot;id&quot;:&quot;income_2013&quot;,&quot;label&quot;:&quot;収入（2013）&quot;,&quot;type&quot;:&quot;number&quot;},{&quot;id&quot;:&quot;income_2014&quot;,&quot;label&quot;:&quot;収入（2014）&quot;,&quot;type&quot;:&quot;number&quot;},{&quot;id&quot;:&quot;income_2015&quot;,&quot;label&quot;:&quot;収入（2015）&quot;,&quot;type&quot;:&quot;number&quot;},{&quot;id&quot;:&quot;income_2016&quot;,&quot;label&quot;:&quot;収入（2016）&quot;,&quot;type&quot;:&quot;number&quot;},{&quot;id&quot;:&quot;income_2017&quot;,&quot;label&quot;:&quot;収入（2017）&quot;,&quot;type&quot;:&quot;number&quot;},{&quot;id&quot;:&quot;income_2018&quot;,&quot;label&quot;:&quot;収入（2018）&quot;,&quot;type&quot;:&quot;number&quot;},{&quot;id&quot;:&quot;income_2019&quot;,&quot;label&quot;:&quot;収入（2019）&quot;,&quot;type&quot;:&quot;number&quot;},{&quot;id&quot;:&quot;income_2020&quot;,&quot;label&quot;:&quot;収入（2020）&quot;,&quot;type&quot;:&quot;number&quot;}]"
-      togostanza-custom_css_url="" event-outgoing_change_selected_nodes
-      event-incoming_change_selected_nodes></togostanza-pagination-table>
-
-
-
-
-
-
-    <script type="text/javascript">
-      const stanzaElement =
-        document.getElementsByTagName("togostanza-__test1")[0];
-
-      stanzaElement.addEventListener("valueChanged", (event) => {
-        // console.log("event received", event);
-        // console.log(event.detail); // {value: 42}
-      });
-
-      setTimeout(() => {
-
-        const stanzaElement4 =
-          document.getElementsByTagName("togostanza-__test4")[0];
-        const stanzaElement5 =
-          document.getElementsByTagName("togostanza-__test5")[0];
-        // console.log(stanzaElement4)
-        // console.log(stanzaElement4.stanzaInstance)
-        // console.log(stanzaElement4.stanzaInstance.data)
-        // console.log(stanzaElement5.stanzaInstance.data)
-        // console.log(stanzaElement4.stanzaInstance.data == stanzaElement5.stanzaInstance.data)
-
-      }, 1000)
-
-    </script>
+  <script type="module" src="js/main.js"></script>
 </body>
 
 </html>
