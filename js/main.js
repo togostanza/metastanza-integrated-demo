@@ -10,8 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   container.innerHTML = "";
 
-  // JSON 定義に従って生成する設定
-  // ※ script タグの src はファイル名のみとし、createElement 内でパスを組み立てる
+  // JSON 定義（stanzas の階層を一段浅く）
   const config = {
     "dataSources": [
       {
@@ -23,72 +22,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
     ],
-    // "flexContainer": [
-    //   {
-    //     "type": "script",
-    //     "src": "treemap.js"
-    //   },
-    //   {
-    //     "tag": "togostanza-treemap",
-    //     "attributes": {
-    //       "data-url": "./tree-data.json",
-    //       "data-type": "json",
-    //       "node-label_key": "label",
-    //       "node-value_key": "size",
-    //       "node-log_scale": "",
-    //       "togostanza-custom_css_url": "",
-    //       "event-incoming_change_selected_nodes": "",
-    //       "event-outgoing_change_selected_nodes": ""
-    //     }
-    //   },
-    //   {
-    //     "type": "script",
-    //     "src": "sunburst.js"
-    //   },
-    //   {
-    //     "tag": "togostanza-sunburst",
-    //     "attributes": {
-    //       "data-url": "./tree-data.json",
-    //       "data-type": "json",
-    //       "node-value_key": "size",
-    //       "node-label_key": "label",
-    //       "node-values_visible": "",
-    //       "node-levels_gap_width": "2",
-    //       "node-gap_width": "8",
-    //       "node-corner_radius": "0",
-    //       "scaling": "By value",
-    //       "max_depth": "3",
-    //       "togostanza-custom_css_url": "",
-    //       "event-incoming_change_selected_nodes": "",
-    //       "event-outgoing_change_selected_nodes": ""
-    //     }
-    //   },
-    //   {
-    //     "type": "script",
-    //     "src": "column-tree.js"
-    //   },
-    //   {
-    //     "tag": "togostanza-column-tree",
-    //     "attributes": {
-    //       "data-url": "./tree-data.json",
-    //       "data-type": "json",
-    //       "node-label_key": "label",
-    //       "node-value_key": "size",
-    //       "node-value_alignment": "horizontal",
-    //       "node-value_fallback": "no data",
-    //       "search_key": "value",
-    //       "togostanza-custom_css_url": "",
-    //       "event-incoming_change_selected_nodes": "",
-    //       "event-outgoing_change_selected_nodes": ""
-    //     }
-    //   }
-    // ],
-    "others": [
+    "stanzas": [
       {
-        "type": "script",
-        "src": "barchart.js"
-      },
-      {
+        "scriptSrc": "barchart.js",
         "tag": "togostanza-barchart",
         "attributes": {
           "data-url": "./data.json",
@@ -128,10 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       },
       {
-        "type": "script",
-        "src": "pagination-table.js"
-      },
-      {
+        "scriptSrc": "pagination-table.js",
         "tag": "togostanza-pagination-table",
         "attributes": {
           "data-url": "https://raw.githubusercontent.com/togostanza/togostanza-data/main/samples/json/pagination-table.disease-gwas.json",
@@ -151,49 +84,49 @@ document.addEventListener("DOMContentLoaded", () => {
     ]
   };
 
-  // JSON の各項目から要素を生成する共通関数
+  // CSS 変数用 style タグの生成
   const style = document.createElement("style");
-  function createElement(item) {
-    if (item.type === "script") {
-      const script = document.createElement("script");
-      script.type = "module";
-      // script の src は baseURL とファイル名を結合
-      script.src = baseURL + item.src;
-      script.async = true;
-      return script;
-    } else if (item.tag) {
-      const elem = document.createElement(item.tag);
-      for (const attr in item.attributes) {
-        elem.setAttribute(attr, item.attributes[attr]);
-      }
-      // CSS 変数を設定
-      if (item.cssVariables) {
-        console.log(item)
-        // 当該要素のCSSルールを生成し、スタイル定義を追加
-        let cssRule = `${item.tag} {`;
-        for (const varName in item.cssVariables) {
-          cssRule += `${varName}: ${item.cssVariables[varName]};`;
-        }
-        cssRule += `}`;
-        console.log(cssRule)
-        style.appendChild(document.createTextNode(cssRule));
-      }
-      return elem;
-    }
-    return null;
-  }
   document.head.appendChild(style);
+
+  // 共通の要素生成関数
+  function createScript(src) {
+    const script = document.createElement("script");
+    script.type = "module";
+    script.src = baseURL + src;
+    script.async = true;
+    return script;
+  }
+  function createComponent(item) {
+    const elem = document.createElement(item.tag);
+    if (item.attributes) {
+      for (const key in item.attributes) {
+        elem.setAttribute(key, item.attributes[key]);
+      }
+    }
+    if (item.cssVariables) {
+      let cssRule = `${item.tag} {`;
+      for (const varName in item.cssVariables) {
+        cssRule += `${varName}: ${item.cssVariables[varName]};`;
+      }
+      cssRule += `}`;
+      style.appendChild(document.createTextNode(cssRule));
+    }
+    return elem;
+  }
 
   // dataSources: container に直接追加
   config.dataSources.forEach(item => {
-    const el = createElement(item);
+    const el = createComponent(item);
     if (el) container.appendChild(el);
   });
 
-  // others: container に直接追加
-  config.others.forEach(item => {
-    console.log(item);
-    const el = createElement(item);
-    if (el) container.appendChild(el);
+  // stanzas: 各要素内に script と component を順次追加
+  config.stanzas.forEach(item => {
+    if (item.scriptSrc) {
+      container.appendChild(createScript(item.scriptSrc));
+    }
+    if (item.tag) {
+      container.appendChild(createComponent(item));
+    }
   });
 });
