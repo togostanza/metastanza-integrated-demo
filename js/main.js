@@ -1,3 +1,8 @@
+const isLocal = location.hostname === "localhost";
+console.log("isLocal:", isLocal);
+// ローカルなら http://localhost:8080/、それ以外なら https://togostanza.github.io/metastanza-devel/
+const baseURL = isLocal ? "http://localhost:8080/" : "https://togostanza.github.io/metastanza-devel/";
+
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.querySelector("togostanza--container");
   if (!container) {
@@ -7,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   container.innerHTML = "";
 
   // JSON 定義に従って生成する設定
+  // ※ script タグの src はファイル名のみとし、createElement 内でパスを組み立てる
   const config = {
     "dataSources": [
       {
@@ -29,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "flexContainer": [
       {
         "type": "script",
-        "src": "http://localhost:8080/treemap.js"
+        "src": "treemap.js"
       },
       {
         "tag": "togostanza-treemap",
@@ -46,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       {
         "type": "script",
-        "src": "http://localhost:8080/sunburst.js"
+        "src": "sunburst.js"
       },
       {
         "tag": "togostanza-sunburst",
@@ -68,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       {
         "type": "script",
-        "src": "http://localhost:8080/column-tree.js"
+        "src": "column-tree.js"
       },
       {
         "tag": "togostanza-column-tree",
@@ -89,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "others": [
       {
         "type": "script",
-        "src": "http://localhost:8080/barchart.js"
+        "src": "barchart.js"
       },
       {
         "tag": "togostanza-barchart",
@@ -128,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       {
         "type": "script",
-        "src": "http://localhost:8080/pagination-table.js"
+        "src": "pagination-table.js"
       },
       {
         "tag": "togostanza-pagination-table",
@@ -155,7 +161,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (item.type === "script") {
       const script = document.createElement("script");
       script.type = "module";
-      script.src = item.src;
+      // script の src は baseURL とファイル名を結合
+      script.src = baseURL + item.src;
       script.async = true;
       return script;
     } else if (item.tag) {
