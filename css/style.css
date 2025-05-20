@@ -1,1 +1,12 @@
 /* This file is intentionally left blank. */
+#stanzas {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  > * {
+    width: fit-content;
+  }
+  > togostanza-pagination-table {
+    flex-basis: 100%;
+  }
+}

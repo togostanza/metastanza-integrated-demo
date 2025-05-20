@@ -51,12 +51,20 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       // stanzas: 各要素内に script と component を順次追加
+      const stanzas = document.createElement("div");
+      stanzas.id = "stanzas";
+      container.appendChild(stanzas);
+      console.log(stanzas);
       config.stanzas.forEach(item => {
         if (item.scriptSrc) {
           container.appendChild(createScript(item.scriptSrc));
         }
         if (item.tag) {
-          container.appendChild(createComponent(item));
+          let container2 = stanzas;
+          if (item.tag === "togostanza-pagination-table") {
+            container2 = container;
+          }
+          container2.appendChild(createComponent(item));
         }
       });
     })
