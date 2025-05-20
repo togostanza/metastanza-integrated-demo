@@ -4,17 +4,54 @@
       "tag": "togostanza--data-source",
       "attributes": {
         "url": "./multi-data.json",
-        "receiver": "togostanza-pagination-table, togostanza-barchart",
+        "receiver": "togostanza-pagination-table, togostanza-barchart, togostanza-scatter-plot",
         "target-attribute": "data-url"
       }
     }
   ],
   "stanzas": [
     {
+      "scriptSrc": "scatter-plot.js",
+      "tag": "togostanza-scatter-plot",
+      "attributes": {
+        "data-type": "json",
+        "axis-x-key": "pop_2020",
+        "axis-x-title": "pop_2020",
+        "axis-x-title_padding": "20",
+        "axis-x-ticks_label_angle": "0",
+        "axis-x-scale": "linear",
+        "axis-x-ticks_interval": "",
+        "axis-x-ticks_interval_units": "none",
+        "axis-x-ticks_labels_format": ",.2r",
+        "axis-x-gridlines_interval": "",
+        "axis-x-gridlines_interval_units": "none",
+        "axis-y-key": "income_2020",
+        "axis-y-title": "Area",
+        "axis-y-title_padding": "45",
+        "axis-y-ticks_label_angle": "0",
+        "axis-y-scale": "linear",
+        "axis-y-ticks_interval": "",
+        "axis-y-ticks_labels_format": ",.2r",
+        "axis-y-gridlines_interval": "",
+        "node-url_key": "url",
+        "node-size_key": "population",
+        "node-size_min": "3",
+        "node-size_max": "10",
+        "legend-visible": "",
+        "legend-title": "Category",
+        "togostanza-custom_css_url": "",
+        "event-outgoing_change_selected_nodes": "",
+        "event-incoming_change_selected_nodes": ""
+      },
+      "cssVariables": {
+        "--togostanza-canvas-width": 300,
+        "--togostanza-canvas-height": 200
+      }
+    },
+    {
       "scriptSrc": "barchart.js",
       "tag": "togostanza-barchart",
       "attributes": {
-        "data-url": "./data.json",
         "data-type": "json",
         "data-interpretation": "distribution",
         "data-bin-count": "10",
@@ -54,7 +91,6 @@
       "scriptSrc": "pagination-table.js",
       "tag": "togostanza-pagination-table",
       "attributes": {
-        "data-url": "https://raw.githubusercontent.com/togostanza/togostanza-data/main/samples/json/pagination-table.disease-gwas.json",
         "data-type": "json",
         "width": "",
         "fixed-columns": "1",
