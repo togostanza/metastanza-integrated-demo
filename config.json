@@ -35,7 +35,7 @@
         "axis-y-ticks_labels_format": ",.2r",
         "axis-y-gridlines_interval": "",
         "node-url_key": "url",
-        "node-size_key": "population",
+        "node-size_key": "area",
         "node-size_min": 3,
         "node-size_max": 10,
         "legend-title": "Category",
@@ -100,7 +100,7 @@
         "page-size-option": "10,20,50,100",
         "page-slider": "true",
         "no_data_message": "fugafuga",
-        "columns": "[{\"id\":\"prefecture\",\"label\":\"都道府県\"},{\"id\":\"regional_block\",\"label\":\"地域\"},{\"id\":\"pop_2011\",\"label\":\"人口（2011）\",\"type\":\"number\"},{\"id\":\"pop_2012\",\"label\":\"人口（2012）\",\"type\":\"number\"},{\"id\":\"pop_2013\",\"label\":\"人口（2013）\",\"type\":\"number\"},{\"id\":\"pop_2014\",\"label\":\"人口（2014）\",\"type\":\"number\"},{\"id\":\"pop_2015\",\"label\":\"人口（2015）\",\"type\":\"number\"},{\"id\":\"pop_2016\",\"label\":\"人口（2016）\",\"type\":\"number\"},{\"id\":\"pop_2017\",\"label\":\"人口（2017）\",\"type\":\"number\"},{\"id\":\"pop_2018\",\"label\":\"人口（2018）\",\"type\":\"number\"},{\"id\":\"pop_2019\",\"label\":\"人口（2019）\",\"type\":\"number\"},{\"id\":\"pop_2020\",\"label\":\"人口（2020）\",\"type\":\"number\"},{\"id\":\"income_2011\",\"label\":\"収入（2011）\",\"type\":\"number\"},{\"id\":\"income_2012\",\"label\":\"収入（2012）\",\"type\":\"number\"},{\"id\":\"income_2013\",\"label\":\"収入（2013）\",\"type\":\"number\"},{\"id\":\"income_2014\",\"label\":\"収入（2014）\",\"type\":\"number\"},{\"id\":\"income_2015\",\"label\":\"収入（2015）\",\"type\":\"number\"},{\"id\":\"income_2016\",\"label\":\"収入（2016）\",\"type\":\"number\"},{\"id\":\"income_2017\",\"label\":\"収入（2017）\",\"type\":\"number\"},{\"id\":\"income_2018\",\"label\":\"収入（2018）\",\"type\":\"number\"},{\"id\":\"income_2019\",\"label\":\"収入（2019）\",\"type\":\"number\"},{\"id\":\"income_2020\",\"label\":\"収入（2020）\",\"type\":\"number\"}]",
+        "columns": "[{\"id\":\"prefecture\",\"label\":\"都道府県\"},{\"id\":\"regional_block\",\"label\":\"地域\"},{\"id\":\"area\",\"label\":\"面積\",\"type\":\"number\"},{\"id\":\"pop_2011\",\"label\":\"人口（2011）\",\"type\":\"number\"},{\"id\":\"pop_2012\",\"label\":\"人口（2012）\",\"type\":\"number\"},{\"id\":\"pop_2013\",\"label\":\"人口（2013）\",\"type\":\"number\"},{\"id\":\"pop_2014\",\"label\":\"人口（2014）\",\"type\":\"number\"},{\"id\":\"pop_2015\",\"label\":\"人口（2015）\",\"type\":\"number\"},{\"id\":\"pop_2016\",\"label\":\"人口（2016）\",\"type\":\"number\"},{\"id\":\"pop_2017\",\"label\":\"人口（2017）\",\"type\":\"number\"},{\"id\":\"pop_2018\",\"label\":\"人口（2018）\",\"type\":\"number\"},{\"id\":\"pop_2019\",\"label\":\"人口（2019）\",\"type\":\"number\"},{\"id\":\"pop_2020\",\"label\":\"人口（2020）\",\"type\":\"number\"},{\"id\":\"income_2011\",\"label\":\"収入（2011）\",\"type\":\"number\"},{\"id\":\"income_2012\",\"label\":\"収入（2012）\",\"type\":\"number\"},{\"id\":\"income_2013\",\"label\":\"収入（2013）\",\"type\":\"number\"},{\"id\":\"income_2014\",\"label\":\"収入（2014）\",\"type\":\"number\"},{\"id\":\"income_2015\",\"label\":\"収入（2015）\",\"type\":\"number\"},{\"id\":\"income_2016\",\"label\":\"収入（2016）\",\"type\":\"number\"},{\"id\":\"income_2017\",\"label\":\"収入（2017）\",\"type\":\"number\"},{\"id\":\"income_2018\",\"label\":\"収入（2018）\",\"type\":\"number\"},{\"id\":\"income_2019\",\"label\":\"収入（2019）\",\"type\":\"number\"},{\"id\":\"income_2020\",\"label\":\"収入（2020）\",\"type\":\"number\"}]",
         "togostanza-custom_css_url": "",
         "event-outgoing_change_selected_nodes": "",
         "event-incoming_change_selected_nodes": ""
