@@ -4,12 +4,29 @@
       "tag": "togostanza--data-source",
       "attributes": {
         "url": "./multi-data.json",
-        "receiver": "togostanza-pagination-table, togostanza-barchart, togostanza-scatter-plot",
+        "receiver": "togostanza-pagination-table, togostanza-piechart, togostanza-barchart, togostanza-scatter-plot",
         "target-attribute": "data-url"
       }
     }
   ],
   "stanzas": [
+    {
+      "scriptSrc": "piechart.js",
+      "tag": "togostanza-piechart",
+      "attributes": {
+        "data-url": "https://sparql-support.dbcls.jp/sparqlist/api/metastanza_chart?chromosome&#x3D;1",
+        "data-type": "json",
+        "data-value_key": "area",
+        "data-category_key": "prefecture",
+        "legend-title": "Population",
+        "event-outgoing_change_selected_nodes": "",
+        "event-incoming_change_selected_nodes": ""
+      },
+      "cssVariables": {
+        "--togostanza-canvas-width": 200,
+        "--togostanza-canvas-height": 200
+      }
+    },
     {
       "scriptSrc": "scatter-plot.js",
       "tag": "togostanza-scatter-plot",
@@ -38,8 +55,7 @@
         "node-size_key": "area",
         "node-size_min": 3,
         "node-size_max": 10,
-        "legend-title": "Category",
-        "togostanza-custom_css_url": "",
+        "tooltip": "{{prefecture}}",
         "event-outgoing_change_selected_nodes": "",
         "event-incoming_change_selected_nodes": ""
       },
@@ -76,10 +92,7 @@
         "grouping-arrangement": "stacked",
         "color_by-key": "color",
         "error_bars-key": "error",
-        "tooltips-key": "count",
-        "legend-visible": "",
-        "legend-title": "Category",
-        "togostanza-custom_css_url": "",
+        "tooltip": "{{prefecture}}",
         "event-outgoing_change_selected_nodes": "",
         "event-incoming_change_selected_nodes": ""
       },
