@@ -4,17 +4,46 @@
       "tag": "togostanza--data-source",
       "attributes": {
         "url": "./multi-data.json",
-        "receiver": "togostanza-pagination-table, togostanza-piechart, togostanza-barchart, togostanza-scatter-plot",
+        "receiver": "togostanza-pagination-table, togostanza-heatmap, togostanza-piechart, togostanza-barchart, togostanza-scatter-plot",
         "target-attribute": "data-url"
       }
     }
   ],
   "stanzas": [
     {
+      "scriptSrc": "heatmap.js",
+      "tag": "togostanza-heatmap",
+      "attributes": {
+        "data-url": "",
+        "data-type": "json",
+        "axis-x-key": "prefecture",
+        "axis-x-title": "都道府県",
+        "axis-x-title_padding": 20,
+        "axis-x-ticks_label_angle": -45,
+        "axis-x-placement": "bottom",
+        "axis-y-key": "regional_block",
+        "axis-y-title": "地域",
+        "axis-y-title_padding": 40,
+        "axis-y-ticks_label_angle": 0,
+        "axis-y-placement": "left",
+        "cell-color_key": "pop_2020",
+        "cell-color_min": "#6590e6",
+        "cell-color_mid": "#ffffff",
+        "cell-color_max": "#F75976",
+        "tooltips-key": "value",
+        "event-outgoing_change_selected_nodes": "",
+        "event-incoming_change_selected_nodes": ""
+      },
+      "cssVariables": {
+        "--togostanza-canvas-width": 500,
+        "--togostanza-canvas-height": 200
+      }
+    },
+    {
       "scriptSrc": "piechart.js",
       "tag": "togostanza-piechart",
       "attributes": {
-        "data-url": "https://sparql-support.dbcls.jp/sparqlist/api/metastanza_chart?chromosome&#x3D;1",
+        "data-url": "",
         "data-type": "json",
         "data-value_key": "area",
         "data-category_key": "prefecture",
