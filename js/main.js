@@ -59,11 +59,26 @@ document.addEventListener("DOMContentLoaded", () => {
         if (item.scriptSrc) {
           container.appendChild(createScript(item.scriptSrc));
         }
-        if (item.tag) {
-          let container2 = stanzas;
-          if (item.tag === "togostanza-pagination-table") {
-            container2 = container;
+        // 対象のコンテナ（Pagination table の場合は container、それ以外は stanzas）
+        let container2 = stanzas;
+        if (item.tag === "togostanza-pagination-table") {
+          container2 = container;
+        }
+        // title が定義されている場合は、タイトルとコンポーネントを wrapper でラップして追加
+        if (item.title) {
+          const wrapper = document.createElement("div");
+          wrapper.classList.add("stanza-wrapper");
+
+          const heading = document.createElement("h2");
+          heading.textContent = item.title;
+          wrapper.appendChild(heading);
+
+          if (item.tag) {
+            wrapper.appendChild(createComponent(item));
           }
+          container2.appendChild(wrapper);
+        } else if (item.tag) {
+          // title がなければ直接追加
           container2.appendChild(createComponent(item));
         }
       });

@@ -11,6 +11,7 @@
   ],
   "stanzas": [
     {
+      "title": "Pie chart",
       "scriptSrc": "piechart.js",
       "tag": "togostanza-piechart",
       "attributes": {
@@ -29,6 +30,7 @@
       }
     },
     {
+      "title": "Scatter plot",
       "scriptSrc": "scatter-plot.js",
       "tag": "togostanza-scatter-plot",
       "attributes": {
@@ -67,6 +69,7 @@
       }
     },
     {
+      "title": "Histogram",
       "scriptSrc": "barchart.js",
       "tag": "togostanza-barchart",
       "attributes": {
@@ -105,6 +108,7 @@
       }
     },
     {
+      "title": "Heatmap",
       "scriptSrc": "heatmap.js",
       "tag": "togostanza-heatmap",
       "attributes": {
@@ -135,6 +139,7 @@
       }
     },
     {
+      "title": "Pagination table",
       "scriptSrc": "pagination-table.js",
       "tag": "togostanza-pagination-table",
       "attributes": {
