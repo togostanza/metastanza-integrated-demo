@@ -56,6 +56,50 @@ body {
   
 }
 
+/* カラースキーマボタン全体 */
+#color-schemes {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  > button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 12px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background-color: transparent;
+    &.-active {
+      /* outline: 2px solid #000; */
+      background-color: #ecefef;
+    }
+    > span {
+      font-size: 10px;
+    }
+  }
+}
+
+/* カラーサンプル用コンテナ */
+.color-scheme-sample {
+  display: flex;
+  margin-top: 4px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 4px;
+}
+
+/* 各シリーズのカラーボックス */
+.color-scheme-box {
+  width: 10px;
+  height: 10px;
+  margin-right: 4px;
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+
 h2 {
   font-size: 1.2em;
   margin: 0.5em 0 0.2em calc(var(--padding-horizontal) * 0.2);

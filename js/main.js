@@ -149,54 +149,43 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch('./color-schemes.json')
     .then(response => response.json())
     .then(colorSchemes => {
-      // カラースキーマ選択用のコンテナ要素作成
+      // カラースキーマ選択用のコンテナ要素作成（id="color-schemes" のスタイルは CSS で定義）
       const schemeContainer = document.createElement("div");
       schemeContainer.id = "color-schemes";
-      schemeContainer.style.display = "flex";
-      schemeContainer.style.gap = "10px";
-      schemeContainer.style.marginBottom = "10px";
 
       colorSchemes.forEach(scheme => {
         const btn = document.createElement("button");
-        btn.style.display = "flex";
-        btn.style.flexDirection = "column";
-        btn.style.alignItems = "center";
-        btn.style.padding = "8px 12px";
-        btn.style.cursor = "pointer";
-        btn.style.border = "none";
-        btn.style.borderRadius = "4px";
-        btn.style.backgroundColor = "transparent";
 
         // スキーマ名のラベル
         const label = document.createElement("span");
         label.textContent = scheme.name;
         btn.appendChild(label);
 
-        // カラーサンプル表示用コンテナ（背景色も反映）
+        // カラーサンプル表示用コンテナ
         const sampleContainer = document.createElement("div");
-        sampleContainer.style.display = "flex";
-        sampleContainer.style.marginTop = "4px";
-        sampleContainer.style.border = "1px solid #ccc";
-        sampleContainer.style.borderRadius = "4px";
-        sampleContainer.style.padding = "2px";
+        sampleContainer.classList.add("color-scheme-sample");
+        // 背景色は背景用変数を適用
         sampleContainer.style.backgroundColor = scheme["--togostanza-theme-background_color"];
 
         // 6色の series 色を表示する
         for (let i = 0; i < 6; i++) {
           const colorKey = `--togostanza-theme-series_${i}_color`;
           const box = document.createElement("div");
-          box.style.width = "20px";
-          box.style.height = "20px";
+          box.classList.add("color-scheme-box");
           box.style.backgroundColor = scheme[colorKey];
-          if (i < 5) {
-            box.style.marginRight = "2px";
-          }
           sampleContainer.appendChild(box);
         }
         btn.appendChild(sampleContainer);
 
         btn.addEventListener("click", () => {
+          // すべてのボタンから -active クラスを削除
+          Array.from(schemeContainer.children).forEach(child => {
+            child.classList.remove("-active");
+          });
+          // カラースキーマを適用
           applyColorScheme(scheme);
+          // 選択されたボタンに -active クラスを追加
+          btn.classList.add("-active");
         });
         schemeContainer.appendChild(btn);
       });
@@ -211,7 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function applyColorScheme(scheme) {
     for (const key in scheme) {
-      if (key !== "name") { // name プロパティはスキップ
+      if (key !== "name") {
         document.documentElement.style.setProperty(key, scheme[key]);
       }
     }
