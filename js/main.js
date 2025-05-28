@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // config.json を読み込む
-  fetch('../config.json')
+  fetch('./config.json')
     .then(response => response.json())
     .then(config => {
       // dataSources: container に直接追加
