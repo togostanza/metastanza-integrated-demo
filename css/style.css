@@ -1,14 +1,35 @@
-/* This file is intentionally left blank. */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
 #stanzas {
+  border-top: solid 1px black;
+  border-bottom: solid 1px black;
   display: flex;
   flex-direction: row;
   align-items: center;
+  overflow-x: auto;
   > * {
     width: fit-content;
+    border-right: solid 1px black;
+    &:last-child {
+      border-right: none;
+    }
   }
 }
 
 #data {
   width: 100%;
   height: 200px;
+}
+
+togostanza-pagination-table {
+  padding: 10px 12px;
+  --togostanza-table-border: 1px solid #000;
+  --togostanza-table-shadow: ;
+  --togostanza-thead-border-bottom: 1px solid #000;
+  --togostanza-thead-font-size: 10px;
+  --togostanza-tbody-border-bottom: 1px solid #0002;
 }

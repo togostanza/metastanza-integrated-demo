@@ -11,35 +11,6 @@
   ],
   "stanzas": [
     {
-      "scriptSrc": "heatmap.js",
-      "tag": "togostanza-heatmap",
-      "attributes": {
-        "data-url": "",
-        "data-type": "json",
-        "axis-x-key": "prefecture",
-        "axis-x-title": "都道府県",
-        "axis-x-title_padding": 20,
-        "axis-x-ticks_label_angle": -45,
-        "axis-x-placement": "bottom",
-        "axis-y-key": "regional_block",
-        "axis-y-title": "地域",
-        "axis-y-title_padding": 40,
-        "axis-y-ticks_label_angle": 0,
-        "axis-y-placement": "left",
-        "cell-color_key": "pop_2020",
-        "cell-color_min": "#6590e6",
-        "cell-color_mid": "#ffffff",
-        "cell-color_max": "#F75976",
-        "tooltips-key": "value",
-        "event-outgoing_change_selected_nodes": "",
-        "event-incoming_change_selected_nodes": ""
-      },
-      "cssVariables": {
-        "--togostanza-canvas-width": 500,
-        "--togostanza-canvas-height": 200
-      }
-    },
-    {
       "scriptSrc": "piechart.js",
       "tag": "togostanza-piechart",
       "attributes": {
@@ -48,6 +19,7 @@
         "data-value_key": "area",
         "data-category_key": "prefecture",
         "legend-title": "Population",
+        "togostanza-menu_placement": "none",
         "event-outgoing_change_selected_nodes": "",
         "event-incoming_change_selected_nodes": ""
       },
@@ -85,6 +57,7 @@
         "node-size_min": 3,
         "node-size_max": 10,
         "tooltip": "{{prefecture}}",
+        "togostanza-menu_placement": "none",
         "event-outgoing_change_selected_nodes": "",
         "event-incoming_change_selected_nodes": ""
       },
@@ -122,11 +95,42 @@
         "color_by-key": "color",
         "error_bars-key": "error",
         "tooltip": "{{prefecture}}",
+        "togostanza-menu_placement": "none",
         "event-outgoing_change_selected_nodes": "",
         "event-incoming_change_selected_nodes": ""
       },
       "cssVariables": {
         "--togostanza-canvas-width": 300,
+        "--togostanza-canvas-height": 200
+      }
+    },
+    {
+      "scriptSrc": "heatmap.js",
+      "tag": "togostanza-heatmap",
+      "attributes": {
+        "data-url": "",
+        "data-type": "json",
+        "axis-x-key": "prefecture",
+        "axis-x-title": "都道府県",
+        "axis-x-title_padding": 20,
+        "axis-x-ticks_label_angle": "-45",
+        "axis-x-placement": "bottom",
+        "axis-y-key": "regional_block",
+        "axis-y-title": "地域",
+        "axis-y-title_padding": 40,
+        "axis-y-ticks_label_angle": 0,
+        "axis-y-placement": "left",
+        "cell-color_key": "pop_2020",
+        "cell-color_min": "#6590e6",
+        "cell-color_mid": "#ffffff",
+        "cell-color_max": "#F75976",
+        "tooltips-key": "value",
+        "togostanza-menu_placement": "none",
+        "event-outgoing_change_selected_nodes": "",
+        "event-incoming_change_selected_nodes": ""
+      },
+      "cssVariables": {
+        "--togostanza-canvas-width": 500,
         "--togostanza-canvas-height": 200
       }
     },
@@ -144,6 +148,7 @@
         "no_data_message": "fugafuga",
         "columns": "[{\"id\":\"prefecture\",\"label\":\"都道府県\"},{\"id\":\"regional_block\",\"label\":\"地域\"},{\"id\":\"area\",\"label\":\"面積\",\"type\":\"number\"},{\"id\":\"pop_2011\",\"label\":\"人口（2011）\",\"type\":\"number\"},{\"id\":\"pop_2012\",\"label\":\"人口（2012）\",\"type\":\"number\"},{\"id\":\"pop_2013\",\"label\":\"人口（2013）\",\"type\":\"number\"},{\"id\":\"pop_2014\",\"label\":\"人口（2014）\",\"type\":\"number\"},{\"id\":\"pop_2015\",\"label\":\"人口（2015）\",\"type\":\"number\"},{\"id\":\"pop_2016\",\"label\":\"人口（2016）\",\"type\":\"number\"},{\"id\":\"pop_2017\",\"label\":\"人口（2017）\",\"type\":\"number\"},{\"id\":\"pop_2018\",\"label\":\"人口（2018）\",\"type\":\"number\"},{\"id\":\"pop_2019\",\"label\":\"人口（2019）\",\"type\":\"number\"},{\"id\":\"pop_2020\",\"label\":\"人口（2020）\",\"type\":\"number\"},{\"id\":\"income_2011\",\"label\":\"収入（2011）\",\"type\":\"number\"},{\"id\":\"income_2012\",\"label\":\"収入（2012）\",\"type\":\"number\"},{\"id\":\"income_2013\",\"label\":\"収入（2013）\",\"type\":\"number\"},{\"id\":\"income_2014\",\"label\":\"収入（2014）\",\"type\":\"number\"},{\"id\":\"income_2015\",\"label\":\"収入（2015）\",\"type\":\"number\"},{\"id\":\"income_2016\",\"label\":\"収入（2016）\",\"type\":\"number\"},{\"id\":\"income_2017\",\"label\":\"収入（2017）\",\"type\":\"number\"},{\"id\":\"income_2018\",\"label\":\"収入（2018）\",\"type\":\"number\"},{\"id\":\"income_2019\",\"label\":\"収入（2019）\",\"type\":\"number\"},{\"id\":\"income_2020\",\"label\":\"収入（2020）\",\"type\":\"number\"}]",
         "togostanza-custom_css_url": "",
+        "togostanza-menu_placement": "none",
         "event-outgoing_change_selected_nodes": "",
         "event-incoming_change_selected_nodes": ""
       }
