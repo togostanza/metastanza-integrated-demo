@@ -1,8 +1,14 @@
 :root {
   --padding-horizontal: 12px;
 }
-* {
-  /* --togostanza-theme-series_0_color: #ca65e6; */
+html {
+  --togostanza-theme-series_0_color: #6590e6;
+  --togostanza-theme-series_1_color: #3ac9b6;
+  --togostanza-theme-series_2_color: #9ede2f;
+  --togostanza-theme-series_3_color: #f5da64;
+  --togostanza-theme-series_4_color: #f57f5b;
+  --togostanza-theme-series_5_color: #f75976;
+  --togostanza-theme-background_color: #ecefef;
 }
 
 body {
@@ -10,11 +16,11 @@ body {
   margin: 10px;
   padding: 0;
   font-size: 10px;
-  background-color: #ecefef;
+  background-color: #d9dfdf;
 }
 
 .panel {
-  background-color: white;
+  background-color: var(--togostanza-theme-background_color);
   margin: 4px;
   padding: 4px;
   border-radius: 4px;
