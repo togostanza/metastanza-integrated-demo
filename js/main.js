@@ -68,34 +68,48 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
 
-      // multi-data.json の内容を textarea#data に格納し、バリデート・更新を行う
+      // multi-data.json の内容を取得して CodeMirror エディタに反映
       fetch('./multi-data.json')
         .then(response => response.text())
         .then(text => {
-          const textarea = document.getElementById('data');
-          textarea.value = text;
-          updateStanzasData(text);
-          // textarea の内容が変化したら再更新
-          textarea.addEventListener('input', (e) => {
-            updateStanzasData(e.target.value);
-          });
+          // CodeMirror エディタが初期化済みなら setValue する
+          if (window.editor) {
+            window.editor.setValue(text);
+            updateStanzasData(text);
+          }
         })
         .catch(err => console.error("multi-data.json の読み込みに失敗しました:", err));
     })
     .catch(err => console.error("config.json の読み込みに失敗しました:", err));
 
-  // テキストエリアの内容を JSON としてバリデートし、URIデータスキーマとして各スタンザに渡す
+  // CodeMirror を textarea#data に適用（JSON モード）
+  const textarea = document.getElementById("data");
+  window.editor = CodeMirror.fromTextArea(textarea, {
+    mode: { name: "javascript", json: true },
+    lineNumbers: true,
+    theme: "default"
+  });
+
+  // textarea の computed style を参照し、高さを取得
+  const computedHeight = window.getComputedStyle(textarea).getPropertyValue("height");
+  window.editor.setSize(null, computedHeight);
+
+  // エディタ内容に変更があればバリデートと各スタンザ更新を行う
+  window.editor.on("change", (cm) => {
+    const text = cm.getValue();
+    updateStanzasData(text);
+  });
+
+  // テキストが有効な JSON だったら、各スタンザに URI データスキーマとして渡す関数
   function updateStanzasData(jsonString) {
     try {
-      JSON.parse(jsonString); // JSON として正しいかをチェック
-      // data: スキーマ形式に変換（※改行や空白は encodeURIComponent により変換される）
+      JSON.parse(jsonString);
       const dataUri = "data:application/json," + encodeURIComponent(jsonString);
-      // data-url 属性を持つ全ての要素に dataUri をセット
       document.querySelectorAll('[data-url]').forEach(el => {
         el.setAttribute("data-url", dataUri);
       });
     } catch (e) {
-      console.error("textarea の内容が有効な JSON ではありません。", e);
+      console.error("エディタの内容が有効な JSON ではありません。", e);
     }
   }
 });

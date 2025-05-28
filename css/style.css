@@ -7,3 +7,8 @@
     width: fit-content;
   }
 }
+
+#data {
+  width: 100%;
+  height: 200px;
+}
