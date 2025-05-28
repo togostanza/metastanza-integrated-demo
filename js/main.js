@@ -135,12 +135,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // タブボタンの active クラス切り替え
       document.querySelectorAll('.tab-container .tabs .tab').forEach(btn => {
-        btn.classList.toggle('active', btn.getAttribute('data-tab') === targetTab);
+        btn.classList.toggle('-active', btn.getAttribute('data-tab') === targetTab);
       });
 
       // タブコンテンツの active クラス切り替え
       document.querySelectorAll('.tab-container .tab-content').forEach(content => {
-        content.classList.toggle('active', content.id === targetTab);
+        content.classList.toggle('-active', content.id === targetTab);
       });
     });
   });

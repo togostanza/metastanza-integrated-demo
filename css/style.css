@@ -2,6 +2,7 @@
   --padding-horizontal: 12px;
 }
 * {
+  --togostanza-theme-series_0_color: #ca65e6;
 }
 
 body {
@@ -21,31 +22,34 @@ body {
 }
 
 /* タブ用スタイル */
-.tab-container .tabs {
-  display: flex;
-  border-bottom: 1px solid #ccc;
-}
+.tab-container {
 
-.tab-container .tabs .tab {
-  background: none;
-  border: none;
-  padding: 8px 12px;
-  cursor: pointer;
-  font-size: 1em;
-}
-
-.tab-container .tabs .tab.active {
-  background-color: #ecefef;
-  border-bottom: 2px solid #000;
-}
-
-.tab-container .tab-content {
-  display: none;
-  margin-top: 8px;
-}
-
-.tab-container .tab-content.active {
-  display: block;
+  .tabs {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    .tab {
+      background: none;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 1em;
+      &.-active {
+        background-color: #ecefef;
+        border-bottom: 2px solid #000;
+      }
+    }
+  
+  }
+  
+  
+  .tab-content {
+    display: none;
+    margin-top: 8px;
+    &.-active {
+      display: block;
+    }
+  }
+  
 }
 
 h2 {
