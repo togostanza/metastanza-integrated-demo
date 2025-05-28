@@ -145,41 +145,39 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // カラースキーマ編集機能
+  // カラースキーマ編集機能の外部ファイルからの読み込み
+  fetch('./color-schemes.json')
+    .then(response => response.json())
+    .then(colorSchemes => {
+      // カラースキーマ選択用のコンテナ要素作成
+      const schemeContainer = document.createElement("div");
+      schemeContainer.id = "color-schemes";
+      schemeContainer.style.display = "flex";
+      schemeContainer.style.gap = "10px";
+      schemeContainer.style.marginBottom = "10px";
 
-  const colorSchemes = [
-    {
-      name: "Default",
-      "--togostanza-theme-series_0_color": "#ca65e6",
-      "--togostanza-theme-series_1_color": "#8c564b",
-      "--togostanza-theme-series_2_color": "#e377c2",
-      "--togostanza-theme-series_3_color": "#7f7f7f",
-      "--togostanza-theme-series_4_color": "#bcbd22",
-      "--togostanza-theme-series_5_color": "#17becf",
-      "--togostanza-theme-background_color": "#ecefef"
-    },
-    {
-      name: "Warm",
-      "--togostanza-theme-series_0_color": "#D72638",
-      "--togostanza-theme-series_1_color": "#3F88C5",
-      "--togostanza-theme-series_2_color": "#F49D37",
-      "--togostanza-theme-series_3_color": "#140F2D",
-      "--togostanza-theme-series_4_color": "#F23C50",
-      "--togostanza-theme-series_5_color": "#F8C300",
-      "--togostanza-theme-background_color": "#FFFBEA"
-    },
-    {
-      name: "Cool",
-      "--togostanza-theme-series_0_color": "#5DADE2",
-      "--togostanza-theme-series_1_color": "#48C9B0",
-      "--togostanza-theme-series_2_color": "#45B39D",
-      "--togostanza-theme-series_3_color": "#A9DFBF",
-      "--togostanza-theme-series_4_color": "#5499C7",
-      "--togostanza-theme-series_5_color": "#2E86C1",
-      "--togostanza-theme-background_color": "#F2F4F4"
-    }
-    // 必要に応じて追加してください
-  ];
+      colorSchemes.forEach(scheme => {
+        const btn = document.createElement("button");
+        btn.textContent = scheme.name;
+        btn.style.padding = "8px 12px";
+        btn.style.cursor = "pointer";
+        btn.style.border = "none";
+        btn.style.borderRadius = "4px";
+        // ボタンの背景色に主要な色を反映
+        btn.style.backgroundColor = scheme["--togostanza-theme-series_0_color"];
+        btn.addEventListener("click", () => {
+          applyColorScheme(scheme);
+        });
+        schemeContainer.appendChild(btn);
+      });
+
+      // Style タブ内の領域にカラースキーマコンテナを追加
+      const styleTab = document.getElementById("style");
+      if (styleTab) {
+        styleTab.insertBefore(schemeContainer, styleTab.firstChild);
+      }
+    })
+    .catch(err => console.error("カラースキーマの読み込みに失敗しました:", err));
 
   function applyColorScheme(scheme) {
     for (const key in scheme) {
@@ -188,33 +186,4 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   }
-
-  // Style タブ内の領域（例: タブコンテンツ id="style"）を取得
-  const styleTab = document.getElementById("style");
-
-  // カラースキーマ選択用のコンテナ要素を作成（flex レイアウト）
-  const schemeContainer = document.createElement("div");
-  schemeContainer.id = "color-schemes";
-  schemeContainer.style.display = "flex";
-  schemeContainer.style.gap = "10px";
-  schemeContainer.style.marginBottom = "10px";
-
-  // 各スキーマに対してボタンを生成
-  colorSchemes.forEach(scheme => {
-    const btn = document.createElement("button");
-    btn.textContent = scheme.name;
-    btn.style.padding = "8px 12px";
-    btn.style.cursor = "pointer";
-    btn.style.border = "none";
-    btn.style.borderRadius = "4px";
-    // ボタンの背景色に、主要な色を反映させる
-    btn.style.backgroundColor = scheme["--togostanza-theme-series_0_color"];
-    btn.addEventListener("click", () => {
-      applyColorScheme(scheme);
-    });
-    schemeContainer.appendChild(btn);
-  });
-
-  // Style タブの先頭にカラースキーマ選択用コンテナを追加
-  styleTab.insertBefore(schemeContainer, styleTab.firstChild);
 });
