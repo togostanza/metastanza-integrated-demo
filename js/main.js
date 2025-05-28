@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // title が定義されている場合は、タイトルとコンポーネントを wrapper でラップして追加
         if (item.title) {
           const wrapper = document.createElement("div");
-          wrapper.classList.add("stanza-wrapper");
+          wrapper.classList.add("panel");
 
           const heading = document.createElement("h2");
           heading.textContent = item.title;

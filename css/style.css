@@ -4,29 +4,38 @@
 
 body {
   font-family: Arial, sans-serif;
-  margin: 0;
+  margin: 10px;
   padding: 0;
   font-size: 10px;
+  background-color: #ecefef;
+}
+
+.panel {
+  background-color: white;
+  margin: 4px;
+  padding: 4px;
+  border-radius: 4px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
   font-size: 1.2em;
-  margin: 0.5em 0 .2em var(--padding-horizontal);
+  margin: 0.5em 0 .2em calc(var(--padding-horizontal) * .2);
 }
 
 #stanzas {
-  border-top: solid 1px black;
-  border-bottom: solid 1px black;
+  /* border-top: solid 1px black;
+  border-bottom: solid 1px black; */
   display: flex;
   flex-direction: row;
   align-items: center;
   overflow-x: auto;
   > * {
     width: fit-content;
-    border-right: solid 1px black;
+    /* border-right: solid 1px black;
     &:last-child {
       border-right: none;
-    }
+    } */
   }
 }
 
