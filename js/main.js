@@ -158,13 +158,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
       colorSchemes.forEach(scheme => {
         const btn = document.createElement("button");
-        btn.textContent = scheme.name;
+        btn.style.display = "flex";
+        btn.style.flexDirection = "column";
+        btn.style.alignItems = "center";
         btn.style.padding = "8px 12px";
         btn.style.cursor = "pointer";
         btn.style.border = "none";
         btn.style.borderRadius = "4px";
-        // ボタンの背景色に主要な色を反映
-        btn.style.backgroundColor = scheme["--togostanza-theme-series_0_color"];
+        btn.style.backgroundColor = "transparent";
+
+        // スキーマ名のラベル
+        const label = document.createElement("span");
+        label.textContent = scheme.name;
+        btn.appendChild(label);
+
+        // カラーサンプル表示用コンテナ（背景色も反映）
+        const sampleContainer = document.createElement("div");
+        sampleContainer.style.display = "flex";
+        sampleContainer.style.marginTop = "4px";
+        sampleContainer.style.border = "1px solid #ccc";
+        sampleContainer.style.borderRadius = "4px";
+        sampleContainer.style.padding = "2px";
+        sampleContainer.style.backgroundColor = scheme["--togostanza-theme-background_color"];
+
+        // 6色の series 色を表示する
+        for (let i = 0; i < 6; i++) {
+          const colorKey = `--togostanza-theme-series_${i}_color`;
+          const box = document.createElement("div");
+          box.style.width = "20px";
+          box.style.height = "20px";
+          box.style.backgroundColor = scheme[colorKey];
+          if (i < 5) {
+            box.style.marginRight = "2px";
+          }
+          sampleContainer.appendChild(box);
+        }
+        btn.appendChild(sampleContainer);
+
         btn.addEventListener("click", () => {
           applyColorScheme(scheme);
         });
