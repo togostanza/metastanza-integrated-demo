@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return elem;
   }
 
-  // config.json を読み込む
+  // config.json を読み込み、スタンザなどを生成
   fetch('./config.json')
     .then(response => response.json())
     .then(config => {
@@ -50,11 +50,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if (el) container.appendChild(el);
       });
 
-      // stanzas: 各要素内に script と component を順次追加
+      // stanzas: 各要素に script と component を追加
       const stanzas = document.createElement("div");
       stanzas.id = "stanzas";
       container.appendChild(stanzas);
-      console.log(stanzas);
+
       config.stanzas.forEach(item => {
         if (item.scriptSrc) {
           container.appendChild(createScript(item.scriptSrc));
@@ -67,6 +67,35 @@ document.addEventListener("DOMContentLoaded", () => {
           container2.appendChild(createComponent(item));
         }
       });
+
+      // multi-data.json の内容を textarea#data に格納し、バリデート・更新を行う
+      fetch('./multi-data.json')
+        .then(response => response.text())
+        .then(text => {
+          const textarea = document.getElementById('data');
+          textarea.value = text;
+          updateStanzasData(text);
+          // textarea の内容が変化したら再更新
+          textarea.addEventListener('input', (e) => {
+            updateStanzasData(e.target.value);
+          });
+        })
+        .catch(err => console.error("multi-data.json の読み込みに失敗しました:", err));
     })
     .catch(err => console.error("config.json の読み込みに失敗しました:", err));
+
+  // テキストエリアの内容を JSON としてバリデートし、URIデータスキーマとして各スタンザに渡す
+  function updateStanzasData(jsonString) {
+    try {
+      JSON.parse(jsonString); // JSON として正しいかをチェック
+      // data: スキーマ形式に変換（※改行や空白は encodeURIComponent により変換される）
+      const dataUri = "data:application/json," + encodeURIComponent(jsonString);
+      // data-url 属性を持つ全ての要素に dataUri をセット
+      document.querySelectorAll('[data-url]').forEach(el => {
+        el.setAttribute("data-url", dataUri);
+      });
+    } catch (e) {
+      console.error("textarea の内容が有効な JSON ではありません。", e);
+    }
+  }
 });
