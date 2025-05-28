@@ -127,4 +127,21 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("エディタの内容が有効な JSON ではありません。", e);
     }
   }
+
+  // タブ切り替えの処理
+  document.querySelectorAll('.tab-container .tabs .tab').forEach(tab => {
+    tab.addEventListener('click', (e) => {
+      const targetTab = e.target.getAttribute('data-tab');
+
+      // タブボタンの active クラス切り替え
+      document.querySelectorAll('.tab-container .tabs .tab').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-tab') === targetTab);
+      });
+
+      // タブコンテンツの active クラス切り替え
+      document.querySelectorAll('.tab-container .tab-content').forEach(content => {
+        content.classList.toggle('active', content.id === targetTab);
+      });
+    });
+  });
 });

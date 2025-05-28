@@ -13,9 +13,18 @@
 <body>
 
   <section>
-    <div class="panel">
-      <h2>Input Data</h2>
-      <textarea id="data"></textarea>
+    <div class="panel tab-container">
+      <div class="tabs">
+        <button class="tab active" data-tab="input">Input Data</button>
+        <button class="tab" data-tab="style">Style</button>
+      </div>
+      <div class="tab-content active" id="input">
+        <textarea id="data"></textarea>
+      </div>
+      <div class="tab-content" id="style">
+        <!-- 例: カスタムスタイル用 JSON 入力エリア -->
+        <textarea id="styleData"></textarea>
+      </div>
     </div>
   </section>
 
