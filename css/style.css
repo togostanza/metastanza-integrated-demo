@@ -2,7 +2,7 @@
   --padding-horizontal: 12px;
 }
 * {
-  --togostanza-theme-series_0_color: #ca65e6;
+  /* --togostanza-theme-series_0_color: #ca65e6; */
 }
 
 body {
@@ -26,22 +26,26 @@ body {
 
   .tabs {
     display: flex;
-    border-bottom: 1px solid #ccc;
+    padding: 0 4px;
+    /* border-bottom: 1px solid #ccc; */
     .tab {
       background: none;
       border: none;
-      padding: 8px 12px;
+      padding: 8px 0 2px;
       cursor: pointer;
-      font-size: 1em;
+      font-size: 1.2em;
+      font-weight: bold;
+      opacity: .3;
+      + .tab {
+        margin-left: 8px;
+      }
       &.-active {
-        background-color: #ecefef;
+        /* background-color: #ecefef; */
         border-bottom: 2px solid #000;
+        opacity: 1;
       }
     }
-  
   }
-  
-  
   .tab-content {
     display: none;
     margin-top: 8px;
