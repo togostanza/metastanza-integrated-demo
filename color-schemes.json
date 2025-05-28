@@ -1,32 +1,83 @@
 [
   {
-    "name": "Default",
-    "--togostanza-theme-series_0_color": "#ca65e6",
-    "--togostanza-theme-series_1_color": "#8c564b",
-    "--togostanza-theme-series_2_color": "#e377c2",
-    "--togostanza-theme-series_3_color": "#7f7f7f",
-    "--togostanza-theme-series_4_color": "#bcbd22",
-    "--togostanza-theme-series_5_color": "#17becf",
+    "name": "bright",
+    "--togostanza-theme-series_0_color": "#6590e6",
+    "--togostanza-theme-series_1_color": "#3ac9b6",
+    "--togostanza-theme-series_2_color": "#9ede2f",
+    "--togostanza-theme-series_3_color": "#f5da64",
+    "--togostanza-theme-series_4_color": "#f57f5b",
+    "--togostanza-theme-series_5_color": "#f75976",
     "--togostanza-theme-background_color": "#ecefef"
   },
   {
-    "name": "Warm",
-    "--togostanza-theme-series_0_color": "#D72638",
-    "--togostanza-theme-series_1_color": "#3F88C5",
-    "--togostanza-theme-series_2_color": "#F49D37",
-    "--togostanza-theme-series_3_color": "#140F2D",
-    "--togostanza-theme-series_4_color": "#F23C50",
-    "--togostanza-theme-series_5_color": "#F8C300",
-    "--togostanza-theme-background_color": "#FFFBEA"
+    "name": "console",
+    "--togostanza-theme-series_0_color": "#00fe17",
+    "--togostanza-theme-series_1_color": "#544dff",
+    "--togostanza-theme-series_2_color": "#f6fe00",
+    "--togostanza-theme-series_3_color": "#ff37ff",
+    "--togostanza-theme-series_4_color": "#ff4247",
+    "--togostanza-theme-series_5_color": "#00fffa",
+    "--togostanza-theme-background_color": "#000000"
   },
   {
-    "name": "Cool",
-    "--togostanza-theme-series_0_color": "#5DADE2",
-    "--togostanza-theme-series_1_color": "#48C9B0",
-    "--togostanza-theme-series_2_color": "#45B39D",
-    "--togostanza-theme-series_3_color": "#A9DFBF",
-    "--togostanza-theme-series_4_color": "#5499C7",
-    "--togostanza-theme-series_5_color": "#2E86C1",
-    "--togostanza-theme-background_color": "#F2F4F4"
+    "name": "cud",
+    "--togostanza-theme-series_0_color": "#003A6B",
+    "--togostanza-theme-series_1_color": "#A3D5FF",
+    "--togostanza-theme-series_2_color": "#B27400",
+    "--togostanza-theme-series_3_color": "#FFD484",
+    "--togostanza-theme-series_4_color": "#AFAFAF",
+    "--togostanza-theme-series_5_color": "#D3D3D3",
+    "--togostanza-theme-background_color": "#FFFFFF"
+  },
+  {
+    "name": "dark",
+    "--togostanza-theme-series_0_color": "#00345b",
+    "--togostanza-theme-series_1_color": "#42034b",
+    "--togostanza-theme-series_2_color": "#9d1600",
+    "--togostanza-theme-series_3_color": "#9e5200",
+    "--togostanza-theme-series_4_color": "#909d00",
+    "--togostanza-theme-series_5_color": "#005524",
+    "--togostanza-theme-background_color": "#E6E3E3"
+  },
+  {
+    "name": "ocean",
+    "--togostanza-theme-series_0_color": "#00b8ae",
+    "--togostanza-theme-series_1_color": "#3ad4e8",
+    "--togostanza-theme-series_2_color": "#006370",
+    "--togostanza-theme-series_3_color": "#0d3329",
+    "--togostanza-theme-series_4_color": "#d19177",
+    "--togostanza-theme-series_5_color": "#edc0c3",
+    "--togostanza-theme-background_color": "#FFFFFF"
+  },
+  {
+    "name": "pastel",
+    "--togostanza-theme-series_0_color": "#adc1c7",
+    "--togostanza-theme-series_1_color": "#ceeded",
+    "--togostanza-theme-series_2_color": "#ccb9b1",
+    "--togostanza-theme-series_3_color": "#f5e7d0",
+    "--togostanza-theme-series_4_color": "#AED6C8",
+    "--togostanza-theme-series_5_color": "#C4D6F5",
+    "--togostanza-theme-background_color": "#FFFFFF"
+  },
+  {
+    "name": "paper",
+    "--togostanza-theme-series_0_color": "#5c5c5c",
+    "--togostanza-theme-series_1_color": "#878787",
+    "--togostanza-theme-series_2_color": "#b3b3b3",
+    "--togostanza-theme-series_3_color": "#d9d9d9",
+    "--togostanza-theme-series_4_color": "#f2f2f2",
+    "--togostanza-theme-series_5_color": "#ffffff",
+    "--togostanza-theme-background_color": "#FFFFFF"
+  },
+  {
+    "name": "sunset",
+    "--togostanza-theme-series_0_color": "#f39800",
+    "--togostanza-theme-series_1_color": "#f25562",
+    "--togostanza-theme-series_2_color": "#c22b5d",
+    "--togostanza-theme-series_3_color": "#6e2c36",
+    "--togostanza-theme-series_4_color": "#421838",
+    "--togostanza-theme-series_5_color": "#face4b",
+    "--togostanza-theme-background_color": "#FFFFFF"
   }
+
 ]
