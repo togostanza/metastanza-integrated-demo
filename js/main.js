@@ -105,7 +105,8 @@ document.addEventListener("DOMContentLoaded", () => {
    * Input Data 用の CodeMirror エディタを初期化する
    */
   function initInputEditor() {
-    const dataTextarea = document.getElementById("data");
+    // 変更後は "DataEditor" という ID を持つ textarea を参照する
+    const dataTextarea = document.getElementById("DataEditor");
     window.inputEditor = CodeMirror.fromTextArea(dataTextarea, {
       mode: { name: "javascript", json: true },
       lineNumbers: true,
@@ -136,14 +137,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /**
-   * Style Data 用の CodeMirror エディタを初期化する
+   * Color Scheme 用の CodeMirror エディタを初期化する
    */
   function initStyleEditor() {
-    const styleTextarea = document.getElementById("styleData");
-    if (!styleTextarea) {
-      console.error("styleData textarea が見つかりません。");
-      return;
-    }
+    // 変更後は "ColorSchemeEditor" という ID を持つ textarea を参照する
+    const styleTextarea = document.getElementById("ColorSchemeEditor");
     window.styleEditor = CodeMirror.fromTextArea(styleTextarea, {
       mode: { name: "javascript", json: true },
       lineNumbers: true,
@@ -170,12 +168,14 @@ document.addEventListener("DOMContentLoaded", () => {
     // エディタを即時リフレッシュ
     window.styleEditor.refresh();
 
+    // 初期値を反映
+    setTimeout(() => {
+      applyStyleFromEditor(window.styleEditor.getValue());
+    }, 0);
 
-    // CodeMirror の内容が変更されたら、JSON の正当性をチェックし
-    // 有効なら CSS 変数を更新する
+    // エディタ変更時の処理
     window.styleEditor.on("change", () => {
       const val = window.styleEditor.getValue();
-      console.log(val)
       try {
         JSON.parse(val);
         applyStyleFromEditor(val);
@@ -207,13 +207,10 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch('./color-schemes.json')
       .then(response => response.json())
       .then(colorSchemes => {
-        const styleTab = document.getElementById("style");
+        const styleTab = document.getElementById("ColorSchemeEditorTab");
         if (!styleTab) return;
         const schemeContainer = document.createElement("div");
         schemeContainer.id = "color-schemes";
-        schemeContainer.style.display = "flex";
-        schemeContainer.style.gap = "10px";
-        schemeContainer.style.marginBottom = "10px";
 
         colorSchemes.forEach(scheme => {
           const btn = document.createElement("button");
@@ -253,6 +250,7 @@ document.addEventListener("DOMContentLoaded", () => {
    * タブ切り替え処理を初期化する
    */
   function initTabs() {
+    // 変更後は、data-tab 属性が "DataEditorTab" または "ColorSchemeEditorTab" となる
     document.querySelectorAll('.tab-container .tabs .tab').forEach(tab => {
       tab.addEventListener('click', (e) => {
         const targetTab = e.target.getAttribute('data-tab');
@@ -263,8 +261,8 @@ document.addEventListener("DOMContentLoaded", () => {
           content.classList.toggle('-active', content.id === targetTab);
         });
 
-        // style タブが表示されたなら、CodeMirror をリフレッシュ
-        if (targetTab === 'style' && window.styleEditor) {
+        // 必要なら各エディタの refresh() を呼ぶ
+        if (targetTab === "ColorSchemeEditorTab" && window.styleEditor) {
           window.styleEditor.refresh();
         }
       });
