@@ -140,6 +140,10 @@ document.addEventListener("DOMContentLoaded", () => {
    */
   function initStyleEditor() {
     const styleTextarea = document.getElementById("styleData");
+    if (!styleTextarea) {
+      console.error("styleData textarea が見つかりません。");
+      return;
+    }
     window.styleEditor = CodeMirror.fromTextArea(styleTextarea, {
       mode: { name: "javascript", json: true },
       lineNumbers: true,
@@ -147,6 +151,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     const heightStyle = window.getComputedStyle(styleTextarea).getPropertyValue("height");
     window.styleEditor.setSize(null, heightStyle);
+
+    // 初期状態で入力する CSS 変数定義
     const defaultStyle = {
       "--togostanza-theme-series_0_color": "#6590e6",
       "--togostanza-theme-series_1_color": "#3ac9b6",
@@ -158,10 +164,18 @@ document.addEventListener("DOMContentLoaded", () => {
       "--togostanza-theme-text_color": "#000000",
       "--togostanza-theme-border_color": "#000000"
     };
-    window.styleEditor.setValue(JSON.stringify(defaultStyle, null, 2));
-    applyStyleFromEditor(window.styleEditor.getValue());
-    window.styleEditor.on("change", (cm) => {
-      const val = cm.getValue();
+    const defaultCode = JSON.stringify(defaultStyle, null, 2);
+    window.styleEditor.setValue(defaultCode);
+
+    // エディタを即時リフレッシュ
+    window.styleEditor.refresh();
+
+
+    // CodeMirror の内容が変更されたら、JSON の正当性をチェックし
+    // 有効なら CSS 変数を更新する
+    window.styleEditor.on("change", () => {
+      const val = window.styleEditor.getValue();
+      console.log(val)
       try {
         JSON.parse(val);
         applyStyleFromEditor(val);
@@ -248,6 +262,11 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll('.tab-container .tab-content').forEach(content => {
           content.classList.toggle('-active', content.id === targetTab);
         });
+
+        // style タブが表示されたなら、CodeMirror をリフレッシュ
+        if (targetTab === 'style' && window.styleEditor) {
+          window.styleEditor.refresh();
+        }
       });
     });
   }
