@@ -13,7 +13,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const styleTag = document.createElement("style");
   document.head.appendChild(styleTag);
 
-  // 共通のコンポーネント生成関数
+  /**
+   * 指定された src を持つ script 要素を生成する
+   * @param {string} src - 読み込むスクリプトの相対パス
+   * @returns {HTMLScriptElement} 生成された script 要素
+   */
   function createScript(src) {
     const script = document.createElement("script");
     script.type = "module";
@@ -21,6 +25,12 @@ document.addEventListener("DOMContentLoaded", () => {
     script.async = true;
     return script;
   }
+
+  /**
+   * config.json の item に基づいてコンポーネントを生成する
+   * @param {Object} item - コンポーネント設定オブジェクト
+   * @returns {HTMLElement} 生成された要素
+   */
   function createComponent(item) {
     const elem = document.createElement(item.tag);
     if (item.attributes) {
@@ -39,18 +49,20 @@ document.addEventListener("DOMContentLoaded", () => {
     return elem;
   }
 
-  // 初期化：config.json & multi-data.json の読み込み
+  /**
+   * config.json および multi-data.json を読み込み、各コンポーネントをレンダリングする
+   */
   function initConfigs() {
     fetch('./config.json')
       .then(response => response.json())
       .then(config => {
-        // dataSources追加
+        // dataSources 追加
         config.dataSources.forEach(item => {
           const el = createComponent(item);
           if (el) container.appendChild(el);
         });
 
-        // stanzasを配置
+        // stanzas の配置
         const stanzas = document.createElement("div");
         stanzas.id = "stanzas";
         container.appendChild(stanzas);
@@ -62,9 +74,11 @@ document.addEventListener("DOMContentLoaded", () => {
           if (item.title) {
             const panel = document.createElement("div");
             panel.classList.add("panel");
+
             const heading = document.createElement("h2");
             heading.textContent = item.title;
             panel.appendChild(heading);
+
             if (item.tag) {
               panel.appendChild(createComponent(item));
             }
@@ -87,7 +101,9 @@ document.addEventListener("DOMContentLoaded", () => {
       .catch(err => console.error("config.json の読み込みに失敗しました:", err));
   }
 
-  // CodeMirror エディタ初期化（Input Data 用）
+  /**
+   * Input Data 用の CodeMirror エディタを初期化する
+   */
   function initInputEditor() {
     const dataTextarea = document.getElementById("data");
     window.inputEditor = CodeMirror.fromTextArea(dataTextarea, {
@@ -103,7 +119,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // JSON が有効なら各スタンザに更新する関数
+  /**
+   * JSON が有効なら各スタンザの data-url 属性を更新する
+   * @param {string} jsonString - JSON 文字列
+   */
   function updateStanzasData(jsonString) {
     try {
       JSON.parse(jsonString);
@@ -116,7 +135,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // CodeMirror エディタ初期化（Style Data 用）
+  /**
+   * Style Data 用の CodeMirror エディタを初期化する
+   */
   function initStyleEditor() {
     const styleTextarea = document.getElementById("styleData");
     window.styleEditor = CodeMirror.fromTextArea(styleTextarea, {
@@ -150,7 +171,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // JSON を読み込んで CSS variables を適用
+  /**
+   * JSON をパースして、document.documentElement の CSS 変数を更新する
+   * @param {string} jsonString - JSON 文字列
+   */
   function applyStyleFromEditor(jsonString) {
     try {
       const styleObj = JSON.parse(jsonString);
@@ -162,7 +186,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // カラースキーマサンプルボタン生成（color-schemes.json を一度だけ読み込み）
+  /**
+   * color-schemes.json を読み込み、カラースキーマサンプルボタンを生成する
+   */
   function initColorSchemeButtons() {
     fetch('./color-schemes.json')
       .then(response => response.json())
@@ -209,7 +235,9 @@ document.addEventListener("DOMContentLoaded", () => {
       .catch(err => console.error("Failed to load color schemes:", err));
   }
 
-  // タブ切り替え処理
+  /**
+   * タブ切り替え処理を初期化する
+   */
   function initTabs() {
     document.querySelectorAll('.tab-container .tabs .tab').forEach(tab => {
       tab.addEventListener('click', (e) => {
@@ -224,7 +252,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 初期化関数呼び出し
+  // 初期化処理呼び出し
   initConfigs();
   initInputEditor();
   initStyleEditor();
