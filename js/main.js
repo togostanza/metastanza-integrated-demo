@@ -105,9 +105,9 @@ document.addEventListener("DOMContentLoaded", () => {
     theme: "default"
   });
 
-  // textarea の computed style を参照し、高さを取得
-  const computedHeight = window.getComputedStyle(textarea).getPropertyValue("height");
-  window.editor.setSize(null, computedHeight);
+  // textarea の computed style を参照し、高さを取得（Input Data 用）
+  const computedHeightData = window.getComputedStyle(textarea).getPropertyValue("height");
+  window.editor.setSize(null, computedHeightData);
 
   // エディタ内容に変更があればバリデートと各スタンザ更新を行う
   window.editor.on("change", (cm) => {
@@ -145,10 +145,67 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // カラースキーマ編集機能の外部ファイルからの読み込み
+  // --- カラースタイル編集領域の初期化 ---
+  // Style タブ（id="style"）に、JSON 用の textarea を生成（既存でなければ）
+  const styleTextarea = document.getElementById("styleData");
+
+  // CodeMirror を textarea#styleData に適用（JSON モード）
+  const styleEditor = CodeMirror.fromTextArea(styleTextarea, {
+    mode: { name: "javascript", json: true },
+    lineNumbers: true,
+    theme: "default"
+  });
+  // textarea の computed style を参照し、高さを取得（Style Data 用）
+  const computedHeightStyle = window.getComputedStyle(styleTextarea).getPropertyValue("height");
+  styleEditor.setSize(null, computedHeightStyle);
+
+  // 初期のスタイル定義（デフォルト値） ※必要に応じて調整してください
+  let defaultStyle = {
+    "--togostanza-theme-series_0_color": "#6590e6",
+    "--togostanza-theme-series_1_color": "#3ac9b6",
+    "--togostanza-theme-series_2_color": "#9ede2f",
+    "--togostanza-theme-series_3_color": "#f5da64",
+    "--togostanza-theme-series_4_color": "#f57f5b",
+    "--togostanza-theme-series_5_color": "#f75976",
+    "--togostanza-theme-background_color": "#ecefef",
+    "--togostanza-theme-text_color": "#000000",
+    "--togostanza-theme-border_color": "#000000"
+  };
+  styleEditor.setValue(JSON.stringify(defaultStyle, null, 2));
+  applyStyleFromEditor(styleEditor.getValue());
+
+  // エディタ内の JSON が有効であれば document.documentElement に反映する関数
+  function applyStyleFromEditor(jsonString) {
+    try {
+      const styleObj = JSON.parse(jsonString);
+      for (const key in styleObj) {
+        document.documentElement.style.setProperty(key, styleObj[key]);
+      }
+    } catch (e) {
+      console.error("Invalid style JSON", e);
+    }
+  }
+
+  // CodeMirror の変更イベントでバリデート＆適用
+  styleEditor.on("change", (cm) => {
+    const value = cm.getValue();
+    try {
+      JSON.parse(value);
+      applyStyleFromEditor(value);
+    } catch (e) {
+      // JSON が無効の場合はエラー表示（必要に応じてユーザー通知など）
+      console.error("Style JSON is invalid:", e);
+    }
+  });
+
+  // --- カラースキーマサンプルボタン＆初期化 ---
+  // color-schemes.json の内容を一度だけ読み込み、サンプルボタンを生成する
   fetch('./color-schemes.json')
     .then(response => response.json())
     .then(colorSchemes => {
+      const styleTab = document.getElementById("style");
+      if (!styleTab) return;
+
       // カラースキーマ選択用のコンテナ要素作成（id="color-schemes" のスタイルは CSS で定義）
       const schemeContainer = document.createElement("div");
       schemeContainer.id = "color-schemes";
@@ -178,31 +235,18 @@ document.addEventListener("DOMContentLoaded", () => {
         btn.appendChild(sampleContainer);
 
         btn.addEventListener("click", () => {
-          // すべてのボタンから -active クラスを削除
-          Array.from(schemeContainer.children).forEach(child => {
-            child.classList.remove("-active");
-          });
-          // カラースキーマを適用
-          applyColorScheme(scheme);
-          // 選択されたボタンに -active クラスを追加
-          btn.classList.add("-active");
+          // name プロパティ以外の内容をエディタにセットする
+          const schemeCopy = { ...scheme };
+          delete schemeCopy.name;
+          const jsonText = JSON.stringify(schemeCopy, null, 2);
+          styleEditor.setValue(jsonText);
+          applyStyleFromEditor(jsonText);
         });
         schemeContainer.appendChild(btn);
       });
 
-      // Style タブ内の領域にカラースキーマコンテナを追加
-      const styleTab = document.getElementById("style");
-      if (styleTab) {
-        styleTab.insertBefore(schemeContainer, styleTab.firstChild);
-      }
+      // Style タブ内の先頭にサンプルボタン群を追加
+      styleTab.insertBefore(schemeContainer, styleTab.firstChild);
     })
-    .catch(err => console.error("カラースキーマの読み込みに失敗しました:", err));
-
-  function applyColorScheme(scheme) {
-    for (const key in scheme) {
-      if (key !== "name") {
-        document.documentElement.style.setProperty(key, scheme[key]);
-      }
-    }
-  }
+    .catch(err => console.error("Failed to load color schemes:", err));
 });
