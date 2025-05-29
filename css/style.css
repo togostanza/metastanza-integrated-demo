@@ -9,6 +9,8 @@ html {
   --togostanza-theme-series_4_color: #f57f5b;
   --togostanza-theme-series_5_color: #f75976;
   --togostanza-theme-background_color: #ecefef;
+  --togostanza-theme-text_color: #000000;
+  --togostanza-theme-border_color: #000000;
 }
 
 body {
@@ -16,7 +18,8 @@ body {
   margin: 10px;
   padding: 0;
   font-size: 10px;
-  background-color: #d9dfdf;
+  background-color: #afb7b7;
+  color: var(--togostanza-theme-text_color);
 }
 
 .panel {
@@ -42,6 +45,7 @@ body {
       font-size: 1.2em;
       font-weight: bold;
       opacity: .3;
+      color: var(--togostanza-theme-text_color);
       + .tab {
         margin-left: 8px;
       }
@@ -55,6 +59,7 @@ body {
   .tab-content {
     display: none;
     margin-top: 8px;
+    overflow-x: auto;
     &.-active {
       display: block;
     }
@@ -67,6 +72,7 @@ body {
   display: flex;
   gap: 10px;
   margin-bottom: 10px;
+  padding: 4px 2px;
   > button {
     display: flex;
     flex-direction: column;
@@ -75,10 +81,10 @@ body {
     cursor: pointer;
     border: none;
     border-radius: 4px;
+    color: var(--togostanza-theme-text_color);
     background-color: transparent;
     &.-active {
-      /* outline: 2px solid #000; */
-      background-color: #ecefef;
+      outline: 1px solid var(--togostanza-theme-border_color);
     }
     > span {
       font-size: 10px;
@@ -116,12 +122,8 @@ h2 {
   flex-direction: row;
   align-items: center;
   overflow-x: auto;
-> * {
+  > * {
     width: fit-content;
-    /* border-right: solid 1px black;
-    &:last-child {
-      border-right: none;
-    } */
   }
 }
 
