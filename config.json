@@ -19,7 +19,10 @@
         "data-type": "json",
         "data-value_key": "area",
         "data-category_key": "prefecture",
+        "color-key": "",
+        "group-key": "",
         "legend-title": "Population",
+        "tooltip": "{{prefecture}}",
         "togostanza-menu_placement": "none",
         "event-outgoing_change_selected_nodes": "",
         "event-incoming_change_selected_nodes": ""
@@ -128,7 +131,7 @@
         "cell-color_min": "#6590e6",
         "cell-color_mid": "#ffffff",
         "cell-color_max": "#F75976",
-        "tooltips-key": "value",
+        "tooltips-key": "color",
         "togostanza-menu_placement": "none",
         "event-outgoing_change_selected_nodes": "",
         "event-incoming_change_selected_nodes": ""
