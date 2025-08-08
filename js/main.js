@@ -1,5 +1,6 @@
 const isLocal = location.hostname === "localhost";
-const baseURL = isLocal ? "http://localhost:8080/" : "https://togostanza.github.io/metastanza-devel/";
+// const baseURL = isLocal ? "http://localhost:8080/" : "https://togostanza.github.io/metastanza-devel/";
+const baseURL =  "http://localhost:8080/" 
 
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.querySelector("togostanza--container");
@@ -139,51 +140,51 @@ document.addEventListener("DOMContentLoaded", () => {
   /**
    * Color Scheme 用の CodeMirror エディタを初期化する
    */
-  function initStyleEditor() {
+function initStyleEditor() {
     // 変更後は "ColorSchemeEditor" という ID を持つ textarea を参照する
-    const styleTextarea = document.getElementById("ColorSchemeEditor");
-    window.styleEditor = CodeMirror.fromTextArea(styleTextarea, {
+  const styleTextarea = document.getElementById("ColorSchemeEditor");
+  window.styleEditor = CodeMirror.fromTextArea(styleTextarea, {
       mode: { name: "javascript", json: true },
       lineNumbers: true,
       theme: "default"
-    });
-    const heightStyle = window.getComputedStyle(styleTextarea).getPropertyValue("height");
-    window.styleEditor.setSize(null, heightStyle);
+  });
+  const heightStyle = window.getComputedStyle(styleTextarea).getPropertyValue("height");
+  window.styleEditor.setSize(null, heightStyle);
 
     // 初期状態で入力する CSS 変数定義
-    const defaultStyle = {
-      "--togostanza-theme-series_0_color": "#6590e6",
-      "--togostanza-theme-series_1_color": "#3ac9b6",
-      "--togostanza-theme-series_2_color": "#9ede2f",
-      "--togostanza-theme-series_3_color": "#f5da64",
-      "--togostanza-theme-series_4_color": "#f57f5b",
-      "--togostanza-theme-series_5_color": "#f75976",
-      "--togostanza-theme-background_color": "#ecefef",
-      "--togostanza-theme-text_color": "#000000",
+  const defaultStyle = {
+    "--togostanza-theme-series_0_color": "#6590e6",
+    "--togostanza-theme-series_1_color": "#3ac9b6",
+    "--togostanza-theme-series_2_color": "#9ede2f",
+    "--togostanza-theme-series_3_color": "#f5da64",
+    "--togostanza-theme-series_4_color": "#f57f5b",
+    "--togostanza-theme-series_5_color": "#f75976",
+    "--togostanza-theme-background_color": "#ecefef",
+    "--togostanza-theme-text_color": "#000000",
       "--togostanza-theme-border_color": "#000000"
-    };
-    const defaultCode = JSON.stringify(defaultStyle, null, 2);
-    window.styleEditor.setValue(defaultCode);
+  };
+  const defaultCode = JSON.stringify(defaultStyle, null, 2);
+  window.styleEditor.setValue(defaultCode);
 
     // エディタを即時リフレッシュ
-    window.styleEditor.refresh();
+  window.styleEditor.refresh();
 
     // 初期値を反映
-    setTimeout(() => {
-      applyStyleFromEditor(window.styleEditor.getValue());
-    }, 0);
+  setTimeout(() => {
+    applyStyleFromEditor(window.styleEditor.getValue());
+  }, 0);
 
     // エディタ変更時の処理
-    window.styleEditor.on("change", () => {
-      const val = window.styleEditor.getValue();
-      try {
+  window.styleEditor.on("change", () => {
+    const val = window.styleEditor.getValue();
+    try {
         JSON.parse(val);
         applyStyleFromEditor(val);
-      } catch (e) {
+    } catch (e) {
         console.error("Style JSON is invalid:", e);
-      }
-    });
-  }
+    }
+  });
+}
 
   /**
    * JSON をパースして、document.documentElement の CSS 変数を更新する
@@ -198,6 +199,25 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (e) {
       console.error("Invalid style JSON", e);
     }
+  }
+
+  /**
+   * 指定されたカラースキーム（CSSカスタムプロパティ）を
+   * ページ内のすべての Stanza 要素に適用します。
+   *
+   * @param {Object.<string, string>} colorScheme - CSS変数とその値のオブジェクト。
+   *        例: { "--togostanza-theme-series_0_color": "#6590e6", ... }
+   */
+  function applyColorSchemeToStanzas(colorScheme) {
+    const stanzaElements = document.querySelectorAll("[data-url]");
+
+    stanzaElements.forEach(el => {
+      Object.entries(colorScheme).forEach(([key, value]) => {
+        if (key.startsWith('--')) {
+          el.style.setProperty(key, value);
+        }
+      });
+    });
   }
 
   /**
@@ -238,6 +258,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const jsonText = JSON.stringify(schemeCopy, null, 2);
             window.styleEditor.setValue(jsonText);
             applyStyleFromEditor(jsonText);
+            applyColorSchemeToStanzas(schemeCopy);
           });
           schemeContainer.appendChild(btn);
         });
