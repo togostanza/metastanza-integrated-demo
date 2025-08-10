@@ -1,6 +1,8 @@
 const isLocal = location.hostname === "localhost";
-// const baseURL = isLocal ? "http://localhost:8080/" : "https://togostanza.github.io/metastanza-devel/";
-const baseURL =  "http://localhost:8080/" 
+const baseURL = isLocal
+  ? "http://localhost:8080/"
+  : "https://togostanza.github.io/metastanza-devel/";
+// const baseURL =  "http://localhost:8080/"
 
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.querySelector("togostanza--container");
@@ -35,13 +37,13 @@ document.addEventListener("DOMContentLoaded", () => {
   function createComponent(item) {
     const elem = document.createElement(item.tag);
     if (item.attributes) {
-      Object.keys(item.attributes).forEach(key => {
+      Object.keys(item.attributes).forEach((key) => {
         elem.setAttribute(key, item.attributes[key]);
       });
     }
     if (item.cssVariables) {
       let cssRule = `${item.tag} {`;
-      Object.keys(item.cssVariables).forEach(varName => {
+      Object.keys(item.cssVariables).forEach((varName) => {
         cssRule += `${varName}: ${item.cssVariables[varName]};`;
       });
       cssRule += `}`;
@@ -54,11 +56,11 @@ document.addEventListener("DOMContentLoaded", () => {
    * config.json および multi-data.json を読み込み、各コンポーネントをレンダリングする
    */
   function initConfigs() {
-    fetch('./config.json')
-      .then(response => response.json())
-      .then(config => {
+    fetch("./config.json")
+      .then((response) => response.json())
+      .then((config) => {
         // dataSources 追加
-        config.dataSources.forEach(item => {
+        config.dataSources.forEach((item) => {
           const el = createComponent(item);
           if (el) container.appendChild(el);
         });
@@ -67,11 +69,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const stanzas = document.createElement("div");
         stanzas.id = "stanzas";
         container.appendChild(stanzas);
-        config.stanzas.forEach(item => {
+        config.stanzas.forEach((item) => {
           if (item.scriptSrc) {
             container.appendChild(createScript(item.scriptSrc));
           }
-          let target = (item.tag === "togostanza-pagination-table") ? container : stanzas;
+          let target =
+            item.tag === "togostanza-pagination-table" ? container : stanzas;
           if (item.title) {
             const panel = document.createElement("div");
             panel.classList.add("panel");
@@ -89,17 +92,21 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         });
         // multi-data.json 読み込み
-        fetch('./multi-data.json')
-          .then(response => response.text())
-          .then(text => {
+        fetch("./multi-data.json")
+          .then((response) => response.text())
+          .then((text) => {
             if (window.inputEditor) {
               window.inputEditor.setValue(text);
               updateStanzasData(text);
             }
           })
-          .catch(err => console.error("multi-data.json の読み込みに失敗しました:", err));
+          .catch((err) =>
+            console.error("multi-data.json の読み込みに失敗しました:", err)
+          );
       })
-      .catch(err => console.error("config.json の読み込みに失敗しました:", err));
+      .catch((err) =>
+        console.error("config.json の読み込みに失敗しました:", err)
+      );
   }
 
   /**
@@ -111,9 +118,11 @@ document.addEventListener("DOMContentLoaded", () => {
     window.inputEditor = CodeMirror.fromTextArea(dataTextarea, {
       mode: { name: "javascript", json: true },
       lineNumbers: true,
-      theme: "default"
+      theme: "default",
     });
-    const heightData = window.getComputedStyle(dataTextarea).getPropertyValue("height");
+    const heightData = window
+      .getComputedStyle(dataTextarea)
+      .getPropertyValue("height");
     window.inputEditor.setSize(null, heightData);
     window.inputEditor.on("change", (cm) => {
       const text = cm.getValue();
@@ -129,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       JSON.parse(jsonString);
       const dataUri = "data:application/json," + encodeURIComponent(jsonString);
-      document.querySelectorAll("[data-url]").forEach(el => {
+      document.querySelectorAll("[data-url]").forEach((el) => {
         el.setAttribute("data-url", dataUri);
       });
     } catch (e) {
@@ -140,51 +149,53 @@ document.addEventListener("DOMContentLoaded", () => {
   /**
    * Color Scheme 用の CodeMirror エディタを初期化する
    */
-function initStyleEditor() {
+  function initStyleEditor() {
     // 変更後は "ColorSchemeEditor" という ID を持つ textarea を参照する
-  const styleTextarea = document.getElementById("ColorSchemeEditor");
-  window.styleEditor = CodeMirror.fromTextArea(styleTextarea, {
+    const styleTextarea = document.getElementById("ColorSchemeEditor");
+    window.styleEditor = CodeMirror.fromTextArea(styleTextarea, {
       mode: { name: "javascript", json: true },
       lineNumbers: true,
-      theme: "default"
-  });
-  const heightStyle = window.getComputedStyle(styleTextarea).getPropertyValue("height");
-  window.styleEditor.setSize(null, heightStyle);
+      theme: "default",
+    });
+    const heightStyle = window
+      .getComputedStyle(styleTextarea)
+      .getPropertyValue("height");
+    window.styleEditor.setSize(null, heightStyle);
 
     // 初期状態で入力する CSS 変数定義
-  const defaultStyle = {
-    "--togostanza-theme-series_0_color": "#6590e6",
-    "--togostanza-theme-series_1_color": "#3ac9b6",
-    "--togostanza-theme-series_2_color": "#9ede2f",
-    "--togostanza-theme-series_3_color": "#f5da64",
-    "--togostanza-theme-series_4_color": "#f57f5b",
-    "--togostanza-theme-series_5_color": "#f75976",
-    "--togostanza-theme-background_color": "#ecefef",
-    "--togostanza-theme-text_color": "#000000",
-      "--togostanza-theme-border_color": "#000000"
-  };
-  const defaultCode = JSON.stringify(defaultStyle, null, 2);
-  window.styleEditor.setValue(defaultCode);
+    const defaultStyle = {
+      "--togostanza-theme-series_0_color": "#6590e6",
+      "--togostanza-theme-series_1_color": "#3ac9b6",
+      "--togostanza-theme-series_2_color": "#9ede2f",
+      "--togostanza-theme-series_3_color": "#f5da64",
+      "--togostanza-theme-series_4_color": "#f57f5b",
+      "--togostanza-theme-series_5_color": "#f75976",
+      "--togostanza-theme-background_color": "#ecefef",
+      "--togostanza-theme-text_color": "#000000",
+      "--togostanza-theme-border_color": "#000000",
+    };
+    const defaultCode = JSON.stringify(defaultStyle, null, 2);
+    window.styleEditor.setValue(defaultCode);
 
     // エディタを即時リフレッシュ
-  window.styleEditor.refresh();
+    window.styleEditor.refresh();
 
     // 初期値を反映
-  setTimeout(() => {
-    applyStyleFromEditor(window.styleEditor.getValue());
-  }, 0);
+    setTimeout(() => {
+      applyStyleFromEditor(window.styleEditor.getValue());
+    }, 0);
 
     // エディタ変更時の処理
-  window.styleEditor.on("change", () => {
-    const val = window.styleEditor.getValue();
-    try {
+    window.styleEditor.on("change", () => {
+      const val = window.styleEditor.getValue();
+      try {
         JSON.parse(val);
         applyStyleFromEditor(val);
-    } catch (e) {
+      } catch (e) {
         console.error("Style JSON is invalid:", e);
-    }
-  });
-}
+      }
+    });
+  }
 
   /**
    * JSON をパースして、document.documentElement の CSS 変数を更新する
@@ -193,7 +204,7 @@ function initStyleEditor() {
   function applyStyleFromEditor(jsonString) {
     try {
       const styleObj = JSON.parse(jsonString);
-      Object.keys(styleObj).forEach(key => {
+      Object.keys(styleObj).forEach((key) => {
         document.documentElement.style.setProperty(key, styleObj[key]);
       });
     } catch (e) {
@@ -211,9 +222,9 @@ function initStyleEditor() {
   function applyColorSchemeToStanzas(colorScheme) {
     const stanzaElements = document.querySelectorAll("[data-url]");
 
-    stanzaElements.forEach(el => {
+    stanzaElements.forEach((el) => {
       Object.entries(colorScheme).forEach(([key, value]) => {
-        if (key.startsWith('--')) {
+        if (key.startsWith("--")) {
           el.style.setProperty(key, value);
         }
       });
@@ -224,15 +235,15 @@ function initStyleEditor() {
    * color-schemes.json を読み込み、カラースキーマサンプルボタンを生成する
    */
   function initColorSchemeButtons() {
-    fetch('./color-schemes.json')
-      .then(response => response.json())
-      .then(colorSchemes => {
+    fetch("./color-schemes.json")
+      .then((response) => response.json())
+      .then((colorSchemes) => {
         const styleTab = document.getElementById("ColorSchemeEditorTab");
         if (!styleTab) return;
         const schemeContainer = document.createElement("div");
         schemeContainer.id = "color-schemes";
 
-        colorSchemes.forEach(scheme => {
+        colorSchemes.forEach((scheme) => {
           const btn = document.createElement("button");
           btn.classList.add("color-scheme-sample-btn");
           // 表示用のラベル
@@ -242,7 +253,8 @@ function initStyleEditor() {
 
           const sampleContainer = document.createElement("div");
           sampleContainer.classList.add("color-scheme-sample");
-          sampleContainer.style.backgroundColor = scheme["--togostanza-theme-background_color"];
+          sampleContainer.style.backgroundColor =
+            scheme["--togostanza-theme-background_color"];
           for (let i = 0; i < 6; i++) {
             const colorKey = `--togostanza-theme-series_${i}_color`;
             const box = document.createElement("div");
@@ -264,7 +276,7 @@ function initStyleEditor() {
         });
         styleTab.insertBefore(schemeContainer, styleTab.firstChild);
       })
-      .catch(err => console.error("Failed to load color schemes:", err));
+      .catch((err) => console.error("Failed to load color schemes:", err));
   }
 
   /**
@@ -272,15 +284,22 @@ function initStyleEditor() {
    */
   function initTabs() {
     // 変更後は、data-tab 属性が "DataEditorTab" または "ColorSchemeEditorTab" となる
-    document.querySelectorAll('.tab-container .tabs .tab').forEach(tab => {
-      tab.addEventListener('click', (e) => {
-        const targetTab = e.target.getAttribute('data-tab');
-        document.querySelectorAll('.tab-container .tabs .tab').forEach(btn => {
-          btn.classList.toggle('-active', btn.getAttribute('data-tab') === targetTab);
-        });
-        document.querySelectorAll('.tab-container .tab-content').forEach(content => {
-          content.classList.toggle('-active', content.id === targetTab);
-        });
+    document.querySelectorAll(".tab-container .tabs .tab").forEach((tab) => {
+      tab.addEventListener("click", (e) => {
+        const targetTab = e.target.getAttribute("data-tab");
+        document
+          .querySelectorAll(".tab-container .tabs .tab")
+          .forEach((btn) => {
+            btn.classList.toggle(
+              "-active",
+              btn.getAttribute("data-tab") === targetTab
+            );
+          });
+        document
+          .querySelectorAll(".tab-container .tab-content")
+          .forEach((content) => {
+            content.classList.toggle("-active", content.id === targetTab);
+          });
 
         // 必要なら各エディタの refresh() を呼ぶ
         if (targetTab === "ColorSchemeEditorTab" && window.styleEditor) {
