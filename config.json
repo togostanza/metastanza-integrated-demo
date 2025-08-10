@@ -131,7 +131,7 @@
         "cell-color_min": "#6590e6",
         "cell-color_mid": "#ffffff",
         "cell-color_max": "#F75976",
-        "tooltips-key": "color",
+        "tooltip": "{{pop_2020}}",
         "togostanza-menu_placement": "none",
         "event-outgoing_change_selected_nodes": "",
         "event-incoming_change_selected_nodes": ""
