@@ -4,7 +4,7 @@
       "tag": "togostanza--data-source",
       "attributes": {
         "url": "./multi-data.json",
-        "receiver": "togostanza-pagination-table, togostanza-heatmap, togostanza-piechart, togostanza-barchart, togostanza-scatter-plot",
+        "receiver": "togostanza-pagination-table, togostanza-heatmap, togostanza-piechart, togostanza-barchart, togostanza-linechart, togostanza-scatter-plot",
         "target-attribute": "data-url"
       }
     }
@@ -110,6 +110,43 @@
       }
     },
     {
+      "title": "Line chart",
+      "scriptSrc": "linechart.js",
+      "tag": "togostanza-linechart",
+      "attributes": {
+        "data-url": "",
+        "data-type": "json",
+        "axis-x-key": "prefecture",
+        "data-x-scale": "ordinal",
+        "axis-x-placement": "bottom",
+        "axis-x-title": "都道府県",
+        "axis-x-title_padding": 20,
+        "axis-x-ticks_label_angle": -45,
+        "axis-x-ticks_interval": "",
+        "axis-x-ticks_labels_format": "",
+        "axis-x-gridlines_interval": "",
+        "axis-y-key": "pop_2020",
+        "axis-y-scale": "linear",
+        "axis-y-placement": "left",
+        "axis-y-title": "人口（2020）",
+        "axis-y-title_padding": 40,
+        "axis-y-ticks_label_angle": 0,
+        "axis-y-ticks_interval": "",
+        "axis-y-ticks_labels_format": "",
+        "axis-y-gridlines_interval": "",
+        "node-size": 5,
+        "group-key": "regional_block",
+        "tooltip": "{{prefecture}}",
+        "togostanza-menu_placement": "none",
+        "event-outgoing_change_selected_nodes": "",
+        "event-incoming_change_selected_nodes": ""
+      },
+      "cssVariables": {
+        "--togostanza-canvas-width": 500,
+        "--togostanza-canvas-height": 200
+      }
+    },
+    {
       "title": "Histogram",
       "scriptSrc": "histogram.js",
       "tag": "togostanza-histogram",
@@ -142,7 +179,7 @@
         "event-incoming_change_selected_nodes": ""
       },
       "cssVariables": {
-        "--togostanza-canvas-width": 500,
+        "--togostanza-canvas-width": 300,
         "--togostanza-canvas-height": 200
       }
     },
