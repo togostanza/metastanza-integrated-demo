@@ -72,17 +72,16 @@
       }
     },
     {
-      "title": "Histogram",
+      "title": "Bar chart",
       "scriptSrc": "barchart.js",
       "tag": "togostanza-barchart",
       "attributes": {
         "data-url": "",
         "data-type": "json",
-        "data-interpretation": "distribution",
         "data-bin-count": 10,
-        "axis-x-key": "pop_2020",
+        "axis-x-key": "prefecture",
         "axis-x-placement": "bottom",
-        "axis-x-title": "人口",
+        "axis-x-title": "都道府県",
         "axis-x-title_padding": 20,
         "axis-x-ticks_label_angle": -45,
         "axis-x-ticks_interval": "",
@@ -90,7 +89,7 @@
         "axis-x-gridlines_interval": "",
         "axis-y-key": "pop_2020",
         "axis-y-placement": "left",
-        "axis-y-title": "自治体数",
+        "axis-y-title": "人口（2020）",
         "axis-y-title_padding": 40,
         "axis-y-ticks_label_angle": 0,
         "axis-y-ticks_interval": "",
@@ -106,7 +105,44 @@
         "event-incoming_change_selected_nodes": ""
       },
       "cssVariables": {
-        "--togostanza-canvas-width": 300,
+        "--togostanza-canvas-width": 500,
+        "--togostanza-canvas-height": 200
+      }
+    },
+    {
+      "title": "Histogram",
+      "scriptSrc": "histogram.js",
+      "tag": "togostanza-histogram",
+      "attributes": {
+        "data-url": "",
+        "data-type": "json",
+        "data-bin-count": 10,
+        "axis-x-key": "pop_2020",
+        "axis-x-placement": "bottom",
+        "axis-x-title": "人口（2020）",
+        "axis-x-title_padding": 20,
+        "axis-x-ticks_label_angle": -45,
+        "axis-x-ticks_interval": "",
+        "axis-x-ticks_labels_format": ",.2r",
+        "axis-x-gridlines_interval": "",
+        "axis-y-placement": "left",
+        "axis-y-title": "都道府県",
+        "axis-y-title_padding": 40,
+        "axis-y-ticks_label_angle": 0,
+        "axis-y-ticks_interval": "",
+        "axis-y-ticks_labels_format": "",
+        "axis-y-gridlines_interval": "",
+        "grouping-key": "regional_block",
+        "grouping-arrangement": "stacked",
+        "color_by-key": "color",
+        "error_bars-key": "error",
+        "tooltip": "{{x0}}–{{x1}}: {{length}}都道府県",
+        "togostanza-menu_placement": "none",
+        "event-outgoing_change_selected_nodes": "",
+        "event-incoming_change_selected_nodes": ""
+      },
+      "cssVariables": {
+        "--togostanza-canvas-width": 500,
         "--togostanza-canvas-height": 200
       }
     },
