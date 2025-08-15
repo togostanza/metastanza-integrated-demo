@@ -1,0 +1,55 @@
+/**
+ * Component - Tab
+ * タブUIコンポーネント
+ * プレフィックス: c-
+ */
+
+.c-tab-container .c-tabs {
+  display: flex;
+  padding: 0 var(--spacing-xs);
+}
+
+.c-tab {
+  background: none;
+  border: none;
+  padding: var(--spacing-sm) 0 2px;
+  cursor: pointer;
+  font-size: var(--font-size-lg);
+  font-weight: bold;
+  opacity: 0.3;
+  color: var(--color-text);
+  transition: opacity 0.2s ease;
+}
+
+.c-tab + .c-tab {
+  margin-left: var(--spacing-sm);
+}
+
+.c-tab:hover {
+  opacity: 0.6;
+}
+
+.c-tab.-active {
+  opacity: 1;
+  border-bottom: 2px solid var(--color-primary);
+}
+
+.c-tab-content {
+  display: none;
+  padding: var(--spacing-md);
+}
+
+.c-tab-content.-active {
+  display: block;
+}
+
+.c-tab-content textarea {
+  width: 100%;
+  height: 200px;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: var(--font-size-sm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-sm);
+  padding: var(--spacing-sm);
+  resize: vertical;
+}

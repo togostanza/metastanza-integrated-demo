@@ -1,0 +1,73 @@
+/**
+ * CSS Layers - 複雑な例
+ * 実際の開発で遭遇する可能性のある複雑なケース
+ */
+
+/* 1. レイヤーの宣言（順序が重要） */
+@layer reset, framework.base, framework.components, theme, app.components, app.utilities;
+
+/* 2. サードパーティライブラリ（Bootstrap等）*/
+@layer framework.base {
+  .btn { 
+    padding: 8px 16px; 
+    background: blue;
+    color: white;
+  }
+  
+  .btn-primary { 
+    background: #007bff !important;  /* ライブラリが!important使用 */
+  }
+}
+
+/* 3. フレームワークのコンポーネント */
+@layer framework.components {
+  .card .btn {                    /* 詳細度: 0,0,2,0 */
+    background: gray;
+  }
+  
+  .btn[data-theme="dark"] {       /* 詳細度: 0,1,1,0 */
+    background: black;
+  }
+}
+
+/* 4. テーマレイヤー */
+@layer theme {
+  :root {
+    --btn-color: purple;
+  }
+  
+  .btn {
+    background: var(--btn-color);  /* CSS変数を使用 */
+  }
+}
+
+/* 5. アプリケーション固有 */
+@layer app.components {
+  .custom-btn {
+    background: orange;
+  }
+  
+  /* フレームワークの!importantを上書き */
+  .btn-primary {
+    background: green;             /* !importantなしでも勝つ */
+  }
+}
+
+/* 6. ユーティリティ（最優先） */
+@layer app.utilities {
+  .bg-red { background: red; }     /* 最終的に勝つ */
+}
+
+/**
+ * 結果の優先順位:
+ * 
+ * <button class="btn btn-primary bg-red">
+ * 
+ * 1. background: red (app.utilities レイヤー)
+ * 2. background: green (app.components レイヤー)
+ * 3. background: purple (theme レイヤー)
+ * 4. background: black (framework.components レイヤー、詳細度高)
+ * 5. background: gray (framework.components レイヤー)
+ * 6. background: #007bff !important (framework.base レイヤー、!important)
+ * 7. background: blue (framework.base レイヤー)
+ */

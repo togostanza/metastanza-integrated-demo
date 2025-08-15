@@ -1,0 +1,21 @@
+/**
+ * Utility - Text
+ * テキスト関連のユーティリティクラス
+ * プレフィックス: u-
+ */
+
+.u-text-center { text-align: center; }
+.u-text-left { text-align: left; }
+.u-text-right { text-align: right; }
+
+.u-text-bold { font-weight: bold; }
+.u-text-normal { font-weight: normal; }
+
+.u-text-muted { color: var(--color-text-muted); }
+.u-text-primary { color: var(--color-primary); }
+
+.u-text-xs { font-size: var(--font-size-xs); }
+.u-text-sm { font-size: var(--font-size-sm); }
+.u-text-base { font-size: var(--font-size-base); }
+.u-text-lg { font-size: var(--font-size-lg); }
+.u-text-xl { font-size: var(--font-size-xl); }

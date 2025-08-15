@@ -1,0 +1,66 @@
+/**
+ * Foundation - Variables
+ * CSS Custom Properties (CSS Variables)
+ * グローバルに使用する値を定義
+ */
+
+:root {
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 24px;
+  --spacing-2xl: 32px;
+  
+  /* Layout */
+  --padding-horizontal: 12px;
+  --container-max-width: 800px;
+  
+  /* Border Radius */
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  
+  /* Typography */
+  --font-family-base: Arial, sans-serif;
+  --font-size-xs: 0.8rem;
+  --font-size-sm: 0.9rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.2rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+  --font-size-3xl: 3rem;
+  
+  /* Line Height */
+  --line-height-tight: 1.25;
+  --line-height-base: 1.5;
+  --line-height-relaxed: 1.6;
+  
+  /* Shadows */
+  --shadow-sm: 0 0 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+html {
+  /* MetaStanza Theme Colors */
+  --togostanza-theme-series_0_color: #6590e6;
+  --togostanza-theme-series_1_color: #3ac9b6;
+  --togostanza-theme-series_2_color: #9ede2f;
+  --togostanza-theme-series_3_color: #f5da64;
+  --togostanza-theme-series_4_color: #f57f5b;
+  --togostanza-theme-series_5_color: #f75976;
+  --togostanza-theme-background_color: #ecefef;
+  --togostanza-theme-text_color: #000000;
+  --togostanza-theme-border_color: #000000;
+  
+  /* Semantic Colors */
+  --color-primary: var(--togostanza-theme-series_0_color);
+  --color-secondary: var(--togostanza-theme-series_1_color);
+  --color-text: var(--togostanza-theme-text_color);
+  --color-text-muted: #666;
+  --color-background: var(--togostanza-theme-background_color);
+  --color-border: #ddd;
+  --color-surface: #afb7b7;
+}

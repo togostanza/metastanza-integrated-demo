@@ -1,0 +1,55 @@
+/**
+ * MetaStanza Showcase - Main CSS
+ * CSS Layers + FLOCSS Architecture
+ * 
+ * CSS Layersの優先順位:
+ * 1. foundation（最低優先度）
+ * 2. layout
+ * 3. component
+ * 4. project
+ * 5. utility（最高優先度）
+ */
+
+/* CSS Layersの宣言（順序が重要） */
+@layer foundation, layout, component, project, utility;
+
+/* Foundation Layer - 基礎となるスタイル */
+@import url("foundation/_variables.css") layer(foundation);
+@import url("foundation/_base.css") layer(foundation);
+
+/* Layout Layer - レイアウト関連 */
+@import url("layout/_container.css") layer(layout);
+
+/* Component Layer - 再利用可能なコンポーネント */
+@import url("object/component/_panel.css") layer(component);
+@import url("object/component/_tab.css") layer(component);
+@import url("object/component/_page-list.css") layer(component);
+@import url("object/component/_color-scheme.css") layer(component);
+
+/* Project Layer - プロジェクト固有のスタイル */
+@import url("object/project/_metastanza.css") layer(project);
+
+/* Utility Layer - ユーティリティクラス（最優先） */
+@import url("object/utility/_text.css") layer(utility);
+@import url("object/utility/_spacing.css") layer(utility);
+
+/**
+ * CSS Layersの動作説明:
+ * 
+ * 1. レイヤー内での優先順位は通常のCSSルール（詳細度、記述順）
+ * 2. レイヤー間では宣言順が優先（後のレイヤーが勝つ）
+ * 3. !importantを使った場合でも、レイヤーの順序が優先される
+ * 
+ * 例：
+ * @layer base, utilities;
+ * 
+ * @layer base {
+ *   .text { color: red !important; }  // 詳細度: 0,0,1,0 + !important
+ * }
+ * 
+ * @layer utilities {
+ *   .text { color: blue; }            // 詳細度: 0,0,1,0
+ * }
+ * 
+ * 結果: blue が勝つ（utilitiesレイヤーが後だから）
+ */

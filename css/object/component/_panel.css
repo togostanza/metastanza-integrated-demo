@@ -1,0 +1,13 @@
+/**
+ * Component - Panel
+ * 汎用的なパネルコンポーネント
+ * プレフィックス: c-
+ */
+
+.c-panel {
+  background-color: var(--color-background);
+  margin: var(--spacing-xs);
+  padding: var(--spacing-xs);
+  border-radius: var(--border-radius-sm);
+  box-shadow: var(--shadow-sm);
+}

@@ -1,0 +1,38 @@
+/**
+ * Layout - Container
+ * ページの主要なコンテナレイアウト
+ * プレフィックス: l-
+ */
+
+.l-container {
+  max-width: var(--container-max-width);
+  margin: 2rem auto;
+  padding: 2rem;
+  background: var(--color-background);
+  border-radius: var(--border-radius-md);
+}
+
+.l-navigation {
+  background: #333;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.l-navigation__link {
+  color: white;
+  text-decoration: none;
+  margin-right: 1rem;
+}
+
+.l-navigation__title {
+  color: white;
+  font-weight: bold;
+}
+
+.l-footer {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}

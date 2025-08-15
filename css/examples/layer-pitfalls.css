@@ -1,0 +1,67 @@
+/**
+ * CSS Layers - よくあるトラブルと対策
+ */
+
+/* ❌ よくある間違い1: レイヤー宣言の順序ミス */
+@layer utilities, components;  /* utilitiesが先 = 優先度低 */
+
+@layer components {
+  .btn { background: blue; }
+}
+
+@layer utilities {
+  .bg-red { background: red; }  /* componentsに負ける！ */
+}
+
+/* ✅ 正しい順序 */
+@layer components, utilities;
+
+/* ❌ よくある間違い2: レイヤーなしのスタイルの扱い */
+@layer base, components;
+
+@layer base {
+  .text { color: blue; }
+}
+
+.text { color: red; }  /* レイヤーなし = 最優先になってしまう */
+
+@layer components {
+  .text { color: green; }  /* redに負ける */
+}
+
+/* ✅ 対策: すべてレイヤーに入れる */
+@layer base, components, unlayered;
+
+@import url("external-styles.css") layer(unlayered);
+
+/* ❌ よくある間違い3: 動的レイヤー追加の問題 */
+@layer base;
+
+/* 後からutilitiesを追加 */
+@layer utilities;  /* baseより後に宣言されるが... */
+
+@layer base {
+  .text { color: blue; }
+}
+
+@layer utilities {
+  .text { color: red; }  /* 期待通り勝つ */
+}
+
+/* 別のファイルで... */
+@layer base {
+  .text { color: green !important; }  /* これが最後に読み込まれると混乱 */
+}
+
+/* ✅ 対策: 最初にすべてのレイヤーを宣言 */
+@layer reset, base, layout, components, utilities, shame;
+
+/**
+ * 開発チームでの取り決め例:
+ * 
+ * 1. レイヤー宣言は必ずmain.cssの最初に書く
+ * 2. 新しいレイヤーを追加する時は必ずチーム相談
+ * 3. !importantはutilitiesレイヤーでのみ使用
+ * 4. サードパーティライブラリは専用レイヤーに隔離
+ * 5. デバッグ用に「shame」レイヤーを最後に用意
+ */

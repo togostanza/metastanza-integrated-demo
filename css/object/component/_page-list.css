@@ -1,0 +1,41 @@
+/**
+ * Component - Page List
+ * ページリスト表示用コンポーネント
+ * プレフィックス: c-
+ */
+
+.c-page-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+}
+
+.c-page-list__item {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: rgba(101, 144, 230, 0.05);
+  border-radius: var(--border-radius-sm);
+  border-left: 3px solid var(--color-primary);
+  transition: background-color 0.2s ease;
+}
+
+.c-page-list__item:hover {
+  background: rgba(101, 144, 230, 0.1);
+}
+
+.c-page-list__link {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: bold;
+  display: block;
+}
+
+.c-page-list__link:hover {
+  text-decoration: underline;
+}
+
+.c-page-list__description {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  margin-top: 0.5rem;
+}
