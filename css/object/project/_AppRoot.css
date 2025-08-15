@@ -2,6 +2,8 @@
   display: flex;
   > * {
     border-right: solid 1px black;
+    height: 100vh;
+    overflow-y: auto;
   }
 
   > .console {

@@ -286,7 +286,12 @@ document.addEventListener("DOMContentLoaded", () => {
     // 変更後は、data-tab 属性が "DataEditorTab" または "ColorSchemeEditorTab" となる
     document.querySelectorAll(".tab-container .tabs .tab").forEach((tab) => {
       tab.addEventListener("click", (e) => {
-        const targetTab = e.target.getAttribute("data-tab");
+        // クリックされた要素がボタン自体でない場合は、親のボタン要素を取得
+        const button = e.target.closest(".tab");
+        if (!button) return;
+
+        const targetTab = button.getAttribute("data-tab");
+
         document
           .querySelectorAll(".tab-container .tabs .tab")
           .forEach((btn) => {

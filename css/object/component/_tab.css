@@ -4,12 +4,14 @@
  * プレフィックス: c-
  */
 
-.c-tab-container .c-tabs {
+.c-tab-container .c-tabs,
+.tab-container .tabs {
   display: flex;
   padding: 0 var(--spacing-xs);
 }
 
-.c-tab {
+.c-tab,
+.tab {
   background: none;
   border: none;
   padding: var(--spacing-sm) 0 2px;
@@ -19,27 +21,35 @@
   opacity: 0.3;
   color: var(--color-text);
   transition: opacity 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.c-tab + .c-tab {
+.c-tab + .c-tab,
+.tab + .tab {
   margin-left: var(--spacing-sm);
 }
 
-.c-tab:hover {
+.c-tab:hover,
+.tab:hover {
   opacity: 0.6;
 }
 
-.c-tab.-active {
+.c-tab.-active,
+.tab.-active {
   opacity: 1;
   border-bottom: 2px solid var(--color-primary);
 }
 
-.c-tab-content {
+.c-tab-content,
+.tab-content {
   display: none;
   padding: var(--spacing-md);
 }
 
-.c-tab-content.-active {
+.c-tab-content.-active,
+.tab-content.-active {
   display: block;
 }
 
