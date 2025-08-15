@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MetaStanza Showcase - グラフ型</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .coming-soon {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: var(--togostanza-theme-background_color);
+      margin: 2rem;
+      border-radius: 8px;
+    }
+
+    .coming-soon h1 {
+      color: var(--togostanza-theme-text_color);
+      margin-bottom: 2rem;
+    }
+
+    .coming-soon p {
+      color: #666;
+      font-size: 1.2rem;
+      line-height: 1.6;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      max-width: 800px;
+      margin: 2rem auto;
+    }
+
+    .feature {
+      background: rgba(101, 144, 230, 0.1);
+      padding: 1.5rem;
+      border-radius: 8px;
+      border-left: 4px solid var(--togostanza-theme-series_0_color);
+    }
+
+    .feature h3 {
+      color: var(--togostanza-theme-text_color);
+      margin-bottom: 1rem;
+    }
+
+    .feature p {
+      color: #666;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+  <nav style="background: #333; padding: 1rem; margin-bottom: 1rem;">
+    <a href="top.html" style="color: white; text-decoration: none; margin-right: 1rem;">← トップページに戻る</a>
+    <span style="color: white; font-weight: bold;">グラフ型データ可視化</span>
+  </nav>
+
+  <div class="coming-soon">
+    <h1>🕸️ グラフ型可視化コンポーネント</h1>
+    <p>
+      ネットワークグラフやノード・エッジ関係の可視化コンポーネントを準備中です。<br>
+      分子構造、関係図、フローチャートなどの表現に適したコンポーネントが含まれる予定です。
+    </p>
+
+    <div class="features">
+      <div class="feature">
+        <h3>ネットワークグラフ</h3>
+        <p>ノードとエッジで構成されるネットワーク構造を可視化。力学モデルによる自動レイアウト機能を含む予定です。</p>
+      </div>
+
+      <div class="feature">
+        <h3>分子構造図</h3>
+        <p>化学分子の構造を表現するための専用コンポーネント。原子間の結合関係を明確に表示します。</p>
+      </div>
+
+      <div class="feature">
+        <h3>フローチャート</h3>
+        <p>プロセスフローやワークフローを表現するためのダイアグラムコンポーネントです。</p>
+      </div>
+
+      <div class="feature">
+        <h3>関係図</h3>
+        <p>エンティティ間の関係性を視覚的に表現するためのコンポーネントです。</p>
+      </div>
+    </div>
+
+    <p style="margin-top: 3rem; color: #888;">
+      開発状況については <a href="https://github.com/togostanza/metastanza" target="_blank"
+        style="color: var(--togostanza-theme-series_0_color);">GitHub</a> をご確認ください。
+    </p>
+  </div>
+</body>
+
+</html>

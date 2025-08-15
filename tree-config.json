@@ -1,0 +1,89 @@
+{
+  "dataSources": [
+    {
+      "tag": "togostanza--data-source",
+      "attributes": {
+        "url": "./tree-data.json",
+        "receiver": "togostanza-tree, togostanza-sunburst, togostanza-treemap",
+        "target-attribute": "data-url"
+      }
+    }
+  ],
+  "stanzas": [
+    {
+      "title": "Tree Diagram",
+      "scriptSrc": "tree.js",
+      "tag": "togostanza-tree",
+      "attributes": {
+        "data-url": "",
+        "data-type": "json",
+        "data-id_key": "id",
+        "data-parent_key": "parent",
+        "data-label_key": "label",
+        "data-size_key": "size",
+        "layout-node_size": "10",
+        "layout-link_width": "2",
+        "layout-direction": "vertical",
+        "color-key": "",
+        "group-key": "",
+        "legend-title": "Tree Structure",
+        "tooltip": "{{label}}",
+        "togostanza-menu_placement": "none",
+        "event-outgoing_change_selected_nodes": "",
+        "event-incoming_change_selected_nodes": ""
+      },
+      "cssVariables": {
+        "--togostanza-canvas-width": "800px",
+        "--togostanza-canvas-height": "600px"
+      }
+    },
+    {
+      "title": "Sunburst Chart",
+      "scriptSrc": "sunburst.js",
+      "tag": "togostanza-sunburst",
+      "attributes": {
+        "data-url": "",
+        "data-type": "json",
+        "data-id_key": "id",
+        "data-parent_key": "parent",
+        "data-label_key": "label",
+        "data-size_key": "size",
+        "color-key": "",
+        "group-key": "",
+        "legend-title": "Sunburst",
+        "tooltip": "{{label}}: {{size}}",
+        "togostanza-menu_placement": "none",
+        "event-outgoing_change_selected_nodes": "",
+        "event-incoming_change_selected_nodes": ""
+      },
+      "cssVariables": {
+        "--togostanza-canvas-width": "400px",
+        "--togostanza-canvas-height": "400px"
+      }
+    },
+    {
+      "title": "Treemap",
+      "scriptSrc": "treemap.js",
+      "tag": "togostanza-treemap",
+      "attributes": {
+        "data-url": "",
+        "data-type": "json",
+        "data-id_key": "id",
+        "data-parent_key": "parent",
+        "data-label_key": "label",
+        "data-size_key": "size",
+        "color-key": "",
+        "group-key": "",
+        "legend-title": "Treemap",
+        "tooltip": "{{label}}: {{size}}",
+        "togostanza-menu_placement": "none",
+        "event-outgoing_change_selected_nodes": "",
+        "event-incoming_change_selected_nodes": ""
+      },
+      "cssVariables": {
+        "--togostanza-canvas-width": "600px",
+        "--togostanza-canvas-height": "400px"
+      }
+    }
+  ]
+}

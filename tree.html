@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MetaStanza Showcase - ツリー型</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- CodeMirror の CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+</head>
+
+<body>
+  <nav style="background: #333; padding: 1rem; margin-bottom: 1rem;">
+    <a href="top.html" style="color: white; text-decoration: none; margin-right: 1rem;">← トップページに戻る</a>
+    <span style="color: white; font-weight: bold;">ツリー型データ可視化</span>
+  </nav>
+
+  <section>
+    <div class="panel tab-container">
+      <div class="tabs">
+        <button class="tab -active" data-tab="DataEditorTab">Data</button>
+        <button class="tab" data-tab="ColorSchemeEditorTab">Color scheme</button>
+      </div>
+      <div class="tab-content -active" id="DataEditorTab">
+        <textarea id="DataEditor"></textarea>
+      </div>
+      <div class="tab-content" id="ColorSchemeEditorTab">
+        <textarea id="ColorSchemeEditor"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <togostanza--container></togostanza--container>
+
+  <!-- CodeMirror のライブラリ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+  <script type="module" src="js/tree-main.js"></script>
+</body>
+
+</html>
