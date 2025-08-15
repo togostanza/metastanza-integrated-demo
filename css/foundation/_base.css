@@ -4,6 +4,9 @@
  * タグセレクタのみを使用
  */
 
+/* Google Fonts - Material Symbols のインポート */
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+
 html {
   box-sizing: border-box;
 }
@@ -17,10 +20,7 @@ html {
 body {
   font-family: var(--font-family-base);
   font-size: 10px; /* MetaStanza base size */
-  line-height: var(--line-height-base);
-  color: var(--color-text);
-  background-color: var(--color-surface);
-  margin: 10px;
+  margin: 0;
   padding: 0;
 }
 
@@ -62,4 +62,18 @@ ol {
 button {
   font-family: inherit;
   cursor: pointer;
+}
+
+/* Material Symbols アイコンフォントの基本設定 */
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+  
+  /* アイコンのスタイル調整 */
+  font-size: 1.2em;
+  vertical-align: middle;
+  line-height: 1;
 }

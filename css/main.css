@@ -25,8 +25,11 @@
 @import url("object/component/_tab.css") layer(component);
 @import url("object/component/_page-list.css") layer(component);
 @import url("object/component/_color-scheme.css") layer(component);
+@import url("object/component/_global-navigation.css") layer(component);
+
 
 /* Project Layer - プロジェクト固有のスタイル */
+@import url("object/project/_AppRoot.css") layer(project);
 @import url("object/project/_metastanza.css") layer(project);
 
 /* Utility Layer - ユーティリティクラス（最優先） */

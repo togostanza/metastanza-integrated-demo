@@ -1,0 +1,23 @@
+.global-navigation {
+  padding: 12px 12px;
+  > a {
+    display: block;
+    width: 36px;
+    height: 36px;
+    text-align: center;
+    line-height: 36px;
+    font-size: 20px;
+    margin: 12px 0;
+    border-radius: 4px;
+  }
+}
+
+[data-page="matrix"] .global-navigation > a[data-page="matrix"],
+[data-page="tree"] .global-navigation > a[data-page="tree"],
+[data-page="graph"] .global-navigation > a[data-page="graph"],
+[data-page="set"] .global-navigation > a[data-page="set"] {
+  background-color: black;
+  color: white;
+  pointer-events: none;
+}
+

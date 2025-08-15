@@ -5,33 +5,64 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MetaStanza Showcase - マトリックス型</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/main.css">
   <!-- CodeMirror の CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
 </head>
 
-<body>
-  <nav style="background: #333; padding: 1rem; margin-bottom: 1rem;">
-    <a href="index.html" style="color: white; text-decoration: none; margin-right: 1rem;">← トップページに戻る</a>
-    <span style="color: white; font-weight: bold;">マトリックス型データ可視化</span>
-  </nav>
+<body data-page="matrix">
 
-  <section>
-    <div class="panel tab-container">
-      <div class="tabs">
-        <button class="tab -active" data-tab="DataEditorTab">Data</button>
-        <button class="tab" data-tab="ColorSchemeEditorTab">Color scheme</button>
-      </div>
-      <div class="tab-content -active" id="DataEditorTab">
-        <textarea id="DataEditor"></textarea>
-      </div>
-      <div class="tab-content" id="ColorSchemeEditorTab">
-        <textarea id="ColorSchemeEditor"></textarea>
-      </div>
-    </div>
-  </section>
+  <div id="AppRoot">
 
-  <togostanza--container></togostanza--container>
+    <nav class="global-navigation">
+      <!-- <a href="index.html">
+        <span class="material-symbols-outlined">arrow_back</span>
+        トップページに戻る
+      </a> -->
+      <a href="matrix.html" title="Matrix data" data-page="matrix">
+        <span class="material-symbols-outlined">grid_on</span>
+      </a>
+      <a href="tree.html" title="Tree data" data-page="tree">
+        <span class="material-symbols-outlined">account_tree</span>
+      </a>
+      <a href="graph.html" title="Graph data" data-page="graph">
+        <span class="material-symbols-outlined">hub</span>
+      </a>
+      <a href="set.html" title="Set data" data-page="set">
+        <span class="material-symbols-outlined">join_full</span>
+      </a>
+    </nav><!-- .global-navigation -->
+
+    <section class="data-visualization">
+
+      <section>
+        <div class="panel tab-container">
+          <div class="tabs">
+            <button class="tab -active" data-tab="DataEditorTab"
+              style="display: flex; align-items: center; gap: 0.5rem;">
+              <span class="material-symbols-outlined">code</span>
+              Data
+            </button>
+            <button class="tab" data-tab="ColorSchemeEditorTab"
+              style="display: flex; align-items: center; gap: 0.5rem;">
+              <span class="material-symbols-outlined">palette</span>
+              Color scheme
+            </button>
+          </div>
+          <div class="tab-content -active" id="DataEditorTab">
+            <textarea id="DataEditor"></textarea>
+          </div>
+          <div class="tab-content" id="ColorSchemeEditorTab">
+            <textarea id="ColorSchemeEditor"></textarea>
+          </div>
+        </div>
+      </section>
+
+      <togostanza--container></togostanza--container>
+
+    </section>
+
+  </div><!-- .app-root -->
 
   <!-- CodeMirror のライブラリ -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>

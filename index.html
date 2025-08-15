@@ -5,22 +5,46 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MetaStanza Showcase - DBCLS</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
-  <div class="container">
+  <div class="l-container">
     <h1>MetaStanza Showcase</h1>
     <p>DBCLSが提供する情報可視化コンポーネント MetaStanza のショーケースアプリケーションです。</p>
 
-    <ul class="page-list">
-      <li><a href="matrix.html">マトリックス型</a> - テーブル、チャート、グラフなどの行列データ可視化</li>
-      <li><a href="tree.html">ツリー型</a> - 階層構造データの可視化</li>
-      <li><a href="graph.html">グラフ型</a> - ネットワークグラフやノード・エッジ関係の可視化（準備中）</li>
-      <li><a href="set.html">集合型</a> - 集合の関係性を表現する可視化（準備中）</li>
+    <ul class="c-page-list">
+      <li class="c-page-list__item">
+        <a href="matrix.html" class="c-page-list__link" style="display: flex; align-items: center; gap: 0.5rem;">
+          <span class="material-symbols-outlined">grid_view</span>
+          マトリックス型
+        </a>
+        <div class="c-page-list__description">テーブル、チャート、グラフなどの行列データ可視化</div>
+      </li>
+      <li class="c-page-list__item">
+        <a href="tree.html" class="c-page-list__link" style="display: flex; align-items: center; gap: 0.5rem;">
+          <span class="material-symbols-outlined">account_tree</span>
+          ツリー型
+        </a>
+        <div class="c-page-list__description">階層構造データの可視化</div>
+      </li>
+      <li class="c-page-list__item">
+        <a href="graph.html" class="c-page-list__link" style="display: flex; align-items: center; gap: 0.5rem;">
+          <span class="material-symbols-outlined">hub</span>
+          グラフ型
+        </a>
+        <div class="c-page-list__description">ネットワークグラフやノード・エッジ関係の可視化（準備中）</div>
+      </li>
+      <li class="c-page-list__item">
+        <a href="set.html" class="c-page-list__link" style="display: flex; align-items: center; gap: 0.5rem;">
+          <span class="material-symbols-outlined">group_work</span>
+          集合型
+        </a>
+        <div class="c-page-list__description">集合の関係性を表現する可視化（準備中）</div>
+      </li>
     </ul>
 
-    <footer>
+    <footer class="l-footer">
       <p>
         Powered by <a href="https://github.com/togostanza/metastanza" target="_blank">MetaStanza</a> |
         <a href="https://dbcls.rois.ac.jp/" target="_blank">DBCLS</a>
