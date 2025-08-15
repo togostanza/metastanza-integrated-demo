@@ -43,5 +43,9 @@
     &.-active {
       display: block;
     }
+    textarea {
+      font-size: 18px;
+    }
+    
   }
 }

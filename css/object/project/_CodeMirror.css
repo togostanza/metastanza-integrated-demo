@@ -1,0 +1,16 @@
+.CodeMirror {
+  font-size: var(--codemirror-font-size);
+  line-height: var(--codemirror-line-height);
+  font-family: var(--font-family-mono);
+  .CodeMirror-lines {
+    font-size: var(--codemirror-font-size);
+  }
+  pre.CodeMirror-line,
+  pre.CodeMirror-line-like {
+    font-size: var(--codemirror-font-size);
+    line-height: var(--codemirror-line-height);
+    font-family: var(--font-family-mono);
+  }
+}
+
+

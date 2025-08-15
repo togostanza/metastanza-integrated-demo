@@ -7,7 +7,7 @@
 :root {
 
   --width-global-navi: 60px;
-  --width-console: 240px;
+  --width-console: 300px;
   
   /* Layout */
   --padding-horizontal: 12px;
@@ -15,6 +15,11 @@
   
   /* Typography */
   --font-family-base: Arial, sans-serif;
+  --font-family-mono: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+  
+  /* CodeMirror */
+  --codemirror-font-size: 12px;
+  --codemirror-line-height: 1.4;
   
 }
 
