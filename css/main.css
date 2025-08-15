@@ -21,8 +21,7 @@
 @import url("layout/_container.css") layer(layout);
 
 /* Component Layer - 再利用可能なコンポーネント */
-@import url("object/component/_panel.css") layer(component);
-@import url("object/component/_tab.css") layer(component);
+@import url("object/component/_tab-container.css") layer(component);
 @import url("object/component/_page-list.css") layer(component);
 @import url("object/component/_color-scheme.css") layer(component);
 @import url("object/component/_global-navigation.css") layer(component);
