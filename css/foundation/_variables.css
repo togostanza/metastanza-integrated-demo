@@ -5,6 +5,9 @@
  */
 
 :root {
+
+  --width-global-navi: 60px;
+  --width-console: 240px;
   
   /* Layout */
   --padding-horizontal: 12px;

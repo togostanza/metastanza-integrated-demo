@@ -1,3 +1,15 @@
 #AppRoot {
   display: flex;
+  > * {
+    border-right: solid 1px black;
+  }
+
+  > .console {
+    width: var(--width-console);
+  }
+
+  > togostanza--container {
+    width: calc(100vw - var(--width-global-navi) - var(--width-console) - 2px);
+  }
+
 }

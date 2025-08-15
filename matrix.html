@@ -33,34 +33,26 @@
       </a>
     </nav><!-- .global-navigation -->
 
-    <section class="data-visualization">
+    <div class="console panel tab-container">
+      <div class="tabs">
+        <button class="tab -active" data-tab="DataEditorTab" style="display: flex; align-items: center; gap: 0.5rem;">
+          <span class="material-symbols-outlined">code</span>
+          Data
+        </button>
+        <button class="tab" data-tab="ColorSchemeEditorTab" style="display: flex; align-items: center; gap: 0.5rem;">
+          <span class="material-symbols-outlined">palette</span>
+          Color scheme
+        </button>
+      </div>
+      <div class="tab-content -active" id="DataEditorTab">
+        <textarea id="DataEditor"></textarea>
+      </div>
+      <div class="tab-content" id="ColorSchemeEditorTab">
+        <textarea id="ColorSchemeEditor"></textarea>
+      </div>
+    </div>
 
-      <section>
-        <div class="panel tab-container">
-          <div class="tabs">
-            <button class="tab -active" data-tab="DataEditorTab"
-              style="display: flex; align-items: center; gap: 0.5rem;">
-              <span class="material-symbols-outlined">code</span>
-              Data
-            </button>
-            <button class="tab" data-tab="ColorSchemeEditorTab"
-              style="display: flex; align-items: center; gap: 0.5rem;">
-              <span class="material-symbols-outlined">palette</span>
-              Color scheme
-            </button>
-          </div>
-          <div class="tab-content -active" id="DataEditorTab">
-            <textarea id="DataEditor"></textarea>
-          </div>
-          <div class="tab-content" id="ColorSchemeEditorTab">
-            <textarea id="ColorSchemeEditor"></textarea>
-          </div>
-        </div>
-      </section>
-
-      <togostanza--container></togostanza--container>
-
-    </section>
+    <togostanza--container></togostanza--container>
 
   </div><!-- .app-root -->
 
