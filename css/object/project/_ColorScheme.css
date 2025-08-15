@@ -1,0 +1,45 @@
+/**
+ * Project - ColorScheme
+ * カラースキーム選択UI（プロジェクト固有）
+ * RSCSS: PascalCaseでファイル名、project層に配置
+ * コンポーネント名: ColorSchemes (ID)
+ * 要素: btn, sample, box
+ */
+
+#ColorSchemes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+
+  & > .btn {
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-sm);
+    padding: var(--spacing-sm);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xs);
+
+    &:hover {
+      border-color: var(--color-primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    & > .sample {
+      display: flex;
+      gap: 2px;
+      padding: var(--spacing-xs);
+      border-radius: var(--border-radius-sm);
+
+      & > .box {
+        width: 16px;
+        height: 16px;
+        border-radius: 2px;
+      }
+    }
+  }
+}

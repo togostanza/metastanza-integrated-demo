@@ -78,7 +78,7 @@ body {
 }
 
 /* カラースキーマボタン全体 */
-#color-schemes {
+#ColorSchemes {
   display: flex;
   gap: 6px;
   margin-bottom: 4px;

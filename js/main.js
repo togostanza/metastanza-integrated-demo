@@ -241,24 +241,24 @@ document.addEventListener("DOMContentLoaded", () => {
         const styleTab = document.getElementById("ColorSchemeEditorTab");
         if (!styleTab) return;
         const schemeContainer = document.createElement("div");
-        schemeContainer.id = "color-schemes";
+        schemeContainer.id = "ColorSchemes";
 
         colorSchemes.forEach((scheme) => {
           const btn = document.createElement("button");
-          btn.classList.add("c-color-scheme-sample-btn");
+          btn.className = "btn";
           // 表示用のラベル
           const label = document.createElement("span");
           label.textContent = scheme.name;
           btn.appendChild(label);
 
           const sampleContainer = document.createElement("div");
-          sampleContainer.classList.add("c-color-scheme-sample");
+          sampleContainer.className = "sample";
           sampleContainer.style.backgroundColor =
             scheme["--togostanza-theme-background_color"];
           for (let i = 0; i < 6; i++) {
             const colorKey = `--togostanza-theme-series_${i}_color`;
             const box = document.createElement("div");
-            box.classList.add("c-color-scheme-box");
+            box.className = "box";
             box.style.backgroundColor = scheme[colorKey];
             sampleContainer.appendChild(box);
           }
