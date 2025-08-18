@@ -250,10 +250,6 @@ function createScript(src) {
 function createComponent(item, styleTag, index) {
   const elem = document.createElement(item.tag);
 
-  // 各スタンザに一意のクラス名を付与
-  const uniqueClass = `stanza-${item.tag.replace('togostanza-', '')}-${index}`;
-  elem.classList.add(uniqueClass);
-
   if (item.attributes) {
     Object.keys(item.attributes).forEach((key) => {
       elem.setAttribute(key, item.attributes[key]);
@@ -261,24 +257,10 @@ function createComponent(item, styleTag, index) {
   }
 
   if (item.cssVariables) {
-    // 方法1: CSSルールとして追加
-    let cssRule = `.${uniqueClass} {`;
-    Object.keys(item.cssVariables).forEach((varName) => {
-      let value = item.cssVariables[varName];
-      cssRule += `${varName}: ${value};`;
-    });
-    cssRule += `}`;
-
-    // デバッグ用出力
-    console.log(`Generated CSS rule for ${item.tag}:`, cssRule);
-
-    styleTag.appendChild(document.createTextNode(cssRule + "\\n"));
-
-    // 方法2: 要素のstyle属性に直接設定（より確実）
+    // CSS変数を要素のstyle属性に直接設定
     Object.keys(item.cssVariables).forEach((varName) => {
       let value = item.cssVariables[varName];
       elem.style.setProperty(varName, value);
-      console.log(`Set ${varName}: ${value} directly on element`);
     });
   }
 
