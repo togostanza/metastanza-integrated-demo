@@ -315,7 +315,7 @@
       ]
     },
     "graph": {
-      "label": "Graph Data",
+      "label": "Chord diagram",
       "description": "Network and relationship visualization",
       "dataSource": {
         "url": "./data/graph-data.json",
@@ -323,25 +323,92 @@
       },
       "stanzas": [
         {
+          "title": "Chord diagram",
+          "scriptSrc": "chord-diagram.js",
+          "tag": "togostanza-chord-diagram",
+          "attributes": {
+            "data-url": "",
+            "data-type": "json",
+            "data-nodes_key": "nodes",
+            "data-edges_key": "links",
+            "node-id_key": "id",
+            "node-label_key": "id",
+            "node-group_key": "group",
+            "node-color_key": "color",
+            "node-color_blend": "normal",
+            "layout": "chord",
+            "edge-width-key": "value",
+            "edge-width-min": "0.5",
+            "edge-width-max": "3",
+            "tooltip": "&lt;h3&gt;{{id}}&lt;/h3&gt;",
+            "event-outgoing_change_selected_nodes": "",
+            "event-incoming_change_selected_nodes": ""
+          },
+          "cssVariables": {
+            "--togostanza-canvas-width": 500,
+            "--togostanza-canvas-height": 500
+          }
+        },
+        {
           "title": "Force Graph",
           "scriptSrc": "force-graph.js",
           "tag": "togostanza-force-graph",
           "attributes": {
             "data-url": "",
             "data-type": "json",
+            "data-nodes_key": "nodes",
+            "data-edges_key": "links",
             "node-id_key": "id",
-            "node-label_key": "name",
-            "node-size_key": "value",
-            "link-source_key": "source",
-            "link-target_key": "target",
-            "tooltip": "{{name}}: {{value}}",
-            "togostanza-menu_placement": "none",
+            "node-label_key": "id",
+            "node-group_key": "group",
+            "node-color_key": "color",
+            "node-color_blend": "normal",
+            "node-size_key": "",
+            "node-size_min": "3",
+            "node-size_max": "6",
+            "node-size_scale": "sqrt",
+            "edge-width-key": "value",
+            "edge-width-min": "1",
+            "edge-width-max": "1",
+            "edge-width-scale": "linear",
+            "tooltip": "&lt;h3&gt;{{id}}&lt;/h3&gt;",
             "event-outgoing_change_selected_nodes": "",
             "event-incoming_change_selected_nodes": ""
           },
           "cssVariables": {
-            "--togostanza-canvas-width": 600,
-            "--togostanza-canvas-height": 400
+            "--togostanza-canvas-width": 500,
+            "--togostanza-canvas-height": 500
+          }
+        },
+        {
+          "title": "Layered graph",
+          "scriptSrc": "layered-graph.js",
+          "tag": "togostanza-layered-graph",
+          "attributes": {
+            "data-url": "",
+            "data-type": "json",
+            "data-nodes_key": "nodes",
+            "data-edges_key": "links",
+            "node-id_key": "id",
+            "node-label_key": "id",
+            "node-group_key": "group",
+            "node-color_key": "color",
+            "node-color_blend": "normal",
+            "node-size_key": "group",
+            "node-size_min": "3",
+            "node-size_max": "6",
+            "node-size_scale": "sqrt",
+            "edge-width-key": "value",
+            "edge-width-min": "0.5",
+            "edge-width-max": "3",
+            "edge-width-scale": "linear",
+            "tooltip": "&lt;h3&gt;{{id}}&lt;/h3&gt;",
+            "event-outgoing_change_selected_nodes": "",
+            "event-incoming_change_selected_nodes": ""
+          },
+          "cssVariables": {
+            "--togostanza-canvas-width": 500,
+            "--togostanza-canvas-height": 500
           }
         }
       ]
