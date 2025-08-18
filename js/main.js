@@ -37,17 +37,17 @@ async function initSPA() {
     // グローバルナビゲーションのイベントリスナーを設定
     setupGlobalNavigation();
 
+    // エディタとタブを初期化（データ読み込み前に実行）
+    initInputEditor();
+    initStyleEditor();
+    initColorSchemeButtons();
+    initTabs();
+
     // 初期ページを読み込み
     await loadDataType(currentDataType);
 
     // ハッシュ変更イベントリスナーを設定
     window.addEventListener("hashchange", handleHashChange);
-
-    // エディタとタブを初期化
-    initInputEditor();
-    initStyleEditor();
-    initColorSchemeButtons();
-    initTabs();
 
   } catch (error) {
     console.error("SPA初期化エラー:", error);
@@ -204,10 +204,17 @@ async function loadDataTypeContent(dataType) {
     const dataResponse = await fetch(config.dataSource.url);
     const dataText = await dataResponse.text();
 
-    if (window.inputEditor) {
-      window.inputEditor.setValue(dataText);
-      updateStanzasData(dataText);
-    }
+    // エディタが初期化されるまで待機してからデータを設定
+    const setEditorData = () => {
+      if (window.inputEditor) {
+        window.inputEditor.setValue(dataText);
+        updateStanzasData(dataText);
+      } else {
+        // エディタがまだ初期化されていない場合、少し待ってから再試行
+        setTimeout(setEditorData, 100);
+      }
+    };
+    setEditorData();
   } catch (error) {
     console.error(`データファイル読み込みエラー: ${config.dataSource.url}`, error);
   }
@@ -278,6 +285,11 @@ function initInputEditor() {
     const text = cm.getValue();
     updateStanzasData(text);
   });
+
+  // エディタの初期化完了を即座にリフレッシュして確実にする
+  setTimeout(() => {
+    window.inputEditor.refresh();
+  }, 0);
 }
 
 /**
