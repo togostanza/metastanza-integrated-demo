@@ -394,6 +394,9 @@ function applyColorSchemeToStanzas(colorScheme) {
   });
 }
 
+// グローバルに利用可能にする
+window.applyColorSchemeToStanzas = applyColorSchemeToStanzas;
+
 /**
  * color-schemes.json を読み込み、カラースキーマサンプルボタンを生成する
  */
@@ -444,8 +447,8 @@ function initColorSchemeButtons() {
           delete schemeCopy.name;
           const jsonText = JSON.stringify(schemeCopy, null, 2);
           editorManager.setStyleValue(jsonText);
+          // applyStyleFromEditorで自動的にapplyColorSchemeToStanzasも呼ばれるので重複削除
           editorManager.applyStyleFromEditor(jsonText);
-          applyColorSchemeToStanzas(schemeCopy);
         });
         schemeContainer.appendChild(btn);
       });

@@ -104,9 +104,10 @@ class EditorManager {
     // エディタ変更時の処理
     this.styleEditor.on("change", () => {
       const val = this.styleEditor.getValue();
+      console.log('Style editor changed:', val);
       try {
-        JSON.parse(val);
-        this.applyStyleFromEditor(val);
+        JSON.parse(val); // バリデーション
+        this.applyStyleFromEditor(val); // 内部でapplyColorSchemeToStanzasも呼ばれる
       } catch (e) {
         console.error("Style JSON is invalid:", e);
       }
@@ -136,13 +137,23 @@ class EditorManager {
   applyStyleFromEditor(jsonString) {
     try {
       const cssVars = JSON.parse(jsonString);
+
+      console.log('Applying CSS variables:', cssVars);
+
+      // document.documentElementにも適用（グローバル）
       const root = document.documentElement;
-      
       Object.entries(cssVars).forEach(([key, value]) => {
         if (key.startsWith('--')) {
           root.style.setProperty(key, value);
         }
       });
+
+      // スタンザ要素への適用は専用関数を使用
+      if (typeof window.applyColorSchemeToStanzas === 'function') {
+        window.applyColorSchemeToStanzas(cssVars);
+      }
+
+      console.log('Applied CSS variables successfully');
     } catch (e) {
       console.error("Failed to apply styles:", e);
     }
