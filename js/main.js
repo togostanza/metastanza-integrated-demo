@@ -68,6 +68,12 @@ document.addEventListener("DOMContentLoaded", () => {
         // stanzas の配置
         const stanzas = document.createElement("div");
         stanzas.id = "StanzasContainer";
+
+        // 見出しを追加
+        const stanzasHeading = document.createElement("h2");
+        stanzasHeading.textContent = "Stanzas";
+        stanzas.appendChild(stanzasHeading);
+
         container.appendChild(stanzas);
         config.stanzas.forEach((item) => {
           if (item.scriptSrc) {
