@@ -8,12 +8,12 @@ export default class AppManager {
     this.consoleManager = consoleManager;
     this.tabManager = tabManager;
     this.editorManager = editorManager;
-    
+
     // SPA状態管理
     this.currentDataType = "matrix"; // デフォルトは matrix
     this.appConfig = null;
     this.loadedScripts = new Set(); // 読み込み済みスクリプトの管理
-    
+
     // URL設定
     this.isLocal = location.hostname === "localhost";
     this.baseURL = this.isLocal
