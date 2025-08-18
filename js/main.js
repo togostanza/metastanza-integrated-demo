@@ -79,8 +79,6 @@ document.addEventListener("DOMContentLoaded", () => {
           if (item.scriptSrc) {
             container.appendChild(createScript(item.scriptSrc));
           }
-          let target =
-            item.tag === "togostanza-pagination-table" ? container : stanzas;
           if (item.title) {
             const stanza = document.createElement("div");
             stanza.classList.add("stanza");
@@ -92,9 +90,9 @@ document.addEventListener("DOMContentLoaded", () => {
             if (item.tag) {
               stanza.appendChild(createComponent(item));
             }
-            target.appendChild(stanza);
+            stanzas.appendChild(stanza);
           } else if (item.tag) {
-            target.appendChild(createComponent(item));
+            stanzas.appendChild(createComponent(item));
           }
         });
         // multi-data.json 読み込み

@@ -1,13 +1,18 @@
 #StanzasContainer {
   /* background-color: #eee; */
   --padding: 4px;
-  padding: var(--padding);
+  padding: 0 var(--padding) var(--padding);
 
   > h2 {
-    margin-left: 6px;
+    margin-left: calc(var(--padding) * -1);
+    padding-left: calc(var(--padding) + 6px);
     font-size: 14px;
-    line-height: calc(var(--height-horizontal-menu) - var(--padding));
+    line-height: var(--height-horizontal-menu);
     margin-bottom: calc(var(--padding) * -1);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(20px);
   }
   
   > .stanza {
@@ -17,6 +22,7 @@
     background-color: var(--togostanza-theme-background_color);
     display: inline-block;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    max-width: calc(100% - 12px);
     > h2 {
       font-size: 12px;
       color: var(--togostanza-theme-text_color);
