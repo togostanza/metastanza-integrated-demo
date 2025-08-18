@@ -148,10 +148,8 @@ class EditorManager {
         }
       });
 
-      // スタンザ要素への適用は専用関数を使用
-      if (typeof window.applyColorSchemeToStanzas === 'function') {
-        window.applyColorSchemeToStanzas(cssVars);
-      }
+      // スタンザ要素への適用は内部メソッドを使用
+      this.applyColorSchemeToStanzas(cssVars);
 
       console.log('Applied CSS variables successfully');
     } catch (e) {
@@ -202,6 +200,22 @@ class EditorManager {
       }
     });
     document.dispatchEvent(event);
+  }
+
+  /**
+   * 指定されたカラースキーム（CSSカスタムプロパティ）を
+   * ページ内のすべての Stanza 要素に適用します。
+   */
+  applyColorSchemeToStanzas(colorScheme) {
+    const stanzaElements = document.querySelectorAll("[data-url]");
+
+    stanzaElements.forEach((el) => {
+      Object.entries(colorScheme).forEach(([key, value]) => {
+        if (key.startsWith("--")) {
+          el.style.setProperty(key, value);
+        }
+      });
+    });
   }
 }
 

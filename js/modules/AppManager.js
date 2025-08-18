@@ -19,9 +19,7 @@ export default class AppManager {
     this.baseURL = this.isLocal
       ? "http://localhost:8080/"
       : "https://togostanza.github.io/metastanza-devel/";
-  }
-
-  /**
+  }  /**
    * アプリケーション初期化
    */
   async init() {
