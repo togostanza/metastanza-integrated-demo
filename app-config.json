@@ -219,7 +219,7 @@
       ]
     },
     "tree": {
-      "label": "Tree Data",
+      "label": "Tree",
       "description": "Hierarchical data visualization with tree structures",
       "dataSource": {
         "url": "./data/tree-data.json",
@@ -227,44 +227,65 @@
       },
       "stanzas": [
         {
-          "title": "Tree Diagram",
+          "title": "Column tree",
+          "scriptSrc": "column-tree.js",
+          "tag": "togostanza-column-tree",
+          "attributes": {
+            "data-url": "",
+            "data-type": "json",
+            "node-label_key": "name",
+            "node-value_key": "size",
+            "node-value_alignment": "horizontal",
+            "node-value_fallback": "no data",
+            "event-outgoing_change_selected_nodes": "",
+            "event-incoming_change_selected_nodes": ""
+          },
+          "cssVariables": {
+            "--togostanza-canvas-width": 400,
+            "--togostanza-canvas-height": 400
+          }
+        },
+        {
+          "title": "Tree",
           "scriptSrc": "tree.js",
           "tag": "togostanza-tree",
           "attributes": {
             "data-url": "",
             "data-type": "json",
-            "data-id_key": "id",
-            "data-parent_key": "parent",
-            "data-label_key": "label",
-            "data-size_key": "size",
-            "layout-node_size": "10",
-            "layout-link_width": "2",
-            "layout-direction": "vertical",
-            "legend-title": "Tree Structure",
-            "tooltip": "{{label}}",
-            "togostanza-menu_placement": "none",
+            "layout-align_leaf_nodes": "",
+            "layout-orientation": "radial",
+            "node-label_key": "name",
+            "node-label_margin": "8",
+            "node-size_key": "size",
+            "node-size_min": "8",
+            "node-size_max": "8",
+            "node-color_key": "color",
+            "group-key": "group",
+            "node-color_blend": "normal",
+            "tooltip": "{{#if url}}&lt;a href&#x3D;{{url}}&gt;{{name}}&lt;/a&gt;{{else}}&lt;span&gt;{{name}}&lt;/span&gt;{{/if}}",
             "event-outgoing_change_selected_nodes": "",
             "event-incoming_change_selected_nodes": ""
           },
           "cssVariables": {
-            "--togostanza-canvas-width": 600,
+            "--togostanza-canvas-width": 400,
             "--togostanza-canvas-height": 400
           }
         },
         {
-          "title": "Sunburst Chart",
+          "title": "Sunburst",
           "scriptSrc": "sunburst.js",
           "tag": "togostanza-sunburst",
           "attributes": {
             "data-url": "",
             "data-type": "json",
-            "data-id_key": "id",
-            "data-parent_key": "parent",
-            "data-label_key": "label",
-            "data-size_key": "size",
-            "legend-title": "Hierarchy",
-            "tooltip": "{{label}}: {{size}}",
-            "togostanza-menu_placement": "none",
+            "node-value_key": "size",
+            "node-label_key": "name",
+            "node-values_visible": true,
+            "node-color_key": "color",
+            "node-color_blend": "normal",
+            "node-corner_radius": "0",
+            "scaling": "By value",
+            "max_depth": "3",
             "event-outgoing_change_selected_nodes": "",
             "event-incoming_change_selected_nodes": ""
           },
@@ -280,19 +301,15 @@
           "attributes": {
             "data-url": "",
             "data-type": "json",
-            "data-id_key": "id",
-            "data-parent_key": "parent",
-            "data-label_key": "label",
-            "data-size_key": "size",
-            "legend-title": "Size Distribution",
-            "tooltip": "{{label}}: {{size}}",
-            "togostanza-menu_placement": "none",
+            "node-label_key": "name",
+            "node-value_key": "size",
+            "node-color_key": "color",
             "event-outgoing_change_selected_nodes": "",
             "event-incoming_change_selected_nodes": ""
           },
           "cssVariables": {
-            "--togostanza-canvas-width": 500,
-            "--togostanza-canvas-height": 300
+            "--togostanza-canvas-width": 400,
+            "--togostanza-canvas-height": 400
           }
         }
       ]
