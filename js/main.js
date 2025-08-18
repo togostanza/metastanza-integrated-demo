@@ -1,6 +1,7 @@
 import StateManager from './modules/StateManager.js';
 import ConsoleManager from './modules/ConsoleManager.js';
 import TabManager from './modules/TabManager.js';
+import EditorManager from './modules/EditorManager.js';
 
 const isLocal = location.hostname === "localhost";
 const baseURL = isLocal
@@ -15,7 +16,8 @@ let loadedScripts = new Set(); // 読み込み済みスクリプトの管理
 // マネージャーのインスタンスを作成
 const stateManager = new StateManager();
 const consoleManager = new ConsoleManager(stateManager);
-const tabManager = new TabManager(stateManager);
+const editorManager = new EditorManager();
+const tabManager = new TabManager(stateManager, editorManager);
 
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.querySelector("togostanza--container");
@@ -47,8 +49,7 @@ async function initSPA() {
     setupGlobalNavigation();
 
     // エディタとタブを初期化（データ読み込み前に実行）
-    initInputEditor();
-    initStyleEditor();
+    editorManager.init();
     initColorSchemeButtons();
     tabManager.init();
 
@@ -233,9 +234,9 @@ async function loadDataTypeContent(dataType) {
 
     // エディタが初期化されるまで待機してからデータを設定
     const setEditorData = () => {
-      if (window.inputEditor) {
-        window.inputEditor.setValue(dataText);
-        updateStanzasData(dataText);
+      if (editorManager.inputEditor) {
+        editorManager.setDataValue(dataText);
+        editorManager.updateStanzasData(dataText);
       } else {
         // エディタがまだ初期化されていない場合、少し待ってから再試行
         setTimeout(setEditorData, 100);
@@ -293,31 +294,9 @@ function createComponent(item) {
 }
 
 /**
- * Input Data 用の CodeMirror エディタを初期化する
+ * 指定されたカラースキーム（CSSカスタムプロパティ）を
+ * ページ内のすべての Stanza 要素に適用します。
  */
-function initInputEditor() {
-  const dataTextarea = document.getElementById("DataEditor");
-  if (!dataTextarea) return;
-
-  window.inputEditor = CodeMirror.fromTextArea(dataTextarea, {
-    mode: { name: "javascript", json: true },
-    lineNumbers: true,
-    theme: "default",
-  });
-
-  const heightData = window.getComputedStyle(dataTextarea).getPropertyValue("height");
-  window.inputEditor.setSize(null, heightData);
-
-  window.inputEditor.on("change", (cm) => {
-    const text = cm.getValue();
-    updateStanzasData(text);
-  });
-
-  // エディタの初期化完了を即座にリフレッシュして確実にする
-  setTimeout(() => {
-    window.inputEditor.refresh();
-  }, 0);
-}
 
 /**
  * JSON が有効なら各スタンザの data-url 属性を更新する
@@ -464,8 +443,8 @@ function initColorSchemeButtons() {
           const schemeCopy = { ...scheme };
           delete schemeCopy.name;
           const jsonText = JSON.stringify(schemeCopy, null, 2);
-          window.styleEditor.setValue(jsonText);
-          applyStyleFromEditor(jsonText);
+          editorManager.setStyleValue(jsonText);
+          editorManager.applyStyleFromEditor(jsonText);
           applyColorSchemeToStanzas(schemeCopy);
         });
         schemeContainer.appendChild(btn);

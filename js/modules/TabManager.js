@@ -2,8 +2,9 @@
  * TabManager - タブ切り替え管理
  */
 class TabManager {
-  constructor(stateManager) {
+  constructor(stateManager, editorManager = null) {
     this.stateManager = stateManager;
+    this.editorManager = editorManager;
     this.isInitialized = false;
   }
 
@@ -64,10 +65,20 @@ class TabManager {
    * @param {string} targetTab - アクティブなタブID
    */
   refreshEditor(targetTab) {
-    if (targetTab === "ColorSchemeEditorTab" && window.styleEditor) {
-      window.styleEditor.refresh();
-    } else if (targetTab === "DataEditorTab" && window.inputEditor) {
-      window.inputEditor.refresh();
+    // EditorManagerが利用可能な場合はそれを使用、そうでなければwindowオブジェクトから取得
+    if (this.editorManager) {
+      if (targetTab === "ColorSchemeEditorTab") {
+        this.editorManager.refreshEditor('style');
+      } else if (targetTab === "DataEditorTab") {
+        this.editorManager.refreshEditor('data');
+      }
+    } else {
+      // フォールバック：既存のwindowオブジェクト参照を使用
+      if (targetTab === "ColorSchemeEditorTab" && window.styleEditor) {
+        window.styleEditor.refresh();
+      } else if (targetTab === "DataEditorTab" && window.inputEditor) {
+        window.inputEditor.refresh();
+      }
     }
   }
 
