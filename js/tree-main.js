@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /**
-   * tree-config.json および tree-data.json を読み込み、各コンポーネントをレンダリングする
+   * tree-config.json および data/tree-data.json を読み込み、各コンポーネントをレンダリングする
    */
   function initConfigs() {
     fetch("./tree-config.json")
@@ -90,8 +90,8 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         });
 
-        // tree-data.json 読み込み
-        fetch("./tree-data.json")
+        // data/tree-data.json 読み込み
+        fetch("./data/tree-data.json")
           .then((response) => response.text())
           .then((text) => {
             if (window.inputEditor) {
@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
           })
           .catch((err) =>
-            console.error("tree-data.json の読み込みに失敗しました:", err)
+            console.error("data/tree-data.json の読み込みに失敗しました:", err)
           );
       })
       .catch((err) =>

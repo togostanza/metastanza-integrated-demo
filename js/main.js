@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /**
-   * config.json および multi-data.json を読み込み、各コンポーネントをレンダリングする
+   * config.json および data/multi-data.json を読み込み、各コンポーネントをレンダリングする
    */
   function initConfigs() {
     fetch("./config.json")
@@ -95,8 +95,8 @@ document.addEventListener("DOMContentLoaded", () => {
             stanzas.appendChild(createComponent(item));
           }
         });
-        // multi-data.json 読み込み
-        fetch("./multi-data.json")
+        // data/multi-data.json 読み込み
+        fetch("./data/multi-data.json")
           .then((response) => response.text())
           .then((text) => {
             if (window.inputEditor) {
@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
           })
           .catch((err) =>
-            console.error("multi-data.json の読み込みに失敗しました:", err)
+            console.error("data/multi-data.json の読み込みに失敗しました:", err)
           );
       })
       .catch((err) =>

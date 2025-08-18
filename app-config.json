@@ -4,7 +4,7 @@
       "label": "Matrix Data",
       "description": "Multi-dimensional data visualization with charts and tables",
       "dataSource": {
-        "url": "./multi-data.json",
+        "url": "./data/multi-data.json",
         "receiver": "togostanza-pagination-table, togostanza-heatmap, togostanza-piechart, togostanza-barchart, togostanza-linechart, togostanza-scatter-plot, togostanza-histogram"
       },
       "stanzas": [
@@ -216,7 +216,7 @@
       "label": "Tree Data",
       "description": "Hierarchical data visualization with tree structures",
       "dataSource": {
-        "url": "./tree-data.json",
+        "url": "./data/tree-data.json",
         "receiver": "togostanza-tree, togostanza-sunburst, togostanza-treemap"
       },
       "stanzas": [
@@ -295,7 +295,7 @@
       "label": "Graph Data",
       "description": "Network and relationship visualization",
       "dataSource": {
-        "url": "./graph-data.json",
+        "url": "./data/graph-data.json",
         "receiver": "togostanza-force-graph, togostanza-chord-diagram"
       },
       "stanzas": [
@@ -327,7 +327,7 @@
       "label": "Set Data",
       "description": "Set relationships and intersections",
       "dataSource": {
-        "url": "./set-data.json",
+        "url": "./data/set-data.json",
         "receiver": "togostanza-venn-diagram, togostanza-upset-plot"
       },
       "stanzas": [

@@ -3,7 +3,7 @@
     {
       "tag": "togostanza--data-source",
       "attributes": {
-        "url": "./tree-data.json",
+        "url": "./data/tree-data.json",
         "receiver": "togostanza-tree, togostanza-sunburst, togostanza-treemap",
         "target-attribute": "data-url"
       }
