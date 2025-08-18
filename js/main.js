@@ -154,15 +154,6 @@ async function loadDataTypeContent(dataType) {
   const config = appConfig.dataTypes[dataType];
   const container = document.querySelector("togostanza--container");
 
-  // style タグ生成（CSS variables 用）
-  let styleTag = document.getElementById("dynamic-styles");
-  if (!styleTag) {
-    styleTag = document.createElement("style");
-    styleTag.id = "dynamic-styles";
-    document.head.appendChild(styleTag);
-  }
-  styleTag.innerHTML = ""; // クリア
-
   // データソースを追加
   const dataSource = createDataSource(config.dataSource);
   container.appendChild(dataSource);
@@ -197,13 +188,13 @@ async function loadDataTypeContent(dataType) {
       stanzaWrapper.appendChild(heading);
 
       if (stanzaConfig.tag) {
-        const stanza = createComponent(stanzaConfig, styleTag, index);
+        const stanza = createComponent(stanzaConfig);
         stanzaWrapper.appendChild(stanza);
       }
 
       stanzasContainer.appendChild(stanzaWrapper);
     } else if (stanzaConfig.tag) {
-      const stanza = createComponent(stanzaConfig, styleTag, index);
+      const stanza = createComponent(stanzaConfig);
       stanzasContainer.appendChild(stanza);
     }
   });
@@ -247,7 +238,7 @@ function createScript(src) {
 /**
  * コンポーネント要素を生成
  */
-function createComponent(item, styleTag, index) {
+function createComponent(item) {
   const elem = document.createElement(item.tag);
 
   if (item.attributes) {

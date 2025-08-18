@@ -2,6 +2,7 @@ const isLocal = location.hostname === "localhost";
 const baseURL = isLocal
   ? "http://localhost:8080/"
   : "https://togostanza.github.io/metastanza-devel/";
+// const baseURL =  "http://localhost:8080/"
 
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.querySelector("togostanza--container");
@@ -29,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /**
-   * tree-config.json の item に基づいてコンポーネントを生成する
+   * config.json の item に基づいてコンポーネントを生成する
    * @param {Object} item - コンポーネント設定オブジェクト
    * @returns {HTMLElement} 生成された要素
    */
@@ -52,10 +53,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /**
-   * tree-config.json および data/tree-data.json を読み込み、各コンポーネントをレンダリングする
+   * config.json および data/matrix-data.json を読み込み、各コンポーネントをレンダリングする
    */
   function initConfigs() {
-    fetch("./tree-config.json")
+    fetch("./config.json")
       .then((response) => response.json())
       .then((config) => {
         // dataSources 追加
@@ -66,32 +67,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // stanzas の配置
         const stanzas = document.createElement("div");
-        stanzas.id = "stanzas";
+        stanzas.id = "StanzasContainer";
+
+        // 見出しを追加
+        const stanzasHeading = document.createElement("h2");
+        stanzasHeading.textContent = "Stanzas";
+        stanzas.appendChild(stanzasHeading);
+
         container.appendChild(stanzas);
         config.stanzas.forEach((item) => {
           if (item.scriptSrc) {
             container.appendChild(createScript(item.scriptSrc));
           }
-
           if (item.title) {
-            const panel = document.createElement("div");
-            panel.classList.add("panel");
+            const stanza = document.createElement("div");
+            stanza.classList.add("stanza");
 
             const heading = document.createElement("h2");
             heading.textContent = item.title;
-            panel.appendChild(heading);
+            stanza.appendChild(heading);
 
             if (item.tag) {
-              panel.appendChild(createComponent(item));
+              stanza.appendChild(createComponent(item));
             }
-            stanzas.appendChild(panel);
+            stanzas.appendChild(stanza);
           } else if (item.tag) {
             stanzas.appendChild(createComponent(item));
           }
         });
-
-        // data/tree-data.json 読み込み
-        fetch("./data/tree-data.json")
+        // data/matrix-data.json 読み込み
+        fetch("./data/matrix-data.json")
           .then((response) => response.text())
           .then((text) => {
             if (window.inputEditor) {
@@ -100,11 +105,11 @@ document.addEventListener("DOMContentLoaded", () => {
             }
           })
           .catch((err) =>
-            console.error("data/tree-data.json の読み込みに失敗しました:", err)
+            console.error("data/matrix-data.json の読み込みに失敗しました:", err)
           );
       })
       .catch((err) =>
-        console.error("tree-config.json の読み込みに失敗しました:", err)
+        console.error("config.json の読み込みに失敗しました:", err)
       );
   }
 
@@ -112,6 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
    * Input Data 用の CodeMirror エディタを初期化する
    */
   function initInputEditor() {
+    // 変更後は "DataEditor" という ID を持つ textarea を参照する
     const dataTextarea = document.getElementById("DataEditor");
     window.inputEditor = CodeMirror.fromTextArea(dataTextarea, {
       mode: { name: "javascript", json: true },
@@ -148,6 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
    * Color Scheme 用の CodeMirror エディタを初期化する
    */
   function initStyleEditor() {
+    // 変更後は "ColorSchemeEditor" という ID を持つ textarea を参照する
     const styleTextarea = document.getElementById("ColorSchemeEditor");
     window.styleEditor = CodeMirror.fromTextArea(styleTextarea, {
       mode: { name: "javascript", json: true },
@@ -240,6 +247,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const schemeContainer = document.createElement("div");
         schemeContainer.id = "ColorSchemes";
 
+        // 見出しを追加
+        const heading = document.createElement("h3");
+        heading.textContent = "Sample color schemes";
+        schemeContainer.appendChild(heading);
+
         colorSchemes.forEach((scheme) => {
           const btn = document.createElement("button");
           btn.className = "btn";
@@ -250,7 +262,7 @@ document.addEventListener("DOMContentLoaded", () => {
           btn.style.borderColor = scheme["--togostanza-theme-border_color"];
 
           // 表示用のラベル
-          const label = document.createElement("span");
+          const label = document.createElement("label");
           label.textContent = scheme.name;
           btn.appendChild(label);
 
@@ -286,9 +298,15 @@ document.addEventListener("DOMContentLoaded", () => {
    * タブ切り替え処理を初期化する
    */
   function initTabs() {
+    // 変更後は、data-tab 属性が "DataEditorTab" または "ColorSchemeEditorTab" となる
     document.querySelectorAll(".tab-container .tabs .tab").forEach((tab) => {
       tab.addEventListener("click", (e) => {
-        const targetTab = e.target.getAttribute("data-tab");
+        // クリックされた要素がボタン自体でない場合は、親のボタン要素を取得
+        const button = e.target.closest(".tab");
+        if (!button) return;
+
+        const targetTab = button.getAttribute("data-tab");
+
         document
           .querySelectorAll(".tab-container .tabs .tab")
           .forEach((btn) => {
