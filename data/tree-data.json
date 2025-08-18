@@ -1,355 +1,1738 @@
 [
   {
-    "id": 99,
-    "value": "variant",
-    "label": "Variant"
-  },
-  {
     "id": 1,
-    "value": "transcript_variant",
-    "label": "Transcript variant",
-    "parent": 99
+    "name": "flare",
+    "url": "http://togostanza.org/",
+    "group": "class1"
   },
   {
     "id": 2,
-    "value": "coding_variant",
-    "label": "Coding variant",
-    "parent": 1
+    "name": "analytics",
+    "parent": 1,
+    "group": "class2"
   },
   {
     "id": 3,
-    "value": "coding_sequence_variant",
-    "label": "Coding sequence variant",
-    "size": 18057,
-    "description": "A sequence variant that changes the coding sequence",
-    "parent": 2
+    "name": "cluster",
+    "parent": 2,
+    "group": "class3"
   },
   {
     "id": 4,
-    "value": "feature_elongation",
-    "label": "Feature elongation",
-    "size": 0,
-    "description": "A sequence variant that causes the extension of a genomic feature, with regard to the reference sequence",
-    "parent": 2
+    "name": "AgglomerativeCluster",
+    "parent": 3,
+    "size": 3938,
+    "group": "class4",
+    "color": "#B5184F"
   },
   {
     "id": 5,
-    "value": "feature_truncation",
-    "label": "Feature truncation",
-    "size": 0,
-    "description": "A sequence variant that causes the reduction of a genomic feature, with regard to the reference sequence",
-    "parent": 2
+    "name": "CommunityStructure",
+    "parent": 3,
+    "size": 3812,
+    "group": "class4"
   },
   {
     "id": 6,
-    "value": "frameshift_variant",
-    "label": "Frameshift variant",
-    "size": 506417,
-    "description": "A sequence variant which causes a disruption of the translational reading frame, because the number of nucleotides inserted or deleted is not a multiple of three",
-    "parent": 2
+    "name": "HierarchicalCluster",
+    "parent": 3,
+    "size": 6714,
+    "group": "class4"
   },
   {
     "id": 7,
-    "value": "incomplete_terminal_codon_variant",
-    "label": "Incomplete terminal codon variant",
-    "size": 3443,
-    "description": "A sequence variant where at least one base of the final codon of an incompletely annotated transcript is changed",
-    "parent": 2
+    "name": "MergeEdge",
+    "parent": 3,
+    "size": 743,
+    "group": "class4"
   },
   {
     "id": 8,
-    "value": "inframe_deletion",
-    "label": "Inframe deletion",
-    "size": 143302,
-    "description": "An inframe non synonymous variant that deletes bases from the coding sequence",
-    "parent": 2
+    "name": "graph",
+    "parent": 2,
+    "group": "class3"
   },
   {
     "id": 9,
-    "value": "inframe_insertion",
-    "label": "Inframe insertion",
-    "size": 50924,
-    "description": "An inframe non synonymous variant that inserts bases into in the coding sequence",
-    "parent": 2
+    "name": "BetweennessCentrality",
+    "parent": 8,
+    "size": 3534,
+    "group": "class4",
+    "color": "#69A90D"
   },
   {
     "id": 10,
-    "value": "missense_variant",
-    "label": "Missense variant",
-    "size": 12385885,
-    "description": "A sequence variant, that changes one or more bases, resulting in a different amino acid sequence but where the length is preserved",
-    "parent": 2
+    "name": "LinkDistance",
+    "parent": 8,
+    "size": 5731,
+    "group": "class4"
   },
   {
     "id": 11,
-    "value": "NMD_transcript_variant",
-    "label": "NMD transcript variant",
-    "size": 20962310,
-    "description": "A variant in a transcript that is the target of NMD",
-    "parent": 2
+    "name": "MaxFlowMinCut",
+    "parent": 8,
+    "size": 7840,
+    "group": "class4"
   },
   {
     "id": 12,
-    "value": "protein_altering_variant",
-    "label": "Protein altering variant",
-    "size": 3482,
-    "description": "A sequence_variant which is predicted to change the protein encoded in the coding sequence",
-    "parent": 2
+    "name": "ShortestPaths",
+    "parent": 8,
+    "size": 5914,
+    "group": "class4"
   },
   {
     "id": 13,
-    "value": "synonymous_variant",
-    "label": "Synonymous variant",
-    "size": 6340518,
-    "description": "A sequence variant where there is no resulting change to the encoded amino acid",
-    "parent": 2
+    "name": "SpanningTree",
+    "parent": 8,
+    "size": 3416,
+    "group": "class4"
   },
   {
     "id": 14,
-    "value": "start_lost",
-    "label": "Start lost",
-    "size": 38719,
-    "description": "A codon variant that changes at least one base of the canonical start codon",
-    "parent": 2
+    "name": "optimization",
+    "parent": 2,
+    "group": "class3"
   },
   {
     "id": 15,
-    "value": "stop_gained",
-    "label": "Stop gained",
-    "size": 402831,
-    "description": "A sequence variant whereby at least one base of a codon is changed, resulting in a premature stop codon, leading to a shortened transcript",
-    "parent": 2
+    "name": "AspectRatioBanker",
+    "parent": 14,
+    "size": 7074,
+    "group": "class4"
   },
   {
     "id": 16,
-    "value": "stop_lost",
-    "label": "Stop lost",
-    "size": 16247,
-    "description": "A sequence variant where at least one base of the terminator codon (stop) is changed, resulting in an elongated transcript",
-    "parent": 2
+    "name": "animate",
+    "parent": 1,
+    "group": "class2"
   },
   {
     "id": 17,
-    "value": "start_retained_variant",
-    "label": "Start retained variant",
-    "size": 585,
-    "description": "A sequence variant where at least one base in the start codon is changed, but the start remains",
-    "parent": 2
+    "name": "Easing",
+    "parent": 16,
+    "size": 17010,
+    "group": "class3"
   },
   {
     "id": 18,
-    "value": "stop_retained_variant",
-    "label": "Stop retained variant",
-    "size": 7754,
-    "description": "A sequence variant where at least one base in the terminator codon is changed, but the terminator remains",
-    "parent": 2
+    "name": "FunctionSequence",
+    "parent": 16,
+    "size": 5842,
+    "group": "class3"
   },
   {
     "id": 19,
-    "label": "Non-coding variant",
-    "parent": 1
+    "name": "interpolate",
+    "parent": 16,
+    "group": "class3",
+    "color": "green"
   },
   {
     "id": 20,
-    "value": "3_prime_UTR_variant",
-    "label": "3 prime UTR variant",
-    "size": 4109311,
-    "description": "A UTR variant of the 3' UTR",
-    "parent": 19
+    "name": "ArrayInterpolator",
+    "parent": 19,
+    "size": 1983,
+    "group": "class4"
   },
   {
     "id": 21,
-    "value": "5_prime_UTR_variant",
-    "label": "5 prime UTR variant",
-    "description": "A UTR variant of the 5' UTR",
-    "parent": 19
+    "name": "ColorInterpolator",
+    "parent": 19,
+    "size": 2047,
+    "group": "class4"
   },
   {
     "id": 22,
-    "value": "intron_variant",
-    "label": "Intron variant",
-    "size": 212366571,
-    "description": "A transcript variant occurring within an intron",
-    "parent": 19
+    "name": "DateInterpolator",
+    "parent": 19,
+    "size": 1375,
+    "group": "class4"
   },
   {
     "id": 23,
-    "value": "non_coding_transcript_exon_variant",
-    "label": "Non coding transcript exon variant",
-    "size": 7450628,
-    "description": "A sequence variant that changes non-coding exon sequence in a non-coding transcript",
-    "parent": 19
+    "name": "Interpolator",
+    "parent": 19,
+    "size": 8746,
+    "group": "class4"
   },
   {
     "id": 24,
-    "value": "non_coding_transcript_variant",
-    "label": "Non coding transcript variant",
-    "size": 52390424,
-    "description": "A transcript variant of a non coding RNA gene",
-    "parent": 19
+    "name": "MatrixInterpolator",
+    "parent": 19,
+    "size": 2202,
+    "group": "class4"
   },
   {
     "id": 25,
-    "label": "Splice variant",
-    "parent": 1
+    "name": "NumberInterpolator",
+    "parent": 19,
+    "size": 1382,
+    "group": "class4"
   },
   {
     "id": 26,
-    "value": "splice_acceptor_variant",
-    "label": "Splice acceptor variant",
-    "size": 172987,
-    "description": "A splice variant that changes the 2 base region at the 3' end of an intron",
-    "parent": 25
+    "name": "ObjectInterpolator",
+    "parent": 19,
+    "size": 1629,
+    "group": "class4"
   },
   {
     "id": 27,
-    "value": "splice_donor_variant",
-    "label": "Splice donor variant",
-    "size": 210311,
-    "description": "A splice variant that changes the 2 base region at the 5' end of an intron",
-    "parent": 25
+    "name": "PointInterpolator",
+    "parent": 19,
+    "size": 1675,
+    "group": "class4"
   },
   {
     "id": 28,
-    "value": "splice_region_variant",
-    "label": "Splice region variant",
-    "size": 2785532,
-    "description": "A sequence variant in which a change has occurred within the region of the splice site, either within 1-3 bases of the exon or 3-8 bases of the intron",
-    "parent": 25
+    "name": "RectangleInterpolator",
+    "parent": 19,
+    "size": 2042,
+    "group": "class4"
   },
   {
     "id": 29,
-    "value": "transcript_ablation",
-    "label": "Transcript ablation",
-    "size": 18,
-    "description": "A feature ablation whereby the deleted region includes a transcript feature",
-    "parent": 1
+    "name": "ISchedulable",
+    "parent": 16,
+    "size": 1041,
+    "group": "class3"
   },
   {
     "id": 30,
-    "value": "transcript_amplification",
-    "label": "Transcript amplification",
-    "size": 0,
-    "description": "A feature amplification of a region containing a transcript",
-    "parent": 1
+    "name": "Parallel",
+    "parent": 16,
+    "size": 5176,
+    "group": "class3"
   },
   {
     "id": 31,
-    "label": "Regulatory variant",
-    "parent": 99
+    "name": "Pause",
+    "parent": 16,
+    "size": 449,
+    "group": "class3"
   },
   {
     "id": 32,
-    "value": "mature_miRNA_variant",
-    "label": "Mature miRNA variant",
-    "size": 6871,
-    "description": "A transcript variant located with the sequence of the mature miRNA",
-    "parent": 31
+    "name": "Scheduler",
+    "parent": 16,
+    "size": 5593,
+    "group": "class3"
   },
   {
     "id": 33,
-    "value": "regulatory_region_ablation",
-    "label": "Regulatory region ablation",
-    "size": 0,
-    "description": "A feature ablation whereby the deleted region includes a regulatory region",
-    "parent": 31
+    "name": "Sequence",
+    "parent": 16,
+    "size": 5534,
+    "group": "class3"
   },
   {
     "id": 34,
-    "value": "regulatory_region_amplification",
-    "label": "Regulatory region amplification",
-    "size": 0,
-    "description": "A feature amplification of a region containing a regulatory region",
-    "parent": 31
+    "name": "Transition",
+    "parent": 16,
+    "size": 9201,
+    "group": "class3"
   },
   {
     "id": 35,
-    "value": "regulatory_region_variant",
-    "label": "Regulatory region variant",
-    "size": 0,
-    "description": "A sequence variant located within a regulatory region",
-    "parent": 31
+    "name": "Transitioner",
+    "parent": 16,
+    "size": 19975,
+    "group": "class3"
   },
   {
     "id": 36,
-    "value": "TF_binding_site_variant",
-    "label": "TF binding site variant",
-    "size": 0,
-    "description": "A sequence variant located within a transcription factor binding site",
-    "parent": 31
+    "name": "TransitionEvent",
+    "parent": 16,
+    "size": 1116,
+    "group": "class3"
   },
   {
     "id": 37,
-    "value": "TFBS_ablation",
-    "label": "TFBS ablation",
-    "size": 0,
-    "description": "A feature ablation whereby the deleted region includes a transcription factor binding site",
-    "parent": 31
+    "name": "Tween",
+    "parent": 16,
+    "size": 6006,
+    "group": "class3"
   },
   {
     "id": 38,
-    "value": "TFBS_amplification",
-    "label": "TFBS amplification",
-    "size": 0,
-    "description": "A feature amplification of a region containing a transcription factor binding site",
-    "parent": 31
+    "name": "data",
+    "parent": 1,
+    "group": "class2"
   },
   {
     "id": 39,
-    "label": "Intergenic variant",
-    "parent": 99
+    "name": "converters",
+    "parent": 38,
+    "group": "class3",
+    "color": "navy"
   },
   {
     "id": 40,
-    "value": "downstream_gene_variant",
-    "label": "Downstream gene variant",
-    "size": 0,
-    "description": "A sequence variant located 3' of a gene",
-    "parent": 39
+    "name": "Converters",
+    "parent": 39,
+    "size": 721,
+    "group": "class4"
   },
   {
     "id": 41,
-    "value": "intergenic_variant",
-    "label": "Intergenic variant",
-    "size": 38329053,
-    "description": "A sequence variant located in the intergenic region, between genes",
-    "parent": 39
+    "name": "DelimitedTextConverter",
+    "parent": 39,
+    "size": 4294,
+    "group": "class4"
   },
   {
     "id": 42,
-    "value": "upstream_gene_variant",
-    "label": "Upstream gene variant",
-    "size": 0,
-    "description": "A sequence variant located 5' of a gene",
-    "parent": 39
+    "name": "GraphMLConverter",
+    "parent": 39,
+    "size": 9800,
+    "group": "class4"
   },
   {
     "id": 43,
-    "value": "shine_dalgarno_sequence",
-    "label": "Shine–Dalgarno sequence",
-    "description": "ribosomal binding site in bacterial and archaeal messenger RNA",
-    "parent": 21
+    "name": "IDataConverter",
+    "parent": 39,
+    "size": 1314,
+    "group": "class4"
   },
   {
     "id": 44,
-    "value": "pyrimidine",
-    "label": "Pyrimidine",
-    "description": "aromatic heterocyclic organic compound similar to pyridine",
-    "parent": 43
+    "name": "JSONConverter",
+    "parent": 39,
+    "size": 2220,
+    "group": "class4"
   },
   {
     "id": 45,
-    "value": "pyrimidine2",
-    "label": "Pyrimidine2 really long-long-long label",
-    "description": "ribosomal binding site in bacterial and archaeal messenger RNA",
-    "parent": 44
+    "name": "DataField",
+    "parent": 38,
+    "size": 1759,
+    "group": "class3"
   },
   {
     "id": 46,
-    "value": "pyrimidine2",
-    "label": "Pyrimidine2 really long-long-long label 2",
-    "size": 1546374,
-    "description": "ribosomal binding site in bacterial and archaeal messenger RNA",
-    "parent": 45
+    "name": "DataSchema",
+    "parent": 38,
+    "size": 2165,
+    "group": "class3"
+  },
+  {
+    "id": 47,
+    "name": "DataSet",
+    "parent": 38,
+    "size": 586,
+    "group": "class3"
+  },
+  {
+    "id": 48,
+    "name": "DataSource",
+    "parent": 38,
+    "size": 3331,
+    "group": "class3"
+  },
+  {
+    "id": 49,
+    "name": "DataTable",
+    "parent": 38,
+    "size": 772,
+    "group": "class3"
+  },
+  {
+    "id": 50,
+    "name": "DataUtil",
+    "parent": 38,
+    "size": 3322,
+    "group": "class3"
+  },
+  {
+    "id": 51,
+    "name": "display",
+    "parent": 1,
+    "group": "class2"
+  },
+  {
+    "id": 52,
+    "name": "DirtySprite",
+    "parent": 51,
+    "size": 8833,
+    "group": "class3"
+  },
+  {
+    "id": 53,
+    "name": "LineSprite",
+    "parent": 51,
+    "size": 1732,
+    "group": "class3"
+  },
+  {
+    "id": 54,
+    "name": "RectSprite",
+    "parent": 51,
+    "size": 3623,
+    "group": "class3"
+  },
+  {
+    "id": 55,
+    "name": "TextSprite",
+    "parent": 51,
+    "size": 10066,
+    "group": "class3"
+  },
+  {
+    "id": 56,
+    "name": "flex",
+    "parent": 1,
+    "group": "class2"
+  },
+  {
+    "id": 57,
+    "name": "FlareVis",
+    "parent": 56,
+    "size": 4116,
+    "group": "class3"
+  },
+  {
+    "id": 58,
+    "name": "physics",
+    "parent": 1,
+    "group": "class2"
+  },
+  {
+    "id": 59,
+    "name": "DragForce",
+    "parent": 58,
+    "size": 1082,
+    "group": "class3"
+  },
+  {
+    "id": 60,
+    "name": "GravityForce",
+    "parent": 58,
+    "size": 1336,
+    "group": "class3"
+  },
+  {
+    "id": 61,
+    "name": "IForce",
+    "parent": 58,
+    "size": 319,
+    "group": "class3"
+  },
+  {
+    "id": 62,
+    "name": "NBodyForce",
+    "parent": 58,
+    "size": 10498,
+    "group": "class3"
+  },
+  {
+    "id": 63,
+    "name": "Particle",
+    "parent": 58,
+    "size": 2822,
+    "group": "class3"
+  },
+  {
+    "id": 64,
+    "name": "Simulation",
+    "parent": 58,
+    "size": 9983,
+    "group": "class3"
+  },
+  {
+    "id": 65,
+    "name": "Spring",
+    "parent": 58,
+    "size": 2213,
+    "group": "class3"
+  },
+  {
+    "id": 66,
+    "name": "SpringForce",
+    "parent": 58,
+    "size": 1681,
+    "group": "class3"
+  },
+  {
+    "id": 67,
+    "name": "query",
+    "parent": 1,
+    "group": "class2"
+  },
+  {
+    "id": 68,
+    "name": "AggregateExpression",
+    "parent": 67,
+    "size": 1616,
+    "group": "class3"
+  },
+  {
+    "id": 69,
+    "name": "And",
+    "parent": 67,
+    "size": 1027,
+    "group": "class3"
+  },
+  {
+    "id": 70,
+    "name": "Arithmetic",
+    "parent": 67,
+    "size": 3891,
+    "group": "class3"
+  },
+  {
+    "id": 71,
+    "name": "Average",
+    "parent": 67,
+    "size": 891,
+    "group": "class3"
+  },
+  {
+    "id": 72,
+    "name": "BinaryExpression",
+    "parent": 67,
+    "size": 2893,
+    "group": "class3"
+  },
+  {
+    "id": 73,
+    "name": "Comparison",
+    "parent": 67,
+    "size": 5103,
+    "group": "class3"
+  },
+  {
+    "id": 74,
+    "name": "CompositeExpression",
+    "parent": 67,
+    "size": 3677,
+    "group": "class3"
+  },
+  {
+    "id": 75,
+    "name": "Count",
+    "parent": 67,
+    "size": 781,
+    "group": "class3"
+  },
+  {
+    "id": 76,
+    "name": "DateUtil",
+    "parent": 67,
+    "size": 4141,
+    "group": "class3"
+  },
+  {
+    "id": 77,
+    "name": "Distinct",
+    "parent": 67,
+    "size": 933,
+    "group": "class3"
+  },
+  {
+    "id": 78,
+    "name": "Expression",
+    "parent": 67,
+    "size": 5130,
+    "group": "class3"
+  },
+  {
+    "id": 79,
+    "name": "ExpressionIterator",
+    "parent": 67,
+    "size": 3617,
+    "group": "class3"
+  },
+  {
+    "id": 80,
+    "name": "Fn",
+    "parent": 67,
+    "size": 3240,
+    "group": "class3"
+  },
+  {
+    "id": 81,
+    "name": "If",
+    "parent": 67,
+    "size": 2732,
+    "group": "class3"
+  },
+  {
+    "id": 82,
+    "name": "IsA",
+    "parent": 67,
+    "size": 2039,
+    "group": "class3"
+  },
+  {
+    "id": 83,
+    "name": "Literal",
+    "parent": 67,
+    "size": 1214,
+    "group": "class3"
+  },
+  {
+    "id": 84,
+    "name": "Match",
+    "parent": 67,
+    "size": 3748,
+    "group": "class3"
+  },
+  {
+    "id": 85,
+    "name": "Maximum",
+    "parent": 67,
+    "size": 843,
+    "group": "class3"
+  },
+  {
+    "id": 86,
+    "name": "methods",
+    "parent": 67,
+    "group": "class3"
+  },
+  {
+    "id": 87,
+    "name": "add",
+    "parent": 86,
+    "size": 593,
+    "group": "class4"
+  },
+  {
+    "id": 88,
+    "name": "and",
+    "parent": 86,
+    "size": 330,
+    "group": "class4"
+  },
+  {
+    "id": 89,
+    "name": "average",
+    "parent": 86,
+    "size": 287,
+    "group": "class4"
+  },
+  {
+    "id": 90,
+    "name": "count",
+    "parent": 86,
+    "size": 277,
+    "group": "class4"
+  },
+  {
+    "id": 91,
+    "name": "distinct",
+    "parent": 86,
+    "size": 292,
+    "group": "class4"
+  },
+  {
+    "id": 92,
+    "name": "div",
+    "parent": 86,
+    "size": 595,
+    "group": "class4"
+  },
+  {
+    "id": 93,
+    "name": "eq",
+    "parent": 86,
+    "size": 594,
+    "group": "class4"
+  },
+  {
+    "id": 94,
+    "name": "fn",
+    "parent": 86,
+    "size": 460,
+    "group": "class4"
+  },
+  {
+    "id": 95,
+    "name": "gt",
+    "parent": 86,
+    "size": 603,
+    "group": "class4"
+  },
+  {
+    "id": 96,
+    "name": "gte",
+    "parent": 86,
+    "size": 625,
+    "group": "class4"
+  },
+  {
+    "id": 97,
+    "name": "iff",
+    "parent": 86,
+    "size": 748,
+    "group": "class4"
+  },
+  {
+    "id": 98,
+    "name": "isa",
+    "parent": 86,
+    "size": 461,
+    "group": "class4"
+  },
+  {
+    "id": 99,
+    "name": "lt",
+    "parent": 86,
+    "size": 597,
+    "group": "class4"
+  },
+  {
+    "id": 100,
+    "name": "lte",
+    "parent": 86,
+    "size": 619,
+    "group": "class4"
+  },
+  {
+    "id": 101,
+    "name": "max",
+    "parent": 86,
+    "size": 283,
+    "group": "class4"
+  },
+  {
+    "id": 102,
+    "name": "min",
+    "parent": 86,
+    "size": 283,
+    "group": "class4"
+  },
+  {
+    "id": 103,
+    "name": "mod",
+    "parent": 86,
+    "size": 591,
+    "group": "class4"
+  },
+  {
+    "id": 104,
+    "name": "mul",
+    "parent": 86,
+    "size": 603,
+    "group": "class4"
+  },
+  {
+    "id": 105,
+    "name": "neq",
+    "parent": 86,
+    "size": 599,
+    "group": "class4"
+  },
+  {
+    "id": 106,
+    "name": "not",
+    "parent": 86,
+    "size": 386,
+    "group": "class4"
+  },
+  {
+    "id": 107,
+    "name": "or",
+    "parent": 86,
+    "size": 323,
+    "group": "class4"
+  },
+  {
+    "id": 108,
+    "name": "orderby",
+    "parent": 86,
+    "size": 307,
+    "group": "class4"
+  },
+  {
+    "id": 109,
+    "name": "range",
+    "parent": 86,
+    "size": 772,
+    "group": "class4"
+  },
+  {
+    "id": 110,
+    "name": "select",
+    "parent": 86,
+    "size": 296,
+    "group": "class4"
+  },
+  {
+    "id": 111,
+    "name": "stddev",
+    "parent": 86,
+    "size": 363,
+    "group": "class4"
+  },
+  {
+    "id": 112,
+    "name": "sub",
+    "parent": 86,
+    "size": 600,
+    "group": "class4"
+  },
+  {
+    "id": 113,
+    "name": "sum",
+    "parent": 86,
+    "size": 280,
+    "group": "class4"
+  },
+  {
+    "id": 114,
+    "name": "update",
+    "parent": 86,
+    "size": 307,
+    "group": "class4"
+  },
+  {
+    "id": 115,
+    "name": "variance",
+    "parent": 86,
+    "size": 335,
+    "group": "class4"
+  },
+  {
+    "id": 116,
+    "name": "where",
+    "parent": 86,
+    "size": 299,
+    "group": "class4"
+  },
+  {
+    "id": 117,
+    "name": "xor",
+    "parent": 86,
+    "size": 354,
+    "group": "class4"
+  },
+  {
+    "id": 118,
+    "name": "_",
+    "parent": 86,
+    "size": 264,
+    "group": "class4"
+  },
+  {
+    "id": 119,
+    "name": "Minimum",
+    "parent": 67,
+    "size": 843,
+    "group": "class3"
+  },
+  {
+    "id": 120,
+    "name": "Not",
+    "parent": 67,
+    "size": 1554,
+    "group": "class3"
+  },
+  {
+    "id": 121,
+    "name": "Or",
+    "parent": 67,
+    "size": 970,
+    "group": "class3"
+  },
+  {
+    "id": 122,
+    "name": "Query",
+    "parent": 67,
+    "size": 13896,
+    "group": "class3"
+  },
+  {
+    "id": 123,
+    "name": "Range",
+    "parent": 67,
+    "size": 1594,
+    "group": "class3"
+  },
+  {
+    "id": 124,
+    "name": "StringUtil",
+    "parent": 67,
+    "size": 4130,
+    "group": "class3"
+  },
+  {
+    "id": 125,
+    "name": "Sum",
+    "parent": 67,
+    "size": 791,
+    "group": "class3"
+  },
+  {
+    "id": 126,
+    "name": "Variable",
+    "parent": 67,
+    "size": 1124,
+    "group": "class3"
+  },
+  {
+    "id": 127,
+    "name": "Variance",
+    "parent": 67,
+    "size": 1876,
+    "group": "class3"
+  },
+  {
+    "id": 128,
+    "name": "Xor",
+    "parent": 67,
+    "size": 1101,
+    "group": "class3"
+  },
+  {
+    "id": 129,
+    "name": "scale",
+    "parent": 1,
+    "group": "class2"
+  },
+  {
+    "id": 130,
+    "name": "IScaleMap",
+    "parent": 129,
+    "size": 2105,
+    "group": "class3"
+  },
+  {
+    "id": 131,
+    "name": "LinearScale",
+    "parent": 129,
+    "size": 1316,
+    "group": "class3"
+  },
+  {
+    "id": 132,
+    "name": "LogScale",
+    "parent": 129,
+    "size": 3151,
+    "group": "class3"
+  },
+  {
+    "id": 133,
+    "name": "OrdinalScale",
+    "parent": 129,
+    "size": 3770,
+    "group": "class3"
+  },
+  {
+    "id": 134,
+    "name": "QuantileScale",
+    "parent": 129,
+    "size": 2435,
+    "group": "class3"
+  },
+  {
+    "id": 135,
+    "name": "QuantitativeScale",
+    "parent": 129,
+    "size": 4839,
+    "group": "class3"
+  },
+  {
+    "id": 136,
+    "name": "RootScale",
+    "parent": 129,
+    "size": 1756,
+    "group": "class3"
+  },
+  {
+    "id": 137,
+    "name": "Scale",
+    "parent": 129,
+    "size": 4268,
+    "group": "class3"
+  },
+  {
+    "id": 138,
+    "name": "ScaleType",
+    "parent": 129,
+    "size": 1821,
+    "group": "class3"
+  },
+  {
+    "id": 139,
+    "name": "TimeScale",
+    "parent": 129,
+    "size": 5833,
+    "group": "class3"
+  },
+  {
+    "id": 140,
+    "name": "util",
+    "parent": 1,
+    "group": "class2"
+  },
+  {
+    "id": 141,
+    "name": "Arrays",
+    "parent": 140,
+    "size": 8258,
+    "group": "class3"
+  },
+  {
+    "id": 142,
+    "name": "Colors",
+    "parent": 140,
+    "size": 10001,
+    "group": "class3"
+  },
+  {
+    "id": 143,
+    "name": "Dates",
+    "parent": 140,
+    "size": 8217,
+    "group": "class3"
+  },
+  {
+    "id": 144,
+    "name": "Displays",
+    "parent": 140,
+    "size": 12555,
+    "group": "class3"
+  },
+  {
+    "id": 145,
+    "name": "Filter",
+    "parent": 140,
+    "size": 2324,
+    "group": "class3"
+  },
+  {
+    "id": 146,
+    "name": "Geometry",
+    "parent": 140,
+    "size": 10993,
+    "group": "class3"
+  },
+  {
+    "id": 147,
+    "name": "heap",
+    "parent": 140,
+    "group": "class3"
+  },
+  {
+    "id": 148,
+    "name": "FibonacciHeap",
+    "parent": 147,
+    "size": 9354,
+    "group": "class4"
+  },
+  {
+    "id": 149,
+    "name": "HeapNode",
+    "parent": 147,
+    "size": 1233,
+    "group": "class4"
+  },
+  {
+    "id": 150,
+    "name": "IEvaluable",
+    "parent": 140,
+    "size": 335,
+    "group": "class3"
+  },
+  {
+    "id": 151,
+    "name": "IPredicate",
+    "parent": 140,
+    "size": 383,
+    "group": "class3"
+  },
+  {
+    "id": 152,
+    "name": "IValueProxy",
+    "parent": 140,
+    "size": 874,
+    "group": "class3"
+  },
+  {
+    "id": 153,
+    "name": "math",
+    "parent": 140,
+    "group": "class3"
+  },
+  {
+    "id": 154,
+    "name": "DenseMatrix",
+    "parent": 153,
+    "size": 3165,
+    "group": "class4"
+  },
+  {
+    "id": 155,
+    "name": "IMatrix",
+    "parent": 153,
+    "size": 2815,
+    "group": "class4"
+  },
+  {
+    "id": 156,
+    "name": "SparseMatrix",
+    "parent": 153,
+    "size": 3366,
+    "group": "class4"
+  },
+  {
+    "id": 157,
+    "name": "Maths",
+    "parent": 140,
+    "size": 17705,
+    "group": "class3"
+  },
+  {
+    "id": 158,
+    "name": "Orientation",
+    "parent": 140,
+    "size": 1486,
+    "group": "class3"
+  },
+  {
+    "id": 159,
+    "name": "palette",
+    "parent": 140,
+    "group": "class3"
+  },
+  {
+    "id": 160,
+    "name": "ColorPalette",
+    "parent": 159,
+    "size": 6367,
+    "group": "class4"
+  },
+  {
+    "id": 161,
+    "name": "Palette",
+    "parent": 159,
+    "size": 1229,
+    "group": "class4"
+  },
+  {
+    "id": 162,
+    "name": "ShapePalette",
+    "parent": 159,
+    "size": 2059,
+    "group": "class4"
+  },
+  {
+    "id": 163,
+    "name": "SizePalette",
+    "parent": 159,
+    "size": 2291,
+    "group": "class4"
+  },
+  {
+    "id": 164,
+    "name": "Property",
+    "parent": 140,
+    "size": 5559,
+    "group": "class3"
+  },
+  {
+    "id": 165,
+    "name": "Shapes",
+    "parent": 140,
+    "size": 19118,
+    "group": "class3"
+  },
+  {
+    "id": 166,
+    "name": "Sort",
+    "parent": 140,
+    "size": 6887,
+    "group": "class3"
+  },
+  {
+    "id": 167,
+    "name": "Stats",
+    "parent": 140,
+    "size": 6557,
+    "group": "class3"
+  },
+  {
+    "id": 168,
+    "name": "Strings",
+    "parent": 140,
+    "size": 22026,
+    "group": "class3"
+  },
+  {
+    "id": 169,
+    "name": "vis",
+    "parent": 1,
+    "group": "class2"
+  },
+  {
+    "id": 170,
+    "name": "axis",
+    "parent": 169,
+    "group": "class3"
+  },
+  {
+    "id": 171,
+    "name": "Axes",
+    "parent": 170,
+    "size": 1302,
+    "group": "class4"
+  },
+  {
+    "id": 172,
+    "name": "Axis",
+    "parent": 170,
+    "size": 24593,
+    "group": "class4"
+  },
+  {
+    "id": 173,
+    "name": "AxisGridLine",
+    "parent": 170,
+    "size": 652,
+    "group": "class4"
+  },
+  {
+    "id": 174,
+    "name": "AxisLabel",
+    "parent": 170,
+    "size": 636,
+    "group": "class4"
+  },
+  {
+    "id": 175,
+    "name": "CartesianAxes",
+    "parent": 170,
+    "size": 6703,
+    "group": "class4"
+  },
+  {
+    "id": 176,
+    "name": "controls",
+    "parent": 169,
+    "group": "class3"
+  },
+  {
+    "id": 177,
+    "name": "AnchorControl",
+    "parent": 176,
+    "size": 2138,
+    "group": "class4"
+  },
+  {
+    "id": 178,
+    "name": "ClickControl",
+    "parent": 176,
+    "size": 3824,
+    "group": "class4"
+  },
+  {
+    "id": 179,
+    "name": "Control",
+    "parent": 176,
+    "size": 1353,
+    "group": "class4"
+  },
+  {
+    "id": 180,
+    "name": "ControlList",
+    "parent": 176,
+    "size": 4665,
+    "group": "class4"
+  },
+  {
+    "id": 181,
+    "name": "DragControl",
+    "parent": 176,
+    "size": 2649,
+    "group": "class4"
+  },
+  {
+    "id": 182,
+    "name": "ExpandControl",
+    "parent": 176,
+    "size": 2832,
+    "group": "class4"
+  },
+  {
+    "id": 183,
+    "name": "HoverControl",
+    "parent": 176,
+    "size": 4896,
+    "group": "class4"
+  },
+  {
+    "id": 184,
+    "name": "IControl",
+    "parent": 176,
+    "size": 763,
+    "group": "class4"
+  },
+  {
+    "id": 185,
+    "name": "PanZoomControl",
+    "parent": 176,
+    "size": 5222,
+    "group": "class4"
+  },
+  {
+    "id": 186,
+    "name": "SelectionControl",
+    "parent": 176,
+    "size": 7862,
+    "group": "class4"
+  },
+  {
+    "id": 187,
+    "name": "TooltipControl",
+    "parent": 176,
+    "size": 8435,
+    "group": "class4"
+  },
+  {
+    "id": 188,
+    "name": "data",
+    "parent": 169,
+    "group": "class3"
+  },
+  {
+    "id": 189,
+    "name": "Data",
+    "parent": 188,
+    "size": 20544,
+    "group": "class4"
+  },
+  {
+    "id": 190,
+    "name": "DataList",
+    "parent": 188,
+    "size": 19788,
+    "group": "class4"
+  },
+  {
+    "id": 191,
+    "name": "DataSprite",
+    "parent": 188,
+    "size": 10349,
+    "group": "class4"
+  },
+  {
+    "id": 192,
+    "name": "EdgeSprite",
+    "parent": 188,
+    "size": 3301,
+    "group": "class4"
+  },
+  {
+    "id": 193,
+    "name": "NodeSprite",
+    "parent": 188,
+    "size": 19382,
+    "group": "class4"
+  },
+  {
+    "id": 194,
+    "name": "render",
+    "parent": 188,
+    "group": "class4"
+  },
+  {
+    "id": 195,
+    "name": "ArrowType",
+    "parent": 194,
+    "size": 698,
+    "group": "class5"
+  },
+  {
+    "id": 196,
+    "name": "EdgeRenderer",
+    "parent": 194,
+    "size": 5569,
+    "group": "class5"
+  },
+  {
+    "id": 197,
+    "name": "IRenderer",
+    "parent": 194,
+    "size": 353,
+    "group": "class5"
+  },
+  {
+    "id": 198,
+    "name": "ShapeRenderer",
+    "parent": 194,
+    "size": 2247,
+    "group": "class5"
+  },
+  {
+    "id": 199,
+    "name": "ScaleBinding",
+    "parent": 188,
+    "size": 11275,
+    "group": "class4"
+  },
+  {
+    "id": 200,
+    "name": "Tree",
+    "parent": 188,
+    "size": 7147,
+    "group": "class4"
+  },
+  {
+    "id": 201,
+    "name": "TreeBuilder",
+    "parent": 188,
+    "size": 9930,
+    "group": "class4"
+  },
+  {
+    "id": 202,
+    "name": "events",
+    "parent": 169,
+    "group": "class3"
+  },
+  {
+    "id": 203,
+    "name": "DataEvent",
+    "parent": 202,
+    "size": 2313,
+    "group": "class4"
+  },
+  {
+    "id": 204,
+    "name": "SelectionEvent",
+    "parent": 202,
+    "size": 1880,
+    "group": "class4"
+  },
+  {
+    "id": 205,
+    "name": "TooltipEvent",
+    "parent": 202,
+    "size": 1701,
+    "group": "class4"
+  },
+  {
+    "id": 206,
+    "name": "VisualizationEvent",
+    "parent": 202,
+    "size": 1117,
+    "group": "class4"
+  },
+  {
+    "id": 207,
+    "name": "legend",
+    "parent": 169,
+    "group": "class3"
+  },
+  {
+    "id": 208,
+    "name": "Legend",
+    "parent": 207,
+    "size": 20859,
+    "group": "class4"
+  },
+  {
+    "id": 209,
+    "name": "LegendItem",
+    "parent": 207,
+    "size": 4614,
+    "group": "class4"
+  },
+  {
+    "id": 210,
+    "name": "LegendRange",
+    "parent": 207,
+    "size": 10530,
+    "group": "class4"
+  },
+  {
+    "id": 211,
+    "name": "operator",
+    "parent": 169,
+    "group": "class3"
+  },
+  {
+    "id": 212,
+    "name": "distortion",
+    "parent": 211,
+    "group": "class4"
+  },
+  {
+    "id": 213,
+    "name": "BifocalDistortion",
+    "parent": 212,
+    "size": 4461,
+    "group": "class5"
+  },
+  {
+    "id": 214,
+    "name": "Distortion",
+    "parent": 212,
+    "size": 6314,
+    "group": "class5"
+  },
+  {
+    "id": 215,
+    "name": "FisheyeDistortion",
+    "parent": 212,
+    "size": 3444,
+    "group": "class5"
+  },
+  {
+    "id": 216,
+    "name": "encoder",
+    "parent": 211,
+    "group": "class4"
+  },
+  {
+    "id": 217,
+    "name": "ColorEncoder",
+    "parent": 216,
+    "size": 3179,
+    "group": "class5"
+  },
+  {
+    "id": 218,
+    "name": "Encoder",
+    "parent": 216,
+    "size": 4060,
+    "group": "class5"
+  },
+  {
+    "id": 219,
+    "name": "PropertyEncoder",
+    "parent": 216,
+    "size": 4138,
+    "group": "class5"
+  },
+  {
+    "id": 220,
+    "name": "ShapeEncoder",
+    "parent": 216,
+    "size": 1690,
+    "group": "class5"
+  },
+  {
+    "id": 221,
+    "name": "SizeEncoder",
+    "parent": 216,
+    "size": 1830,
+    "group": "class5"
+  },
+  {
+    "id": 222,
+    "name": "filter",
+    "parent": 211,
+    "group": "class4"
+  },
+  {
+    "id": 223,
+    "name": "FisheyeTreeFilter",
+    "parent": 222,
+    "size": 5219,
+    "group": "class5"
+  },
+  {
+    "id": 224,
+    "name": "GraphDistanceFilter",
+    "parent": 222,
+    "size": 3165,
+    "group": "class5"
+  },
+  {
+    "id": 225,
+    "name": "VisibilityFilter",
+    "parent": 222,
+    "size": 3509,
+    "group": "class5"
+  },
+  {
+    "id": 226,
+    "name": "IOperator",
+    "parent": 211,
+    "size": 1286,
+    "group": "class4"
+  },
+  {
+    "id": 227,
+    "name": "label",
+    "parent": 211,
+    "group": "class4"
+  },
+  {
+    "id": 228,
+    "name": "Labeler",
+    "parent": 227,
+    "size": 9956,
+    "group": "class5"
+  },
+  {
+    "id": 229,
+    "name": "RadialLabeler",
+    "parent": 227,
+    "size": 3899,
+    "group": "class5"
+  },
+  {
+    "id": 230,
+    "name": "StackedAreaLabeler",
+    "parent": 227,
+    "size": 3202,
+    "group": "class5"
+  },
+  {
+    "id": 231,
+    "name": "layout",
+    "parent": 211,
+    "group": "class4"
+  },
+  {
+    "id": 232,
+    "name": "AxisLayout",
+    "parent": 231,
+    "size": 6725,
+    "group": "class5"
+  },
+  {
+    "id": 233,
+    "name": "BundledEdgeRouter",
+    "parent": 231,
+    "size": 3727,
+    "group": "class5"
+  },
+  {
+    "id": 234,
+    "name": "CircleLayout",
+    "parent": 231,
+    "size": 9317,
+    "group": "class5"
+  },
+  {
+    "id": 235,
+    "name": "CirclePackingLayout",
+    "parent": 231,
+    "size": 12003,
+    "group": "class5"
+  },
+  {
+    "id": 236,
+    "name": "DendrogramLayout",
+    "parent": 231,
+    "size": 4853,
+    "group": "class5"
+  },
+  {
+    "id": 237,
+    "name": "ForceDirectedLayout",
+    "parent": 231,
+    "size": 8411,
+    "group": "class5"
+  },
+  {
+    "id": 238,
+    "name": "IcicleTreeLayout",
+    "parent": 231,
+    "size": 4864,
+    "group": "class5"
+  },
+  {
+    "id": 239,
+    "name": "IndentedTreeLayout",
+    "parent": 231,
+    "size": 3174,
+    "group": "class5"
+  },
+  {
+    "id": 240,
+    "name": "Layout",
+    "parent": 231,
+    "size": 7881,
+    "group": "class5"
+  },
+  {
+    "id": 241,
+    "name": "NodeLinkTreeLayout",
+    "parent": 231,
+    "size": 12870,
+    "group": "class5"
+  },
+  {
+    "id": 242,
+    "name": "PieLayout",
+    "parent": 231,
+    "size": 2728,
+    "group": "class5"
+  },
+  {
+    "id": 243,
+    "name": "RadialTreeLayout",
+    "parent": 231,
+    "size": 12348,
+    "group": "class5"
+  },
+  {
+    "id": 244,
+    "name": "RandomLayout",
+    "parent": 231,
+    "size": 870,
+    "group": "class5"
+  },
+  {
+    "id": 245,
+    "name": "StackedAreaLayout",
+    "parent": 231,
+    "size": 9121,
+    "group": "class5"
+  },
+  {
+    "id": 246,
+    "name": "TreeMapLayout",
+    "parent": 231,
+    "size": 9191,
+    "group": "class5"
+  },
+  {
+    "id": 247,
+    "name": "Operator",
+    "parent": 211,
+    "size": 2490,
+    "group": "class4"
+  },
+  {
+    "id": 248,
+    "name": "OperatorList",
+    "parent": 211,
+    "size": 5248,
+    "group": "class4"
+  },
+  {
+    "id": 249,
+    "name": "OperatorSequence",
+    "parent": 211,
+    "size": 4190,
+    "group": "class4"
+  },
+  {
+    "id": 250,
+    "name": "OperatorSwitch",
+    "parent": 211,
+    "size": 2581,
+    "group": "class4"
+  },
+  {
+    "id": 251,
+    "name": "SortOperator",
+    "parent": 211,
+    "size": 2023,
+    "group": "class4"
+  },
+  {
+    "id": 252,
+    "name": "Visualization",
+    "parent": 169,
+    "size": 16540,
+    "group": "class3"
   }
 ]

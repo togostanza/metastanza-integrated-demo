@@ -3,7 +3,7 @@
     {
       "tag": "togostanza--data-source",
       "attributes": {
-        "url": "./data/multi-data.json",
+        "url": "./data/matrix-data.json",
         "receiver": "togostanza-pagination-table, togostanza-heatmap, togostanza-piechart, togostanza-barchart, togostanza-linechart, togostanza-scatter-plot",
         "target-attribute": "data-url"
       }

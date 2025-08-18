@@ -4,7 +4,7 @@
       "label": "Matrix Data",
       "description": "Multi-dimensional data visualization with charts and tables",
       "dataSource": {
-        "url": "./data/multi-data.json",
+        "url": "./data/matrix-data.json",
         "receiver": "togostanza-pagination-table, togostanza-heatmap, togostanza-piechart, togostanza-barchart, togostanza-linechart, togostanza-scatter-plot, togostanza-histogram"
       },
       "stanzas": [
