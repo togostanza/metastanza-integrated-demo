@@ -1,5 +1,6 @@
 import StateManager from './modules/StateManager.js';
 import ConsoleManager from './modules/ConsoleManager.js';
+import TabManager from './modules/TabManager.js';
 
 const isLocal = location.hostname === "localhost";
 const baseURL = isLocal
@@ -14,6 +15,7 @@ let loadedScripts = new Set(); // 読み込み済みスクリプトの管理
 // マネージャーのインスタンスを作成
 const stateManager = new StateManager();
 const consoleManager = new ConsoleManager(stateManager);
+const tabManager = new TabManager(stateManager);
 
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.querySelector("togostanza--container");
@@ -48,7 +50,7 @@ async function initSPA() {
     initInputEditor();
     initStyleEditor();
     initColorSchemeButtons();
-    initTabs();
+    tabManager.init();
 
     // 初期ページを読み込み
     await loadDataType(currentDataType);
@@ -102,32 +104,13 @@ function updateGlobalNavigationState(dataType) {
  * 保存された状態を復元
  */
 function restoreState() {
-  // アクティブタブ状態の復元（コンソール状態はConsoleManagerで処理）
-  const activeTab = stateManager.loadActiveTab();
-  setActiveTab(activeTab);
+  // タブとコンソールの状態復元はそれぞれのマネージャーで処理
+  // 追加の復元処理があればここに記述
 }
 
 /**
- * アクティブタブを設定
+ * 保存された状態を復元
  */
-function setActiveTab(targetTab) {
-  document.querySelectorAll(".tab-container .tabs .tab").forEach((btn) => {
-    btn.classList.toggle("-active", btn.getAttribute("data-tab") === targetTab);
-  });
-
-  document.querySelectorAll(".tab-container .tab-content").forEach((content) => {
-    content.classList.toggle("-active", content.id === targetTab);
-  });
-
-  // エディタのリフレッシュ（遅延実行で確実に実行）
-  setTimeout(() => {
-    if (targetTab === "ColorSchemeEditorTab" && window.styleEditor) {
-      window.styleEditor.refresh();
-    } else if (targetTab === "InputEditorTab" && window.inputEditor) {
-      window.inputEditor.refresh();
-    }
-  }, 50);
-}
 
 /**
  * データタイプへの遷移
@@ -490,24 +473,4 @@ function initColorSchemeButtons() {
       styleTab.insertBefore(schemeContainer, styleTab.firstChild);
     })
     .catch((err) => console.error("Failed to load color schemes:", err));
-}
-
-/**
- * タブ切り替え処理を初期化する
- */
-function initTabs() {
-  document.querySelectorAll(".tab-container .tabs .tab").forEach((tab) => {
-    tab.addEventListener("click", (e) => {
-      const button = e.target.closest(".tab");
-      if (!button) return;
-
-      const targetTab = button.getAttribute("data-tab");
-
-      // タブ状態を設定
-      setActiveTab(targetTab);
-
-      // 状態を保存
-      stateManager.saveActiveTab(targetTab);
-    });
-  });
 }
