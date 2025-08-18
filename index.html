@@ -4,53 +4,70 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MetaStanza Showcase - DBCLS</title>
+  <title>MetaStanza Showcase - DBCLS (SPA)</title>
   <link rel="stylesheet" href="css/main.css">
+
+  <!-- Material Symbols -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+  <!-- CodeMirror -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+
+  <!-- TogoStanza -->
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@togostanza/togostanza@3.10.1/dist/togostanza.mjs"></script>
 </head>
 
-<body>
-  <div class="l-container">
-    <h1>MetaStanza Showcase</h1>
-    <p>DBCLSが提供する情報可視化コンポーネント MetaStanza のショーケースアプリケーションです。</p>
+<body data-page="spa">
 
-    <ul class="c-page-list">
-      <li class="c-page-list__item">
-        <a href="matrix.html" class="c-page-list__link" style="display: flex; align-items: center; gap: 0.5rem;">
-          <span class="material-symbols-outlined">grid_view</span>
-          マトリックス型
-        </a>
-        <div class="c-page-list__description">テーブル、チャート、グラフなどの行列データ可視化</div>
-      </li>
-      <li class="c-page-list__item">
-        <a href="tree.html" class="c-page-list__link" style="display: flex; align-items: center; gap: 0.5rem;">
-          <span class="material-symbols-outlined">account_tree</span>
-          ツリー型
-        </a>
-        <div class="c-page-list__description">階層構造データの可視化</div>
-      </li>
-      <li class="c-page-list__item">
-        <a href="graph.html" class="c-page-list__link" style="display: flex; align-items: center; gap: 0.5rem;">
-          <span class="material-symbols-outlined">hub</span>
-          グラフ型
-        </a>
-        <div class="c-page-list__description">ネットワークグラフやノード・エッジ関係の可視化（準備中）</div>
-      </li>
-      <li class="c-page-list__item">
-        <a href="set.html" class="c-page-list__link" style="display: flex; align-items: center; gap: 0.5rem;">
-          <span class="material-symbols-outlined">group_work</span>
-          集合型
-        </a>
-        <div class="c-page-list__description">集合の関係性を表現する可視化（準備中）</div>
-      </li>
-    </ul>
+  <div id="AppRoot">
 
-    <footer class="l-footer">
-      <p>
-        Powered by <a href="https://github.com/togostanza/metastanza" target="_blank">MetaStanza</a> |
-        <a href="https://dbcls.rois.ac.jp/" target="_blank">DBCLS</a>
-      </p>
-    </footer>
-  </div>
+    <nav class="global-navigation">
+      <a href="#matrix" title="Matrix data" data-page="matrix">
+        <span class="material-symbols-outlined">grid_on</span>
+      </a>
+      <a href="#tree" title="Tree data" data-page="tree">
+        <span class="material-symbols-outlined">account_tree</span>
+      </a>
+      <a href="#graph" title="Graph data" data-page="graph">
+        <span class="material-symbols-outlined">hub</span>
+      </a>
+      <a href="#set" title="Set data" data-page="set">
+        <span class="material-symbols-outlined">join_full</span>
+      </a>
+    </nav><!-- .global-navigation -->
+
+    <div class="console tab-container">
+      <div class="tabs">
+        <button class="tab -active" data-tab="DataEditorTab">
+          <span class="material-symbols-outlined">code</span>
+          Data
+        </button>
+        <button class="tab" data-tab="ColorSchemeEditorTab">
+          <span class="material-symbols-outlined">palette</span>
+          Color scheme
+        </button>
+      </div>
+      <div class="tab-content -active" id="DataEditorTab">
+        <textarea id="DataEditor"></textarea>
+      </div>
+      <div class="tab-content" id="ColorSchemeEditorTab">
+        <textarea id="ColorSchemeEditor"></textarea>
+      </div>
+    </div>
+
+    <togostanza--container></togostanza--container>
+
+  </div><!-- #AppRoot -->
+
+  </div><!-- #AppRoot -->
+
+  <!-- Main JavaScript -->
+  <script type="module" src="js/main.js"></script>
 </body>
+
+</html>
 
 </html>

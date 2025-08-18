@@ -28,14 +28,14 @@ async function initSPA() {
     const response = await fetch("./app-config.json");
     appConfig = await response.json();
 
+    // ナビゲーションUIを作成
+    createNavigation();
+
     // URL から初期データタイプを取得
     const hash = window.location.hash.replace("#", "");
     if (hash && appConfig.dataTypes[hash]) {
       currentDataType = hash;
     }
-
-    // グローバルナビゲーションのイベントリスナーを設定
-    setupGlobalNavigation();
 
     // 初期ページを読み込み
     await loadDataType(currentDataType);
@@ -55,34 +55,37 @@ async function initSPA() {
 }
 
 /**
- * グローバルナビゲーション設定
+ * ナビゲーションUI作成
  */
-function setupGlobalNavigation() {
-  const navLinks = document.querySelectorAll(".global-navigation a[data-page]");
+function createNavigation() {
+  const container = document.querySelector("togostanza--container");
 
-  navLinks.forEach(link => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      const dataType = link.getAttribute("data-page");
+  // ナビゲーション要素を作成
+  const nav = document.createElement("nav");
+  nav.id = "DataTypeNavigation";
+  nav.innerHTML = `
+    <h2>Data Types</h2>
+    <div class="nav-buttons">
+      ${Object.entries(appConfig.dataTypes).map(([key, config]) => `
+        <button class="nav-btn ${key === currentDataType ? '-active' : ''}" 
+                data-type="${key}">
+          <span class="label">${config.label}</span>
+          <span class="description">${config.description}</span>
+        </button>
+      `).join('')}
+    </div>
+  `;
+
+  // ナビゲーションボタンのイベントリスナー
+  nav.addEventListener("click", (e) => {
+    const btn = e.target.closest(".nav-btn");
+    if (btn) {
+      const dataType = btn.getAttribute("data-type");
       navigateToDataType(dataType);
-    });
+    }
   });
 
-  // 初期状態を設定
-  updateGlobalNavigationState(currentDataType);
-}
-
-/**
- * グローバルナビゲーション状態の更新
- */
-function updateGlobalNavigationState(dataType) {
-  const navLinks = document.querySelectorAll(".global-navigation a[data-page]");
-  navLinks.forEach(link => {
-    link.classList.toggle("-active", link.getAttribute("data-page") === dataType);
-  });
-
-  // body の data-page 属性も更新
-  document.body.setAttribute("data-page", dataType);
+  container.insertBefore(nav, container.firstChild);
 }
 
 /**
@@ -115,7 +118,7 @@ async function loadDataType(dataType) {
     console.log(`Loading data type: ${dataType}`);
 
     // ナビゲーションの状態更新
-    updateGlobalNavigationState(dataType);
+    updateNavigationState(dataType);
 
     // 既存のコンテンツをクリア
     clearCurrentContent();
@@ -128,6 +131,15 @@ async function loadDataType(dataType) {
   } catch (error) {
     console.error(`データタイプ "${dataType}" の読み込みエラー:`, error);
   }
+}
+
+/**
+ * ナビゲーション状態の更新
+ */
+function updateNavigationState(dataType) {
+  document.querySelectorAll("#DataTypeNavigation .nav-btn").forEach(btn => {
+    btn.classList.toggle("-active", btn.getAttribute("data-type") === dataType);
+  });
 }
 
 /**
@@ -179,7 +191,7 @@ async function loadDataTypeContent(dataType) {
   container.appendChild(stanzasContainer);
 
   // 各スタンザを追加
-  config.stanzas.forEach((stanzaConfig, index) => {
+  for (const stanzaConfig of config.stanzas) {
     // スクリプト読み込み
     if (stanzaConfig.scriptSrc && !loadedScripts.has(stanzaConfig.scriptSrc)) {
       const script = createScript(stanzaConfig.scriptSrc);
@@ -197,16 +209,16 @@ async function loadDataTypeContent(dataType) {
       stanzaWrapper.appendChild(heading);
 
       if (stanzaConfig.tag) {
-        const stanza = createComponent(stanzaConfig, styleTag, index);
+        const stanza = createComponent(stanzaConfig, styleTag);
         stanzaWrapper.appendChild(stanza);
       }
 
       stanzasContainer.appendChild(stanzaWrapper);
     } else if (stanzaConfig.tag) {
-      const stanza = createComponent(stanzaConfig, styleTag, index);
+      const stanza = createComponent(stanzaConfig, styleTag);
       stanzasContainer.appendChild(stanza);
     }
-  });
+  }
 
   // データファイルを読み込んでエディタに設定
   try {
@@ -247,12 +259,8 @@ function createScript(src) {
 /**
  * コンポーネント要素を生成
  */
-function createComponent(item, styleTag, index) {
+function createComponent(item, styleTag) {
   const elem = document.createElement(item.tag);
-
-  // 各スタンザに一意のクラス名を付与
-  const uniqueClass = `stanza-${item.tag.replace('togostanza-', '')}-${index}`;
-  elem.classList.add(uniqueClass);
 
   if (item.attributes) {
     Object.keys(item.attributes).forEach((key) => {
@@ -261,25 +269,12 @@ function createComponent(item, styleTag, index) {
   }
 
   if (item.cssVariables) {
-    // 方法1: CSSルールとして追加
-    let cssRule = `.${uniqueClass} {`;
+    let cssRule = `${item.tag} {`;
     Object.keys(item.cssVariables).forEach((varName) => {
-      let value = item.cssVariables[varName];
-      cssRule += `${varName}: ${value};`;
+      cssRule += `${varName}: ${item.cssVariables[varName]};`;
     });
     cssRule += `}`;
-
-    // デバッグ用出力
-    console.log(`Generated CSS rule for ${item.tag}:`, cssRule);
-
     styleTag.appendChild(document.createTextNode(cssRule + "\\n"));
-
-    // 方法2: 要素のstyle属性に直接設定（より確実）
-    Object.keys(item.cssVariables).forEach((varName) => {
-      let value = item.cssVariables[varName];
-      elem.style.setProperty(varName, value);
-      console.log(`Set ${varName}: ${value} directly on element`);
-    });
   }
 
   return elem;
