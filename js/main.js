@@ -2,6 +2,7 @@ import StateManager from './modules/StateManager.js';
 import ConsoleManager from './modules/ConsoleManager.js';
 import TabManager from './modules/TabManager.js';
 import EditorManager from './modules/EditorManager.js';
+import AppManager from './modules/AppManager.js';
 
 const isLocal = location.hostname === "localhost";
 const baseURL = isLocal
@@ -18,6 +19,7 @@ const stateManager = new StateManager();
 const consoleManager = new ConsoleManager(stateManager);
 const editorManager = new EditorManager();
 const tabManager = new TabManager(stateManager, editorManager);
+const appManager = new AppManager(stateManager, consoleManager, tabManager, editorManager);
 
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.querySelector("togostanza--container");
@@ -50,7 +52,7 @@ async function initSPA() {
 
     // エディタとタブを初期化（データ読み込み前に実行）
     editorManager.init();
-    initColorSchemeButtons();
+    appManager.initColorSchemeButtons();
     tabManager.init();
 
     // 初期ページを読み込み
@@ -396,63 +398,3 @@ function applyColorSchemeToStanzas(colorScheme) {
 
 // グローバルに利用可能にする
 window.applyColorSchemeToStanzas = applyColorSchemeToStanzas;
-
-/**
- * color-schemes.json を読み込み、カラースキーマサンプルボタンを生成する
- */
-function initColorSchemeButtons() {
-  fetch("./color-schemes.json")
-    .then((response) => response.json())
-    .then((colorSchemes) => {
-      const styleTab = document.getElementById("ColorSchemeEditorTab");
-      if (!styleTab) return;
-
-      const schemeContainer = document.createElement("div");
-      schemeContainer.id = "ColorSchemes";
-
-      // 見出しを追加
-      const heading = document.createElement("h3");
-      heading.textContent = "Sample color schemes";
-      schemeContainer.appendChild(heading);
-
-      colorSchemes.forEach((scheme) => {
-        const btn = document.createElement("button");
-        btn.className = "btn";
-
-        // カラースキームの背景色とフォント色を適用
-        btn.style.backgroundColor = scheme["--togostanza-theme-background_color"];
-        btn.style.color = scheme["--togostanza-theme-text_color"];
-        btn.style.borderColor = scheme["--togostanza-theme-border_color"];
-
-        // 表示用のラベル
-        const label = document.createElement("label");
-        label.textContent = scheme.name;
-        btn.appendChild(label);
-
-        const sampleContainer = document.createElement("div");
-        sampleContainer.className = "sample";
-        sampleContainer.style.backgroundColor =
-          scheme["--togostanza-theme-background_color"];
-        for (let i = 0; i < 6; i++) {
-          const colorKey = `--togostanza-theme-series_${i}_color`;
-          const box = document.createElement("div");
-          box.className = "box";
-          box.style.backgroundColor = scheme[colorKey];
-          sampleContainer.appendChild(box);
-        }
-        btn.appendChild(sampleContainer);
-
-        btn.addEventListener("click", () => {
-          const schemeCopy = { ...scheme };
-          delete schemeCopy.name;
-          const jsonText = JSON.stringify(schemeCopy, null, 2);
-          editorManager.setStyleValue(jsonText);
-          // applyStyleFromEditorで自動的にapplyColorSchemeToStanzasも呼ばれるので重複削除
-          editorManager.applyStyleFromEditor(jsonText);
-        });
-        schemeContainer.appendChild(btn);
-      });
-      styleTab.insertBefore(schemeContainer, styleTab.firstChild);
-    })
-    .catch((err) => console.error("Failed to load color schemes:", err));
-}
