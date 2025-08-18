@@ -46,6 +46,9 @@ async function initSPA() {
     // 初期ページを読み込み
     await loadDataType(currentDataType);
 
+    // 保存された状態を復元（エディタ初期化後）
+    restoreState();
+
     // ハッシュ変更イベントリスナーを設定
     window.addEventListener("hashchange", handleHashChange);
 
@@ -122,12 +125,92 @@ function toggleConsole() {
     toggleButton.setAttribute("aria-expanded", "true");
     toggleButton.setAttribute("title", "Close Console");
     icon.textContent = "keyboard_arrow_right";
+    saveState(STATE_KEYS.CONSOLE_COLLAPSED, false);
   } else {
     // 閉じる
     body.classList.add("-console-collapsed");
     toggleButton.setAttribute("aria-expanded", "false");
     toggleButton.setAttribute("title", "Open Console");
     icon.textContent = "keyboard_arrow_left";
+    saveState(STATE_KEYS.CONSOLE_COLLAPSED, true);
+  }
+}
+
+/**
+ * 保存された状態を復元
+ */
+function restoreState() {
+  // コンソール開閉状態の復元
+  const isConsoleCollapsed = loadState(STATE_KEYS.CONSOLE_COLLAPSED, false);
+  if (isConsoleCollapsed) {
+    const body = document.body;
+    const toggleButton = document.querySelector(".consolecollapse > button");
+    const icon = toggleButton?.querySelector(".material-symbols-outlined");
+
+    if (body && toggleButton && icon) {
+      body.classList.add("-console-collapsed");
+      toggleButton.setAttribute("aria-expanded", "false");
+      toggleButton.setAttribute("title", "Open Console");
+      icon.textContent = "keyboard_arrow_left";
+    }
+  }
+
+  // アクティブタブ状態の復元
+  const activeTab = loadState(STATE_KEYS.ACTIVE_TAB, "InputEditorTab");
+  setActiveTab(activeTab);
+}
+
+/**
+ * アクティブタブを設定
+ */
+function setActiveTab(targetTab) {
+  document.querySelectorAll(".tab-container .tabs .tab").forEach((btn) => {
+    btn.classList.toggle("-active", btn.getAttribute("data-tab") === targetTab);
+  });
+
+  document.querySelectorAll(".tab-container .tab-content").forEach((content) => {
+    content.classList.toggle("-active", content.id === targetTab);
+  });
+
+  // エディタのリフレッシュ（遅延実行で確実に実行）
+  setTimeout(() => {
+    if (targetTab === "ColorSchemeEditorTab" && window.styleEditor) {
+      window.styleEditor.refresh();
+    } else if (targetTab === "InputEditorTab" && window.inputEditor) {
+      window.inputEditor.refresh();
+    }
+  }, 50);
+}
+
+/**
+ * 状態管理 - localStorageとの連携
+ */
+const STATE_KEYS = {
+  CONSOLE_COLLAPSED: 'metastanza-console-collapsed',
+  ACTIVE_TAB: 'metastanza-active-tab'
+};
+
+/**
+ * 状態をlocalStorageに保存
+ */
+function saveState(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (error) {
+    console.warn('Failed to save state to localStorage:', error);
+  }
+}
+
+/**
+ * 状態をlocalStorageから復元
+ */
+function loadState(key, defaultValue = null) {
+  try {
+    const saved = localStorage.getItem(key);
+    return saved ? JSON.parse(saved) : defaultValue;
+  } catch (error) {
+    console.warn('Failed to load state from localStorage:', error);
+    return defaultValue;
   }
 }
 
@@ -505,18 +588,11 @@ function initTabs() {
 
       const targetTab = button.getAttribute("data-tab");
 
-      document.querySelectorAll(".tab-container .tabs .tab").forEach((btn) => {
-        btn.classList.toggle("-active", btn.getAttribute("data-tab") === targetTab);
-      });
+      // タブ状態を設定
+      setActiveTab(targetTab);
 
-      document.querySelectorAll(".tab-container .tab-content").forEach((content) => {
-        content.classList.toggle("-active", content.id === targetTab);
-      });
-
-      // 必要なら各エディタの refresh() を呼ぶ
-      if (targetTab === "ColorSchemeEditorTab" && window.styleEditor) {
-        window.styleEditor.refresh();
-      }
+      // 状態を保存
+      saveState(STATE_KEYS.ACTIVE_TAB, targetTab);
     });
   });
 }
