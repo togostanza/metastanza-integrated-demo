@@ -1,4 +1,5 @@
 import StateManager from './modules/StateManager.js';
+import ConsoleManager from './modules/ConsoleManager.js';
 
 const isLocal = location.hostname === "localhost";
 const baseURL = isLocal
@@ -10,8 +11,9 @@ let currentDataType = "matrix"; // デフォルトは matrix
 let appConfig = null;
 let loadedScripts = new Set(); // 読み込み済みスクリプトの管理
 
-// StateManagerのインスタンスを作成
+// マネージャーのインスタンスを作成
 const stateManager = new StateManager();
+const consoleManager = new ConsoleManager(stateManager);
 
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.querySelector("togostanza--container");
@@ -76,8 +78,8 @@ function setupGlobalNavigation() {
     });
   });
 
-  // コンソール開閉機能を設定
-  setupConsoleToggle();
+  // コンソール開閉機能を初期化
+  consoleManager.init();
 
   // 初期状態を設定
   updateGlobalNavigationState(currentDataType);
@@ -97,70 +99,10 @@ function updateGlobalNavigationState(dataType) {
 }
 
 /**
- * コンソール開閉機能の設定
- */
-function setupConsoleToggle() {
-  const toggleButton = document.querySelector(".consolecollapse > button");
-  const tabContainer = document.querySelector(".console.tab-container");
-
-  if (!toggleButton || !tabContainer) {
-    console.warn("Console toggle elements not found");
-    return;
-  }
-
-  toggleButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    toggleConsole();
-  });
-}/**
- * コンソール開閉の切り替え
- */
-function toggleConsole() {
-  const body = document.body;
-  const toggleButton = document.querySelector(".consolecollapse > button");
-  const icon = toggleButton?.querySelector(".material-symbols-outlined");
-
-  if (!toggleButton || !icon) return;
-
-  const isCollapsed = body.classList.contains("-console-collapsed");
-
-  if (isCollapsed) {
-    // 開く
-    body.classList.remove("-console-collapsed");
-    toggleButton.setAttribute("aria-expanded", "true");
-    toggleButton.setAttribute("title", "Close Console");
-    icon.textContent = "keyboard_arrow_right";
-    stateManager.saveConsoleState(false);
-  } else {
-    // 閉じる
-    body.classList.add("-console-collapsed");
-    toggleButton.setAttribute("aria-expanded", "false");
-    toggleButton.setAttribute("title", "Open Console");
-    icon.textContent = "keyboard_arrow_left";
-    stateManager.saveConsoleState(true);
-  }
-}
-
-/**
  * 保存された状態を復元
  */
 function restoreState() {
-  // コンソール開閉状態の復元
-  const isConsoleCollapsed = stateManager.loadConsoleState();
-  if (isConsoleCollapsed) {
-    const body = document.body;
-    const toggleButton = document.querySelector(".consolecollapse > button");
-    const icon = toggleButton?.querySelector(".material-symbols-outlined");
-
-    if (body && toggleButton && icon) {
-      body.classList.add("-console-collapsed");
-      toggleButton.setAttribute("aria-expanded", "false");
-      toggleButton.setAttribute("title", "Open Console");
-      icon.textContent = "keyboard_arrow_left";
-    }
-  }
-
-  // アクティブタブ状態の復元
+  // アクティブタブ状態の復元（コンソール状態はConsoleManagerで処理）
   const activeTab = stateManager.loadActiveTab();
   setActiveTab(activeTab);
 }
