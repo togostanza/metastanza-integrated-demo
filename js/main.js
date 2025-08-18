@@ -1,3 +1,5 @@
+import StateManager from './modules/StateManager.js';
+
 const isLocal = location.hostname === "localhost";
 const baseURL = isLocal
   ? "http://localhost:8080/"
@@ -7,6 +9,9 @@ const baseURL = isLocal
 let currentDataType = "matrix"; // デフォルトは matrix
 let appConfig = null;
 let loadedScripts = new Set(); // 読み込み済みスクリプトの管理
+
+// StateManagerのインスタンスを作成
+const stateManager = new StateManager();
 
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.querySelector("togostanza--container");
@@ -125,14 +130,14 @@ function toggleConsole() {
     toggleButton.setAttribute("aria-expanded", "true");
     toggleButton.setAttribute("title", "Close Console");
     icon.textContent = "keyboard_arrow_right";
-    saveState(STATE_KEYS.CONSOLE_COLLAPSED, false);
+    stateManager.saveConsoleState(false);
   } else {
     // 閉じる
     body.classList.add("-console-collapsed");
     toggleButton.setAttribute("aria-expanded", "false");
     toggleButton.setAttribute("title", "Open Console");
     icon.textContent = "keyboard_arrow_left";
-    saveState(STATE_KEYS.CONSOLE_COLLAPSED, true);
+    stateManager.saveConsoleState(true);
   }
 }
 
@@ -141,7 +146,7 @@ function toggleConsole() {
  */
 function restoreState() {
   // コンソール開閉状態の復元
-  const isConsoleCollapsed = loadState(STATE_KEYS.CONSOLE_COLLAPSED, false);
+  const isConsoleCollapsed = stateManager.loadConsoleState();
   if (isConsoleCollapsed) {
     const body = document.body;
     const toggleButton = document.querySelector(".consolecollapse > button");
@@ -156,7 +161,7 @@ function restoreState() {
   }
 
   // アクティブタブ状態の復元
-  const activeTab = loadState(STATE_KEYS.ACTIVE_TAB, "InputEditorTab");
+  const activeTab = stateManager.loadActiveTab();
   setActiveTab(activeTab);
 }
 
@@ -180,38 +185,6 @@ function setActiveTab(targetTab) {
       window.inputEditor.refresh();
     }
   }, 50);
-}
-
-/**
- * 状態管理 - localStorageとの連携
- */
-const STATE_KEYS = {
-  CONSOLE_COLLAPSED: 'metastanza-console-collapsed',
-  ACTIVE_TAB: 'metastanza-active-tab'
-};
-
-/**
- * 状態をlocalStorageに保存
- */
-function saveState(key, value) {
-  try {
-    localStorage.setItem(key, JSON.stringify(value));
-  } catch (error) {
-    console.warn('Failed to save state to localStorage:', error);
-  }
-}
-
-/**
- * 状態をlocalStorageから復元
- */
-function loadState(key, defaultValue = null) {
-  try {
-    const saved = localStorage.getItem(key);
-    return saved ? JSON.parse(saved) : defaultValue;
-  } catch (error) {
-    console.warn('Failed to load state from localStorage:', error);
-    return defaultValue;
-  }
 }
 
 /**
@@ -592,7 +565,7 @@ function initTabs() {
       setActiveTab(targetTab);
 
       // 状態を保存
-      saveState(STATE_KEYS.ACTIVE_TAB, targetTab);
+      stateManager.saveActiveTab(targetTab);
     });
   });
 }
