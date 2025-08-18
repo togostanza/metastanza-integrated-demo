@@ -30,6 +30,7 @@
 @import url("object/project/_AppRoot.css") layer(project);
 @import url("object/project/_CodeMirror.css") layer(project);
 @import url("object/project/_ColorScheme.css") layer(project);
+@import url("object/project/_StanzasContainer.css") layer(project);
 @import url("object/project/_metastanza.css") layer(project);
 
 /* Utility Layer - ユーティリティクラス（最優先） */

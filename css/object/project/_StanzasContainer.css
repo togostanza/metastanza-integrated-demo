@@ -1,0 +1,18 @@
+#StanzasContainer {
+  /* background-color: #eee; */
+  padding: 4px;
+  
+  > .stanza {
+    margin: 6px;
+    padding: 6px;
+    border-radius: 4px;
+    background-color: var(--togostanza-theme-background_color);
+    display: inline-block;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    > h2 {
+      font-size: 12px;
+      color: var(--togostanza-theme-text_color);
+      margin-bottom: 4px;
+    }
+  }
+}

@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // stanzas の配置
         const stanzas = document.createElement("div");
-        stanzas.id = "stanzas";
+        stanzas.id = "StanzasContainer";
         container.appendChild(stanzas);
         config.stanzas.forEach((item) => {
           if (item.scriptSrc) {
@@ -76,17 +76,17 @@ document.addEventListener("DOMContentLoaded", () => {
           let target =
             item.tag === "togostanza-pagination-table" ? container : stanzas;
           if (item.title) {
-            const panel = document.createElement("div");
-            panel.classList.add("panel");
+            const stanza = document.createElement("div");
+            stanza.classList.add("stanza");
 
             const heading = document.createElement("h2");
             heading.textContent = item.title;
-            panel.appendChild(heading);
+            stanza.appendChild(heading);
 
             if (item.tag) {
-              panel.appendChild(createComponent(item));
+              stanza.appendChild(createComponent(item));
             }
-            target.appendChild(panel);
+            target.appendChild(stanza);
           } else if (item.tag) {
             target.appendChild(createComponent(item));
           }
