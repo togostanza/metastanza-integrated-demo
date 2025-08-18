@@ -243,6 +243,12 @@ document.addEventListener("DOMContentLoaded", () => {
         colorSchemes.forEach((scheme) => {
           const btn = document.createElement("button");
           btn.className = "btn";
+
+          // カラースキームの背景色とフォント色を適用
+          btn.style.backgroundColor = scheme["--togostanza-theme-background_color"];
+          btn.style.color = scheme["--togostanza-theme-text_color"];
+          btn.style.borderColor = scheme["--togostanza-theme-border_color"];
+
           // 表示用のラベル
           const label = document.createElement("span");
           label.textContent = scheme.name;
