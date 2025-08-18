@@ -1,0 +1,44 @@
+[
+  {
+    "id": "set1",
+    "label": "Set A",
+    "size": 100,
+    "items": ["item1", "item2", "item3", "item4", "item5"]
+  },
+  {
+    "id": "set2", 
+    "label": "Set B",
+    "size": 80,
+    "items": ["item3", "item4", "item6", "item7", "item8"]
+  },
+  {
+    "id": "set3",
+    "label": "Set C", 
+    "size": 60,
+    "items": ["item1", "item5", "item9", "item10"]
+  },
+  {
+    "id": "intersection_ab",
+    "label": "A ∩ B",
+    "size": 20,
+    "items": ["item3", "item4"]
+  },
+  {
+    "id": "intersection_ac",
+    "label": "A ∩ C", 
+    "size": 15,
+    "items": ["item1", "item5"]
+  },
+  {
+    "id": "intersection_bc",
+    "label": "B ∩ C",
+    "size": 5,
+    "items": []
+  },
+  {
+    "id": "intersection_abc",
+    "label": "A ∩ B ∩ C",
+    "size": 0,
+    "items": []
+  }
+]

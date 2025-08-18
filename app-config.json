@@ -1,0 +1,357 @@
+{
+  "dataTypes": {
+    "matrix": {
+      "label": "Matrix Data",
+      "description": "Multi-dimensional data visualization with charts and tables",
+      "dataSource": {
+        "url": "./multi-data.json",
+        "receiver": "togostanza-pagination-table, togostanza-heatmap, togostanza-piechart, togostanza-barchart, togostanza-linechart, togostanza-scatter-plot, togostanza-histogram"
+      },
+      "stanzas": [
+        {
+          "title": "Pie chart",
+          "scriptSrc": "piechart.js",
+          "tag": "togostanza-piechart",
+          "attributes": {
+            "data-url": "",
+            "data-type": "json",
+            "data-value_key": "area",
+            "data-category_key": "prefecture",
+            "legend-title": "Population",
+            "tooltip": "{{prefecture}}",
+            "togostanza-menu_placement": "none",
+            "event-outgoing_change_selected_nodes": "",
+            "event-incoming_change_selected_nodes": ""
+          },
+          "cssVariables": {
+            "--togostanza-canvas-width": 200,
+            "--togostanza-canvas-height": 200
+          }
+        },
+        {
+          "title": "Scatter plot",
+          "scriptSrc": "scatter-plot.js",
+          "tag": "togostanza-scatter-plot",
+          "attributes": {
+            "data-url": "",
+            "data-type": "json",
+            "axis-x-key": "pop_2020",
+            "axis-x-title": "人口",
+            "axis-x-title_padding": 20,
+            "axis-x-ticks_label_angle": -45,
+            "axis-x-scale": "linear",
+            "axis-x-ticks_interval_units": "none",
+            "axis-x-ticks_labels_format": ",.2r",
+            "axis-x-gridlines_interval_units": "none",
+            "axis-y-key": "income_2020",
+            "axis-y-title": "収入",
+            "axis-y-title_padding": 40,
+            "axis-y-ticks_label_angle": 0,
+            "axis-y-scale": "linear",
+            "axis-y-ticks_labels_format": ",.2r",
+            "node-url_key": "url",
+            "node-size_key": "area",
+            "node-size_min": 3,
+            "node-size_max": 10,
+            "tooltip": "{{prefecture}}",
+            "togostanza-menu_placement": "none",
+            "event-outgoing_change_selected_nodes": "",
+            "event-incoming_change_selected_nodes": ""
+          },
+          "cssVariables": {
+            "--togostanza-canvas-width": 300,
+            "--togostanza-canvas-height": 200
+          }
+        },
+        {
+          "title": "Bar chart",
+          "scriptSrc": "barchart.js",
+          "tag": "togostanza-barchart",
+          "attributes": {
+            "data-url": "",
+            "data-type": "json",
+            "data-bin-count": 10,
+            "axis-x-key": "prefecture",
+            "axis-x-placement": "bottom",
+            "axis-x-title": "都道府県",
+            "axis-x-title_padding": 20,
+            "axis-x-ticks_label_angle": -45,
+            "axis-x-ticks_labels_format": ",.2r",
+            "axis-y-key": "pop_2020",
+            "axis-y-placement": "left",
+            "axis-y-title": "人口（2020）",
+            "axis-y-title_padding": 40,
+            "axis-y-ticks_label_angle": 0,
+            "grouping-key": "regional_block",
+            "grouping-arrangement": "stacked",
+            "color_by-key": "color",
+            "error_bars-key": "error",
+            "tooltip": "{{prefecture}}",
+            "togostanza-menu_placement": "none",
+            "event-outgoing_change_selected_nodes": "",
+            "event-incoming_change_selected_nodes": ""
+          },
+          "cssVariables": {
+            "--togostanza-canvas-width": 500,
+            "--togostanza-canvas-height": 200
+          }
+        },
+        {
+          "title": "Line chart",
+          "scriptSrc": "linechart.js",
+          "tag": "togostanza-linechart",
+          "attributes": {
+            "data-url": "",
+            "data-type": "json",
+            "data-bin-count": 10,
+            "axis-x-key": "prefecture",
+            "axis-x-placement": "bottom",
+            "axis-x-title": "都道府県",
+            "axis-x-title_padding": 20,
+            "axis-x-ticks_label_angle": -45,
+            "axis-x-ticks_labels_format": ",.2r",
+            "axis-y-key": "pop_2020",
+            "axis-y-scale": "linear",
+            "axis-y-placement": "left",
+            "axis-y-title": "人口（2020）",
+            "axis-y-title_padding": 40,
+            "axis-y-ticks_label_angle": 0,
+            "node-size": 5,
+            "group-key": "regional_block",
+            "tooltip": "{{prefecture}}",
+            "togostanza-menu_placement": "none",
+            "event-outgoing_change_selected_nodes": "",
+            "event-incoming_change_selected_nodes": ""
+          },
+          "cssVariables": {
+            "--togostanza-canvas-width": 500,
+            "--togostanza-canvas-height": 200
+          }
+        },
+        {
+          "title": "Histogram",
+          "scriptSrc": "histogram.js",
+          "tag": "togostanza-histogram",
+          "attributes": {
+            "data-url": "",
+            "data-type": "json",
+            "data-bin-count": 10,
+            "axis-x-key": "pop_2020",
+            "axis-x-placement": "bottom",
+            "axis-x-title": "人口（2020）",
+            "axis-x-title_padding": 20,
+            "axis-x-ticks_label_angle": -45,
+            "axis-x-ticks_labels_format": ",.2r",
+            "axis-y-placement": "left",
+            "axis-y-title": "都道府県",
+            "axis-y-title_padding": 40,
+            "axis-y-ticks_label_angle": 0,
+            "grouping-key": "regional_block",
+            "grouping-arrangement": "stacked",
+            "color_by-key": "color",
+            "error_bars-key": "error",
+            "tooltip": "{{x0}}–{{x1}}: {{length}}都道府県",
+            "togostanza-menu_placement": "none",
+            "event-outgoing_change_selected_nodes": "",
+            "event-incoming_change_selected_nodes": ""
+          },
+          "cssVariables": {
+            "--togostanza-canvas-width": 300,
+            "--togostanza-canvas-height": 200
+          }
+        },
+        {
+          "title": "Heatmap",
+          "scriptSrc": "heatmap.js",
+          "tag": "togostanza-heatmap",
+          "attributes": {
+            "data-url": "",
+            "data-type": "json",
+            "axis-x-key": "prefecture",
+            "axis-x-title": "都道府県",
+            "axis-x-title_padding": 20,
+            "axis-x-ticks_label_angle": -45,
+            "axis-x-placement": "bottom",
+            "axis-y-key": "regional_block",
+            "axis-y-title": "地域",
+            "axis-y-title_padding": 40,
+            "axis-y-ticks_label_angle": 0,
+            "axis-y-placement": "left",
+            "cell-color_key": "pop_2020",
+            "cell-color_min": "#6590e6",
+            "cell-color_mid": "#ffffff",
+            "cell-color_max": "#F75976",
+            "tooltip": "{{pop_2020}}",
+            "togostanza-menu_placement": "none",
+            "event-outgoing_change_selected_nodes": "",
+            "event-incoming_change_selected_nodes": ""
+          },
+          "cssVariables": {
+            "--togostanza-canvas-width": 500,
+            "--togostanza-canvas-height": 200
+          }
+        },
+        {
+          "title": "Pagination table",
+          "scriptSrc": "pagination-table.js",
+          "tag": "togostanza-pagination-table",
+          "attributes": {
+            "data-url": "",
+            "data-type": "json",
+            "fixed-columns": "1",
+            "padding": "0px",
+            "page-size-option": "10,20,50,100",
+            "page-slider": "true",
+            "no_data_message": "fugafuga",
+            "show-axis_selector": "true",
+            "columns": "[{\"id\":\"prefecture\",\"label\":\"都道府県\"},{\"id\":\"regional_block\",\"label\":\"地域\"},{\"id\":\"area\",\"label\":\"面積\",\"type\":\"number\"},{\"id\":\"pop_2011\",\"label\":\"人口（2011）\",\"type\":\"number\"},{\"id\":\"pop_2012\",\"label\":\"人口（2012）\",\"type\":\"number\"},{\"id\":\"pop_2013\",\"label\":\"人口（2013）\",\"type\":\"number\"},{\"id\":\"pop_2014\",\"label\":\"人口（2014）\",\"type\":\"number\"},{\"id\":\"pop_2015\",\"label\":\"人口（2015）\",\"type\":\"number\"},{\"id\":\"pop_2016\",\"label\":\"人口（2016）\",\"type\":\"number\"},{\"id\":\"pop_2017\",\"label\":\"人口（2017）\",\"type\":\"number\"},{\"id\":\"pop_2018\",\"label\":\"人口（2018）\",\"type\":\"number\"},{\"id\":\"pop_2019\",\"label\":\"人口（2019）\",\"type\":\"number\"},{\"id\":\"pop_2020\",\"label\":\"人口（2020）\",\"type\":\"number\"},{\"id\":\"income_2011\",\"label\":\"収入（2011）\",\"type\":\"number\"},{\"id\":\"income_2012\",\"label\":\"収入（2012）\",\"type\":\"number\"},{\"id\":\"income_2013\",\"label\":\"収入（2013）\",\"type\":\"number\"},{\"id\":\"income_2014\",\"label\":\"収入（2014）\",\"type\":\"number\"},{\"id\":\"income_2015\",\"label\":\"収入（2015）\",\"type\":\"number\"},{\"id\":\"income_2016\",\"label\":\"収入（2016）\",\"type\":\"number\"},{\"id\":\"income_2017\",\"label\":\"収入（2017）\",\"type\":\"number\"},{\"id\":\"income_2018\",\"label\":\"収入（2018）\",\"type\":\"number\"},{\"id\":\"income_2019\",\"label\":\"収入（2019）\",\"type\":\"number\"},{\"id\":\"income_2020\",\"label\":\"収入（2020）\",\"type\":\"number\"}]",
+            "togostanza-menu_placement": "none",
+            "event-outgoing_change_selected_nodes": "",
+            "event-incoming_change_selected_nodes": ""
+          }
+        }
+      ]
+    },
+    "tree": {
+      "label": "Tree Data",
+      "description": "Hierarchical data visualization with tree structures",
+      "dataSource": {
+        "url": "./tree-data.json",
+        "receiver": "togostanza-tree, togostanza-sunburst, togostanza-treemap"
+      },
+      "stanzas": [
+        {
+          "title": "Tree Diagram",
+          "scriptSrc": "tree.js",
+          "tag": "togostanza-tree",
+          "attributes": {
+            "data-url": "",
+            "data-type": "json",
+            "data-id_key": "id",
+            "data-parent_key": "parent",
+            "data-label_key": "label",
+            "data-size_key": "size",
+            "layout-node_size": "10",
+            "layout-link_width": "2",
+            "layout-direction": "vertical",
+            "legend-title": "Tree Structure",
+            "tooltip": "{{label}}",
+            "togostanza-menu_placement": "none",
+            "event-outgoing_change_selected_nodes": "",
+            "event-incoming_change_selected_nodes": ""
+          },
+          "cssVariables": {
+            "--togostanza-canvas-width": 600,
+            "--togostanza-canvas-height": 400
+          }
+        },
+        {
+          "title": "Sunburst Chart",
+          "scriptSrc": "sunburst.js",
+          "tag": "togostanza-sunburst",
+          "attributes": {
+            "data-url": "",
+            "data-type": "json",
+            "data-id_key": "id",
+            "data-parent_key": "parent",
+            "data-label_key": "label",
+            "data-size_key": "size",
+            "legend-title": "Hierarchy",
+            "tooltip": "{{label}}: {{size}}",
+            "togostanza-menu_placement": "none",
+            "event-outgoing_change_selected_nodes": "",
+            "event-incoming_change_selected_nodes": ""
+          },
+          "cssVariables": {
+            "--togostanza-canvas-width": 400,
+            "--togostanza-canvas-height": 400
+          }
+        },
+        {
+          "title": "Treemap",
+          "scriptSrc": "treemap.js",
+          "tag": "togostanza-treemap",
+          "attributes": {
+            "data-url": "",
+            "data-type": "json",
+            "data-id_key": "id",
+            "data-parent_key": "parent",
+            "data-label_key": "label",
+            "data-size_key": "size",
+            "legend-title": "Size Distribution",
+            "tooltip": "{{label}}: {{size}}",
+            "togostanza-menu_placement": "none",
+            "event-outgoing_change_selected_nodes": "",
+            "event-incoming_change_selected_nodes": ""
+          },
+          "cssVariables": {
+            "--togostanza-canvas-width": 500,
+            "--togostanza-canvas-height": 300
+          }
+        }
+      ]
+    },
+    "graph": {
+      "label": "Graph Data",
+      "description": "Network and relationship visualization",
+      "dataSource": {
+        "url": "./graph-data.json",
+        "receiver": "togostanza-force-graph, togostanza-chord-diagram"
+      },
+      "stanzas": [
+        {
+          "title": "Force Graph",
+          "scriptSrc": "force-graph.js",
+          "tag": "togostanza-force-graph",
+          "attributes": {
+            "data-url": "",
+            "data-type": "json",
+            "node-id_key": "id",
+            "node-label_key": "name",
+            "node-size_key": "value",
+            "link-source_key": "source",
+            "link-target_key": "target",
+            "tooltip": "{{name}}: {{value}}",
+            "togostanza-menu_placement": "none",
+            "event-outgoing_change_selected_nodes": "",
+            "event-incoming_change_selected_nodes": ""
+          },
+          "cssVariables": {
+            "--togostanza-canvas-width": 600,
+            "--togostanza-canvas-height": 400
+          }
+        }
+      ]
+    },
+    "set": {
+      "label": "Set Data",
+      "description": "Set relationships and intersections",
+      "dataSource": {
+        "url": "./set-data.json",
+        "receiver": "togostanza-venn-diagram, togostanza-upset-plot"
+      },
+      "stanzas": [
+        {
+          "title": "Venn Diagram",
+          "scriptSrc": "venn-diagram.js",
+          "tag": "togostanza-venn-diagram",
+          "attributes": {
+            "data-url": "",
+            "data-type": "json",
+            "set-id_key": "id",
+            "set-label_key": "label",
+            "set-size_key": "size",
+            "tooltip": "{{label}}: {{size}} items",
+            "togostanza-menu_placement": "none",
+            "event-outgoing_change_selected_nodes": "",
+            "event-incoming_change_selected_nodes": ""
+          },
+          "cssVariables": {
+            "--togostanza-canvas-width": 400,
+            "--togostanza-canvas-height": 300
+          }
+        }
+      ]
+    }
+  }
+}
