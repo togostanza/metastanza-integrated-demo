@@ -68,6 +68,9 @@ function setupGlobalNavigation() {
     });
   });
 
+  // コンソール開閉機能を設定
+  setupConsoleToggle();
+
   // 初期状態を設定
   updateGlobalNavigationState(currentDataType);
 }
@@ -83,6 +86,49 @@ function updateGlobalNavigationState(dataType) {
 
   // body の data-page 属性も更新
   document.body.setAttribute("data-page", dataType);
+}
+
+/**
+ * コンソール開閉機能の設定
+ */
+function setupConsoleToggle() {
+  const toggleButton = document.querySelector(".consolecollapse > button");
+  const tabContainer = document.querySelector(".console.tab-container");
+
+  if (!toggleButton || !tabContainer) {
+    console.warn("Console toggle elements not found");
+    return;
+  }
+
+  toggleButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    toggleConsole();
+  });
+}/**
+ * コンソール開閉の切り替え
+ */
+function toggleConsole() {
+  const body = document.body;
+  const toggleButton = document.querySelector(".consolecollapse > button");
+  const icon = toggleButton?.querySelector(".material-symbols-outlined");
+
+  if (!toggleButton || !icon) return;
+
+  const isCollapsed = body.classList.contains("-console-collapsed");
+
+  if (isCollapsed) {
+    // 開く
+    body.classList.remove("-console-collapsed");
+    toggleButton.setAttribute("aria-expanded", "true");
+    toggleButton.setAttribute("title", "Close Console");
+    icon.textContent = "keyboard_arrow_right";
+  } else {
+    // 閉じる
+    body.classList.add("-console-collapsed");
+    toggleButton.setAttribute("aria-expanded", "false");
+    toggleButton.setAttribute("title", "Open Console");
+    icon.textContent = "keyboard_arrow_left";
+  }
 }
 
 /**

@@ -5,6 +5,11 @@
  */
 
 .tab-container {
+  width: var(--width-console);
+  min-width: 0;
+  transition: width 0.3s ease, opacity 0.3s ease;
+  overflow: hidden;
+
   > .tabs {
     display: flex;
     position: sticky;

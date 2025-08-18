@@ -24,15 +24,7 @@
   
 }
 
-html {
-  /* MetaStanza Theme Colors */
-  /* --togostanza-theme-series_0_color: #6590e6;
-  --togostanza-theme-series_1_color: #3ac9b6;
-  --togostanza-theme-series_2_color: #9ede2f;
-  --togostanza-theme-series_3_color: #f5da64;
-  --togostanza-theme-series_4_color: #f57f5b;
-  --togostanza-theme-series_5_color: #f75976;
-  --togostanza-theme-background_color: #ecefef;
-  --togostanza-theme-text_color: #000000;
-  --togostanza-theme-border_color: #000000; */
+/* コンソール閉じた状態 */
+body.-console-collapsed {
+  --width-console: 0px;
 }
