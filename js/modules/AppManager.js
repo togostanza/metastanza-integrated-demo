@@ -227,8 +227,54 @@ export default class AppManager {
             const res = await fetch(url);
             if (!res.ok) throw new Error("取得失敗");
             const metadata = await res.json();
-            console.log(metadata); // 必要に応じて表示や処理
-            // 例: alert(JSON.stringify(metadata, null, 2));
+            // #StanzaPramasTabにフォーム形式で表示
+            const tab = document.getElementById("StanzaPramasTab");
+            if (!tab) return;
+            tab.innerHTML = "";
+            // stanza:parameter
+            if (metadata["stanza:parameter"]) {
+              const paramSection = document.createElement("section");
+              paramSection.innerHTML = `<h4>Parameters</h4>`;
+              const paramForm = document.createElement("form");
+              Object.entries(metadata["stanza:parameter"]).forEach(
+                ([key, value]) => {
+                  const label = document.createElement("label");
+                  label.textContent = key;
+                  label.style.display = "block";
+                  const input = document.createElement("input");
+                  input.type = "text";
+                  input.name = key;
+                  input.value = value.default ?? "";
+                  input.placeholder = value.description ?? "";
+                  label.appendChild(input);
+                  paramForm.appendChild(label);
+                }
+              );
+              paramSection.appendChild(paramForm);
+              tab.appendChild(paramSection);
+            }
+            // stanza:style
+            if (metadata["stanza:style"]) {
+              const styleSection = document.createElement("section");
+              styleSection.innerHTML = `<h4>Styles</h4>`;
+              const styleForm = document.createElement("form");
+              Object.entries(metadata["stanza:style"]).forEach(
+                ([key, value]) => {
+                  const label = document.createElement("label");
+                  label.textContent = key;
+                  label.style.display = "block";
+                  const input = document.createElement("input");
+                  input.type = "text";
+                  input.name = key;
+                  input.value = value.default ?? "";
+                  input.placeholder = value.description ?? "";
+                  label.appendChild(input);
+                  styleForm.appendChild(label);
+                }
+              );
+              styleSection.appendChild(styleForm);
+              tab.appendChild(styleSection);
+            }
           } catch (err) {
             console.error("metadata.json取得エラー:", err);
           }
