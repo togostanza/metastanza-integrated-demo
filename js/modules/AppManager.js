@@ -19,7 +19,8 @@ export default class AppManager {
     this.baseURL = this.isLocal
       ? "http://localhost:8080/"
       : "https://togostanza.github.io/metastanza-devel/";
-  }  /**
+  }
+  /**
    * アプリケーション初期化
    */
   async init() {
@@ -56,7 +57,6 @@ export default class AppManager {
 
       // ハッシュ変更イベントリスナーを設定
       window.addEventListener("hashchange", this.handleHashChange.bind(this));
-
     } catch (error) {
       console.error("アプリケーション初期化エラー:", error);
     }
@@ -66,9 +66,11 @@ export default class AppManager {
    * グローバルナビゲーション設定
    */
   setupGlobalNavigation() {
-    const navLinks = document.querySelectorAll(".global-navigation a[data-page]");
+    const navLinks = document.querySelectorAll(
+      ".global-navigation a[data-page]"
+    );
 
-    navLinks.forEach(link => {
+    navLinks.forEach((link) => {
       link.addEventListener("click", (e) => {
         e.preventDefault();
         const dataType = link.getAttribute("data-page");
@@ -87,9 +89,14 @@ export default class AppManager {
    * グローバルナビゲーション状態の更新
    */
   updateGlobalNavigationState(dataType) {
-    const navLinks = document.querySelectorAll(".global-navigation a[data-page]");
-    navLinks.forEach(link => {
-      link.classList.toggle("-active", link.getAttribute("data-page") === dataType);
+    const navLinks = document.querySelectorAll(
+      ".global-navigation a[data-page]"
+    );
+    navLinks.forEach((link) => {
+      link.classList.toggle(
+        "-active",
+        link.getAttribute("data-page") === dataType
+      );
     });
 
     // body の data-page 属性も更新
@@ -121,7 +128,10 @@ export default class AppManager {
     const hash = window.location.hash.replace("#", "");
     const dataType = hash || "matrix";
 
-    if (dataType !== this.currentDataType && this.appConfig.dataTypes[dataType]) {
+    if (
+      dataType !== this.currentDataType &&
+      this.appConfig.dataTypes[dataType]
+    ) {
       await this.loadDataType(dataType);
     }
   }
@@ -143,7 +153,6 @@ export default class AppManager {
       await this.loadDataTypeContent(dataType);
 
       this.currentDataType = dataType;
-
     } catch (error) {
       console.error(`データタイプ "${dataType}" の読み込みエラー:`, error);
     }
@@ -163,7 +172,7 @@ export default class AppManager {
 
     // データソース要素を削除
     const dataSources = container.querySelectorAll("togostanza--data-source");
-    dataSources.forEach(ds => ds.remove());
+    dataSources.forEach((ds) => ds.remove());
   }
 
   /**
@@ -191,7 +200,10 @@ export default class AppManager {
     // 各スタンザを追加
     config.stanzas.forEach((stanzaConfig, index) => {
       // スクリプト読み込み
-      if (stanzaConfig.scriptSrc && !this.loadedScripts.has(stanzaConfig.scriptSrc)) {
+      if (
+        stanzaConfig.scriptSrc &&
+        !this.loadedScripts.has(stanzaConfig.scriptSrc)
+      ) {
         const script = this.createScript(stanzaConfig.scriptSrc);
         container.appendChild(script);
         this.loadedScripts.add(stanzaConfig.scriptSrc);
@@ -201,10 +213,30 @@ export default class AppManager {
       if (stanzaConfig.title) {
         const stanzaWrapper = document.createElement("div");
         stanzaWrapper.classList.add("stanza");
+        if (stanzaConfig.id) {
+          stanzaWrapper.setAttribute("data-stanza-id", stanzaConfig.id);
+        }
 
         const heading = document.createElement("h3");
         heading.textContent = stanzaConfig.title;
         stanzaWrapper.appendChild(heading);
+        // h3クリックでmetadata.json取得
+        heading.addEventListener("click", async (e) => {
+          const stanzaId = stanzaWrapper.getAttribute("data-stanza-id");
+          console.log(stanzaId);
+          console.log(stanzaConfig);
+          if (!stanzaId) return;
+          const url = `https://raw.githubusercontent.com/togostanza/metastanza-devel/main/stanzas/${stanzaId}/metadata.json`;
+          try {
+            const res = await fetch(url);
+            if (!res.ok) throw new Error("取得失敗");
+            const metadata = await res.json();
+            console.log(metadata); // 必要に応じて表示や処理
+            // 例: alert(JSON.stringify(metadata, null, 2));
+          } catch (err) {
+            console.error("metadata.json取得エラー:", err);
+          }
+        });
 
         if (stanzaConfig.tag) {
           const stanza = this.createComponent(stanzaConfig);
@@ -235,7 +267,10 @@ export default class AppManager {
       };
       setEditorData();
     } catch (error) {
-      console.error(`データファイル読み込みエラー: ${config.dataSource.url}`, error);
+      console.error(
+        `データファイル読み込みエラー: ${config.dataSource.url}`,
+        error
+      );
     }
   }
 
@@ -308,7 +343,8 @@ export default class AppManager {
           btn.className = "btn";
 
           // カラースキームの背景色とフォント色を適用
-          btn.style.backgroundColor = scheme["--togostanza-theme-background_color"];
+          btn.style.backgroundColor =
+            scheme["--togostanza-theme-background_color"];
           btn.style.color = scheme["--togostanza-theme-text_color"];
           btn.style.borderColor = scheme["--togostanza-theme-border_color"];
 
