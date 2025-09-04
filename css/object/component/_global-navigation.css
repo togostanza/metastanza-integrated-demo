@@ -25,7 +25,6 @@
 
       > .material-symbols-outlined {
         width: 100%;
-        /* height: var(--height-horizontal-menu); */
         line-height: calc(var(--height-horizontal-menu) - 4px) !important;
         font-size: 20px;
         transition: transform 0.3s ease;
@@ -41,21 +40,18 @@
     line-height: var(--size);
     margin: 12px 0;
     border-radius: 6px;
-    background-color: #000C;
-    color: white;
-    pointer-events: none;
     > span {
       font-size: 16px !important;
     }
   }
 }
 
-/* [data-page="matrix"] .global-navigation > a[data-page="matrix"],
+[data-page="matrix"] .global-navigation > a[data-page="matrix"],
 [data-page="tree"] .global-navigation > a[data-page="tree"],
 [data-page="graph"] .global-navigation > a[data-page="graph"],
 [data-page="set"] .global-navigation > a[data-page="set"] {
-  background-color: black;
+  background-color: #000C;
   color: white;
   pointer-events: none;
-} */
+}
 
