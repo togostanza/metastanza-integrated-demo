@@ -227,49 +227,54 @@ export default class AppManager {
             const res = await fetch(url);
             if (!res.ok) throw new Error("取得失敗");
             const metadata = await res.json();
-            // #StanzaPramasTabにフォーム形式で表示
-            const tab = document.getElementById("StanzaPramasTab");
-            if (!tab) return;
-            tab.innerHTML = "";
+            // 既存フォームのul要素を取得
+            const paramsUl = document.querySelector(
+              "#StanzaParamsContainer ul"
+            );
+            const stylesUl = document.querySelector(
+              "#StanzaStylesContainer ul"
+            );
+            if (paramsUl) paramsUl.innerHTML = "";
+            if (stylesUl) stylesUl.innerHTML = "";
             // stanza:parameter
-            if (metadata["stanza:parameter"]) {
-              const paramSection = document.createElement("section");
-              paramSection.innerHTML = `<h4>Parameters</h4>`;
-              const paramForm = document.createElement("form");
+            if (Array.isArray(metadata["stanza:parameter"])) {
               metadata["stanza:parameter"].forEach((parameter) => {
+                const li = document.createElement("li");
                 const label = document.createElement("label");
                 label.textContent = parameter["stanza:key"];
-                label.style.display = "block";
                 const input = document.createElement("input");
                 input.type = "text";
                 input.name = parameter["stanza:key"];
-                input.value = parameter.default ?? "";
+                input.value =
+                  parameter["stanza:default"] ??
+                  parameter["stanza:example"] ??
+                  "";
                 input.placeholder = parameter["stanza:example"] ?? "";
                 label.appendChild(input);
-                paramForm.appendChild(label);
+                li.appendChild(label);
+                paramsUl.appendChild(li);
               });
-              paramSection.appendChild(paramForm);
-              tab.appendChild(paramSection);
             }
             // stanza:style
-            if (metadata["stanza:style"]) {
-              const styleSection = document.createElement("section");
-              styleSection.innerHTML = `<h4>Styles</h4>`;
-              const styleForm = document.createElement("form");
-              metadata["stanza:style"].forEach((parameter) => {
+            if (Array.isArray(metadata["stanza:style"])) {
+              metadata["stanza:style"].forEach((style) => {
+                const li = document.createElement("li");
                 const label = document.createElement("label");
-                label.textContent = parameter["stanza:key"];
-                label.style.display = "block";
+                label.textContent = style["stanza:key"];
                 const input = document.createElement("input");
-                input.type = "text";
-                input.name = parameter["stanza:key"];
-                input.value = parameter.default ?? "";
-                input.placeholder = parameter["stanza:default"] ?? "";
+                input.type =
+                  style["stanza:type"] === "color"
+                    ? "color"
+                    : style["stanza:type"] === "number"
+                    ? "number"
+                    : "text";
+                input.name = style["stanza:key"];
+                input.value = style["stanza:default"] ?? "";
+                input.placeholder = style["stanza:default"] ?? "";
                 label.appendChild(input);
-                styleForm.appendChild(label);
+                li.appendChild(label);
+                stylesUl.appendChild(li);
               });
-              styleSection.appendChild(styleForm);
-              tab.appendChild(styleSection);
             }
           } catch (err) {
             console.error("metadata.json取得エラー:", err);
