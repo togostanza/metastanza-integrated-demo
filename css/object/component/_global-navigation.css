@@ -39,18 +39,23 @@
     height: var(--size);
     text-align: center;
     line-height: var(--size);
-    font-size: 16px;
     margin: 12px 0;
-    border-radius: 4px;
+    border-radius: 6px;
+    background-color: #000C;
+    color: white;
+    pointer-events: none;
+    > span {
+      font-size: 16px !important;
+    }
   }
 }
 
-[data-page="matrix"] .global-navigation > a[data-page="matrix"],
+/* [data-page="matrix"] .global-navigation > a[data-page="matrix"],
 [data-page="tree"] .global-navigation > a[data-page="tree"],
 [data-page="graph"] .global-navigation > a[data-page="graph"],
 [data-page="set"] .global-navigation > a[data-page="set"] {
   background-color: black;
   color: white;
   pointer-events: none;
-}
+} */
 
