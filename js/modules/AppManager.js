@@ -236,20 +236,18 @@ export default class AppManager {
               const paramSection = document.createElement("section");
               paramSection.innerHTML = `<h4>Parameters</h4>`;
               const paramForm = document.createElement("form");
-              Object.entries(metadata["stanza:parameter"]).forEach(
-                ([key, value]) => {
-                  const label = document.createElement("label");
-                  label.textContent = key;
-                  label.style.display = "block";
-                  const input = document.createElement("input");
-                  input.type = "text";
-                  input.name = key;
-                  input.value = value.default ?? "";
-                  input.placeholder = value.description ?? "";
-                  label.appendChild(input);
-                  paramForm.appendChild(label);
-                }
-              );
+              metadata["stanza:parameter"].forEach((parameter) => {
+                const label = document.createElement("label");
+                label.textContent = parameter["stanza:key"];
+                label.style.display = "block";
+                const input = document.createElement("input");
+                input.type = "text";
+                input.name = parameter["stanza:key"];
+                input.value = parameter.default ?? "";
+                input.placeholder = parameter["stanza:example"] ?? "";
+                label.appendChild(input);
+                paramForm.appendChild(label);
+              });
               paramSection.appendChild(paramForm);
               tab.appendChild(paramSection);
             }
@@ -258,20 +256,18 @@ export default class AppManager {
               const styleSection = document.createElement("section");
               styleSection.innerHTML = `<h4>Styles</h4>`;
               const styleForm = document.createElement("form");
-              Object.entries(metadata["stanza:style"]).forEach(
-                ([key, value]) => {
-                  const label = document.createElement("label");
-                  label.textContent = key;
-                  label.style.display = "block";
-                  const input = document.createElement("input");
-                  input.type = "text";
-                  input.name = key;
-                  input.value = value.default ?? "";
-                  input.placeholder = value.description ?? "";
-                  label.appendChild(input);
-                  styleForm.appendChild(label);
-                }
-              );
+              metadata["stanza:style"].forEach((parameter) => {
+                const label = document.createElement("label");
+                label.textContent = parameter["stanza:key"];
+                label.style.display = "block";
+                const input = document.createElement("input");
+                input.type = "text";
+                input.name = parameter["stanza:key"];
+                input.value = parameter.default ?? "";
+                input.placeholder = parameter["stanza:default"] ?? "";
+                label.appendChild(input);
+                styleForm.appendChild(label);
+              });
               styleSection.appendChild(styleForm);
               tab.appendChild(styleSection);
             }
