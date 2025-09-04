@@ -199,32 +199,28 @@ export default class AppManager {
 
     // 各スタンザを追加
     config.stanzas.forEach((stanzaConfig, index) => {
+      // idからscriptSrcとtagを自動生成
+      const stanzaId = stanzaConfig.id;
+      const scriptSrc = stanzaId ? `${stanzaId}.js` : null;
+      const tag = stanzaId ? `togostanza-${stanzaId}` : null;
+
       // スクリプト読み込み
-      if (
-        stanzaConfig.scriptSrc &&
-        !this.loadedScripts.has(stanzaConfig.scriptSrc)
-      ) {
-        const script = this.createScript(stanzaConfig.scriptSrc);
+      if (scriptSrc && !this.loadedScripts.has(scriptSrc)) {
+        const script = this.createScript(scriptSrc);
         container.appendChild(script);
-        this.loadedScripts.add(stanzaConfig.scriptSrc);
+        this.loadedScripts.add(scriptSrc);
       }
 
       // スタンザ要素作成
       if (stanzaConfig.title) {
         const stanzaWrapper = document.createElement("div");
         stanzaWrapper.classList.add("stanza");
-        if (stanzaConfig.id) {
-          stanzaWrapper.setAttribute("data-stanza-id", stanzaConfig.id);
-        }
 
         const heading = document.createElement("h3");
         heading.textContent = stanzaConfig.title;
         stanzaWrapper.appendChild(heading);
         // h3クリックでmetadata.json取得
         heading.addEventListener("click", async (e) => {
-          const stanzaId = stanzaWrapper.getAttribute("data-stanza-id");
-          console.log(stanzaId);
-          console.log(stanzaConfig);
           if (!stanzaId) return;
           const url = `https://raw.githubusercontent.com/togostanza/metastanza-devel/main/stanzas/${stanzaId}/metadata.json`;
           try {
@@ -238,14 +234,22 @@ export default class AppManager {
           }
         });
 
-        if (stanzaConfig.tag) {
-          const stanza = this.createComponent(stanzaConfig);
+        // tagからスタンザ要素生成
+        if (tag) {
+          // createComponentにtagを渡す
+          const stanza = this.createComponent({
+            ...stanzaConfig,
+            tag,
+          });
           stanzaWrapper.appendChild(stanza);
         }
 
         stanzasContainer.appendChild(stanzaWrapper);
-      } else if (stanzaConfig.tag) {
-        const stanza = this.createComponent(stanzaConfig);
+      } else if (tag) {
+        const stanza = this.createComponent({
+          ...stanzaConfig,
+          tag,
+        });
         stanzasContainer.appendChild(stanza);
       }
     });

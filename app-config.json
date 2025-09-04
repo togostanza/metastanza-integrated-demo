@@ -10,8 +10,7 @@
       "stanzas": [
         {
           "title": "Pie chart",
-          "scriptSrc": "piechart.js",
-          "tag": "togostanza-piechart",
+          "id": "piechart",
           "attributes": {
             "data-url": "",
             "data-type": "json",
@@ -32,8 +31,7 @@
         },
         {
           "title": "Scatter plot",
-          "scriptSrc": "scatter-plot.js",
-          "tag": "togostanza-scatter-plot",
+          "id": "scatter-plot",
           "attributes": {
             "data-url": "",
             "data-type": "json",
@@ -71,8 +69,7 @@
         },
         {
           "title": "Bar chart",
-          "scriptSrc": "barchart.js",
-          "tag": "togostanza-barchart",
+          "id": "barchart",
           "attributes": {
             "data-url": "",
             "data-type": "json",
@@ -104,8 +101,7 @@
         },
         {
           "title": "Line chart",
-          "scriptSrc": "linechart.js",
-          "tag": "togostanza-linechart",
+          "id": "linechart",
           "attributes": {
             "data-url": "",
             "data-type": "json",
@@ -136,8 +132,7 @@
         },
         {
           "title": "Histogram",
-          "scriptSrc": "histogram.js",
-          "tag": "togostanza-histogram",
+          "id": "histogram",
           "attributes": {
             "data-url": "",
             "data-type": "json",
@@ -168,8 +163,7 @@
         },
         {
           "title": "Heatmap",
-          "scriptSrc": "heatmap.js",
-          "tag": "togostanza-heatmap",
+          "id": "heatmap",
           "attributes": {
             "data-url": "",
             "data-type": "json",
@@ -199,8 +193,7 @@
         },
         {
           "title": "Pagination table",
-          "scriptSrc": "pagination-table.js",
-          "tag": "togostanza-pagination-table",
+          "id": "pagination-table",
           "attributes": {
             "data-url": "",
             "data-type": "json",
@@ -228,8 +221,7 @@
       "stanzas": [
         {
           "title": "Column tree",
-          "scriptSrc": "column-tree.js",
-          "tag": "togostanza-column-tree",
+          "id": "column-tree",
           "attributes": {
             "data-url": "",
             "data-type": "json",
@@ -247,8 +239,7 @@
         },
         {
           "title": "Tree",
-          "scriptSrc": "tree.js",
-          "tag": "togostanza-tree",
+          "id": "tree",
           "attributes": {
             "data-url": "",
             "data-type": "json",
@@ -273,8 +264,7 @@
         },
         {
           "title": "Sunburst",
-          "scriptSrc": "sunburst.js",
-          "tag": "togostanza-sunburst",
+          "id": "sunburst",
           "attributes": {
             "data-url": "",
             "data-type": "json",
@@ -296,8 +286,7 @@
         },
         {
           "title": "Treemap",
-          "scriptSrc": "treemap.js",
-          "tag": "togostanza-treemap",
+          "id": "treemap",
           "attributes": {
             "data-url": "",
             "data-type": "json",
@@ -324,8 +313,7 @@
       "stanzas": [
         {
           "title": "Chord diagram",
-          "scriptSrc": "chord-diagram.js",
-          "tag": "togostanza-chord-diagram",
+          "id": "chord-diagram",
           "attributes": {
             "data-url": "",
             "data-type": "json",
@@ -351,8 +339,7 @@
         },
         {
           "title": "Force Graph",
-          "scriptSrc": "force-graph.js",
-          "tag": "togostanza-force-graph",
+          "id": "force-graph",
           "attributes": {
             "data-url": "",
             "data-type": "json",
@@ -382,8 +369,7 @@
         },
         {
           "title": "Layered graph",
-          "scriptSrc": "layered-graph.js",
-          "tag": "togostanza-layered-graph",
+          "id": "layered-graph",
           "attributes": {
             "data-url": "",
             "data-type": "json",
@@ -423,8 +409,7 @@
       "stanzas": [
         {
           "title": "Venn Diagram",
-          "scriptSrc": "venn-diagram.js",
-          "tag": "togostanza-venn-diagram",
+          "id": "venn-diagram",
           "attributes": {
             "data-url": "",
             "data-type": "json",
