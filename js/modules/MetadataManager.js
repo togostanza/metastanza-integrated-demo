@@ -87,6 +87,11 @@ export default class MetadataManager {
     input.value = this.getCurrentParameterValue(parameter["stanza:key"], stanzaId);
     input.placeholder = parameter["stanza:default"] ?? parameter["stanza:example"] ?? "";
 
+    // フォーカスが外れた時に値をスタンザに適用
+    input.addEventListener("blur", () => {
+      this.applyParameterToStanza(parameter["stanza:key"], input.value, stanzaId);
+    });
+
     label.appendChild(input);
     li.appendChild(label);
     return li;
@@ -105,6 +110,11 @@ export default class MetadataManager {
     input.name = style["stanza:key"];
     input.value = this.getCurrentStyleValue(style["stanza:key"], stanzaId);
     input.placeholder = style["stanza:default"] ?? "";
+
+    // フォーカスが外れた時に値をスタンザに適用
+    input.addEventListener("blur", () => {
+      this.applyStyleToStanza(style["stanza:key"], input.value, stanzaId);
+    });
 
     label.appendChild(input);
     li.appendChild(label);
@@ -156,5 +166,38 @@ export default class MetadataManager {
     
     // CSS変数が見つからない場合、data属性から取得を試行
     return stanzaElement.getAttribute(`data-${styleKey}`) || "";
+  }
+
+  /**
+   * パラメータ値をスタンザに適用
+   */
+  applyParameterToStanza(paramKey, value, stanzaId) {
+    if (!stanzaId) return;
+    
+    const stanzaElement = document.querySelector(`togostanza-${stanzaId}`);
+    if (!stanzaElement) return;
+    
+    if (value === "") {
+      stanzaElement.removeAttribute(paramKey);
+    } else {
+      stanzaElement.setAttribute(paramKey, value);
+    }
+  }
+
+  /**
+   * スタイル値をスタンザに適用
+   */
+  applyStyleToStanza(styleKey, value, stanzaId) {
+    if (!stanzaId) return;
+    
+    const stanzaElement = document.querySelector(`togostanza-${stanzaId}`);
+    if (!stanzaElement) return;
+    
+    // CSS変数として設定
+    if (value === "") {
+      stanzaElement.style.removeProperty(`--${styleKey}`);
+    } else {
+      stanzaElement.style.setProperty(`--${styleKey}`, value);
+    }
   }
 }
