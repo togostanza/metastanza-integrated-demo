@@ -81,8 +81,58 @@ export default class MetadataManager {
     const label = document.createElement("label");
     label.innerHTML = `<span>${parameter["stanza:key"]}</span>`;
 
+    let inputElement;
+
+    // single-choiceタイプの場合はselect要素を作成
+    if (parameter["stanza:type"] === "single-choice" && parameter["stanza:choice"]) {
+      inputElement = this.createSelectElement(parameter, stanzaId);
+    } else {
+      inputElement = this.createInputElement(parameter, stanzaId);
+    }
+
+    label.appendChild(inputElement);
+    li.appendChild(label);
+    return li;
+  }
+
+  /**
+   * select要素を作成（single-choice用）
+   */
+  createSelectElement(parameter, stanzaId) {
+    const select = document.createElement("select");
+    select.name = parameter["stanza:key"];
+
+    const currentValue = this.getCurrentParameterValue(parameter["stanza:key"], stanzaId);
+    const defaultValue = parameter["stanza:default"] ?? parameter["stanza:example"] ?? "";
+
+    // 選択肢を追加
+    parameter["stanza:choice"].forEach(choice => {
+      const option = document.createElement("option");
+      option.value = choice;
+      option.textContent = choice;
+
+      // 現在値または初期値に一致する場合は選択状態にする
+      if (choice === currentValue || (currentValue === "" && choice === defaultValue)) {
+        option.selected = true;
+      }
+
+      select.appendChild(option);
+    });
+
+    // 値変更時にスタンザに適用
+    select.addEventListener("change", () => {
+      this.applyParameterToStanza(parameter["stanza:key"], select.value, stanzaId);
+    });
+
+    return select;
+  }
+
+  /**
+   * input要素を作成（通常のパラメータ用）
+   */
+  createInputElement(parameter, stanzaId) {
     const input = document.createElement("input");
-    input.type = "text";
+    input.type = this.getInputTypeForParameter(parameter["stanza:type"]);
     input.name = parameter["stanza:key"];
     input.value = this.getCurrentParameterValue(parameter["stanza:key"], stanzaId);
     input.placeholder = parameter["stanza:default"] ?? parameter["stanza:example"] ?? "";
@@ -92,9 +142,7 @@ export default class MetadataManager {
       this.applyParameterToStanza(parameter["stanza:key"], input.value, stanzaId);
     });
 
-    label.appendChild(input);
-    li.appendChild(label);
-    return li;
+    return input;
   }
 
   /**
@@ -136,14 +184,30 @@ export default class MetadataManager {
   }
 
   /**
+   * パラメータタイプに応じた入力タイプを取得
+   */
+  getInputTypeForParameter(stanzaType) {
+    switch (stanzaType) {
+      case "number":
+        return "number";
+      case "boolean":
+        return "checkbox";
+      case "text":
+        return "text";
+      default:
+        return "text";
+    }
+  }
+
+  /**
    * 現在のパラメータ値を取得
    */
   getCurrentParameterValue(paramKey, stanzaId) {
     if (!stanzaId) return "";
-    
+
     const stanzaElement = document.querySelector(`togostanza-${stanzaId}`);
     if (!stanzaElement) return "";
-    
+
     return stanzaElement.getAttribute(paramKey) || "";
   }
 
@@ -152,10 +216,10 @@ export default class MetadataManager {
    */
   getCurrentStyleValue(styleKey, stanzaId) {
     if (!stanzaId) return "";
-    
+
     const stanzaElement = document.querySelector(`togostanza-${stanzaId}`);
     if (!stanzaElement) return "";
-    
+
     // CSS変数として設定されているスタイル値を取得
     const shadowRoot = stanzaElement.shadowRoot;
     if (shadowRoot) {
@@ -163,7 +227,7 @@ export default class MetadataManager {
       const cssVarValue = computedStyle.getPropertyValue(`--${styleKey}`);
       if (cssVarValue) return cssVarValue.trim();
     }
-    
+
     // CSS変数が見つからない場合、data属性から取得を試行
     return stanzaElement.getAttribute(`data-${styleKey}`) || "";
   }
@@ -173,10 +237,10 @@ export default class MetadataManager {
    */
   applyParameterToStanza(paramKey, value, stanzaId) {
     if (!stanzaId) return;
-    
+
     const stanzaElement = document.querySelector(`togostanza-${stanzaId}`);
     if (!stanzaElement) return;
-    
+
     if (value === "") {
       stanzaElement.removeAttribute(paramKey);
     } else {
@@ -189,10 +253,10 @@ export default class MetadataManager {
    */
   applyStyleToStanza(styleKey, value, stanzaId) {
     if (!stanzaId) return;
-    
+
     const stanzaElement = document.querySelector(`togostanza-${stanzaId}`);
     if (!stanzaElement) return;
-    
+
     // CSS変数として設定
     if (value === "") {
       stanzaElement.style.removeProperty(`--${styleKey}`);
