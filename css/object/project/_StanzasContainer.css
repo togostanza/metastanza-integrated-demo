@@ -1,5 +1,4 @@
 #StanzasContainer {
-  /* background-color: #eee; */
   --padding: 4px;
   padding: 0 var(--padding) var(--padding);
 

@@ -29,29 +29,9 @@
 @import url("object/project/_AppRoot.css") layer(project);
 @import url("object/project/_CodeMirror.css") layer(project);
 @import url("object/project/_ColorScheme.css") layer(project);
+@import url("object/project/_StanzaPramasTab.css") layer(project);
 @import url("object/project/_StanzasContainer.css") layer(project);
 
 /* Utility Layer - ユーティリティクラス（最優先） */
-@import url("object/utility/_text.css") layer(utility);
-@import url("object/utility/_spacing.css") layer(utility);
-
-/**
- * CSS Layersの動作説明:
- * 
- * 1. レイヤー内での優先順位は通常のCSSルール（詳細度、記述順）
- * 2. レイヤー間では宣言順が優先（後のレイヤーが勝つ）
- * 3. !importantを使った場合でも、レイヤーの順序が優先される
- * 
- * 例：
- * @layer base, utilities;
- * 
- * @layer base {
- *   .text { color: red !important; }  // 詳細度: 0,0,1,0 + !important
- * }
- * 
- * @layer utilities {
- *   .text { color: blue; }            // 詳細度: 0,0,1,0
- * }
- * 
- * 結果: blue が勝つ（utilitiesレイヤーが後だから）
- */
+/* @import url("object/utility/_text.css") layer(utility);
+@import url("object/utility/_spacing.css") layer(utility); */
