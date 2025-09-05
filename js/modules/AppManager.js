@@ -1,3 +1,6 @@
+import ContentManager from './ContentManager.js';
+import ColorSchemeManager from './ColorSchemeManager.js';
+
 /**
  * AppManager - アプリケーション全体の管理を行うクラス
  * SPA機能、データタイプの切り替え、設定の読み込みなどを担当
@@ -12,13 +15,16 @@ export default class AppManager {
     // SPA状態管理
     this.currentDataType = "matrix"; // デフォルトは matrix
     this.appConfig = null;
-    this.loadedScripts = new Set(); // 読み込み済みスクリプトの管理
 
     // URL設定
     this.isLocal = location.hostname === "localhost";
     this.baseURL = this.isLocal
       ? "http://localhost:8080/"
       : "https://togostanza.github.io/metastanza-devel/";
+
+    // ContentManagerは設定読み込み後に初期化
+    this.contentManager = null;
+    this.colorSchemeManager = new ColorSchemeManager(editorManager);
   }
   /**
    * アプリケーション初期化
@@ -35,6 +41,9 @@ export default class AppManager {
       const response = await fetch("./app-config.json");
       this.appConfig = await response.json();
 
+      // ContentManagerを初期化
+      this.contentManager = new ContentManager(this.appConfig, this.baseURL);
+
       // URL から初期データタイプを取得
       const hash = window.location.hash.replace("#", "");
       if (hash && this.appConfig.dataTypes[hash]) {
@@ -46,7 +55,7 @@ export default class AppManager {
 
       // エディタとタブを初期化（データ読み込み前に実行）
       this.editorManager.init();
-      this.initColorSchemeButtons();
+      this.colorSchemeManager.initColorSchemeButtons();
       this.tabManager.init();
 
       // 初期ページを読み込み
@@ -147,287 +156,14 @@ export default class AppManager {
       this.updateGlobalNavigationState(dataType);
 
       // 既存のコンテンツをクリア
-      this.clearCurrentContent();
+      this.contentManager.clearCurrentContent();
 
       // 新しいコンテンツを読み込み
-      await this.loadDataTypeContent(dataType);
+      await this.contentManager.loadDataTypeContent(dataType, this.editorManager);
 
       this.currentDataType = dataType;
     } catch (error) {
       console.error(`データタイプ "${dataType}" の読み込みエラー:`, error);
     }
-  }
-
-  /**
-   * 現在のコンテンツをクリア
-   */
-  clearCurrentContent() {
-    const container = document.querySelector("togostanza--container");
-
-    // Stanzas Container を削除
-    const stanzasContainer = document.getElementById("StanzasContainer");
-    if (stanzasContainer) {
-      stanzasContainer.remove();
-    }
-
-    // データソース要素を削除
-    const dataSources = container.querySelectorAll("togostanza--data-source");
-    dataSources.forEach((ds) => ds.remove());
-  }
-
-  /**
-   * データタイプのコンテンツを読み込み
-   */
-  async loadDataTypeContent(dataType) {
-    const config = this.appConfig.dataTypes[dataType];
-    const container = document.querySelector("togostanza--container");
-
-    // データソースを追加
-    const dataSource = this.createDataSource(config.dataSource);
-    container.appendChild(dataSource);
-
-    // Stanzas Container を作成
-    const stanzasContainer = document.createElement("div");
-    stanzasContainer.id = "StanzasContainer";
-
-    // 見出しを追加
-    const stanzasHeading = document.createElement("h2");
-    stanzasHeading.textContent = "Stanzas";
-    stanzasContainer.appendChild(stanzasHeading);
-
-    container.appendChild(stanzasContainer);
-
-    // 各スタンザを追加
-    config.stanzas.forEach((stanzaConfig, index) => {
-      // idからscriptSrcとtagを自動生成
-      const stanzaId = stanzaConfig.id;
-      const scriptSrc = stanzaId ? `${stanzaId}.js` : null;
-      const tag = stanzaId ? `togostanza-${stanzaId}` : null;
-
-      // スクリプト読み込み
-      if (scriptSrc && !this.loadedScripts.has(scriptSrc)) {
-        const script = this.createScript(scriptSrc);
-        container.appendChild(script);
-        this.loadedScripts.add(scriptSrc);
-      }
-
-      // スタンザ要素作成
-      if (stanzaConfig.title) {
-        const stanzaWrapper = document.createElement("div");
-        stanzaWrapper.classList.add("stanza");
-
-        const heading = document.createElement("h3");
-        heading.textContent = stanzaConfig.title;
-        stanzaWrapper.appendChild(heading);
-        // h3クリックでmetadata.json取得
-        heading.addEventListener("click", async (e) => {
-          if (!stanzaId) return;
-          const url = `https://raw.githubusercontent.com/togostanza/metastanza-devel/main/stanzas/${stanzaId}/metadata.json`;
-          try {
-            const res = await fetch(url);
-            if (!res.ok) throw new Error("取得失敗");
-            const metadata = await res.json();
-            // 既存フォームのul要素を取得
-            const paramsUl = document.querySelector(
-              "#StanzaParamsContainer ul"
-            );
-            const stylesUl = document.querySelector(
-              "#StanzaStylesContainer ul"
-            );
-            if (paramsUl) paramsUl.innerHTML = "";
-            if (stylesUl) stylesUl.innerHTML = "";
-            // stanza:parameter
-            if (Array.isArray(metadata["stanza:parameter"])) {
-              metadata["stanza:parameter"].forEach((parameter) => {
-                const li = document.createElement("li");
-                const label = document.createElement("label");
-                label.textContent = parameter["stanza:key"];
-                const input = document.createElement("input");
-                input.type = "text";
-                input.name = parameter["stanza:key"];
-                input.value =
-                  parameter["stanza:default"] ??
-                  parameter["stanza:example"] ??
-                  "";
-                input.placeholder = parameter["stanza:example"] ?? "";
-                label.appendChild(input);
-                li.appendChild(label);
-                paramsUl.appendChild(li);
-              });
-            }
-            // stanza:style
-            if (Array.isArray(metadata["stanza:style"])) {
-              metadata["stanza:style"].forEach((style) => {
-                const li = document.createElement("li");
-                const label = document.createElement("label");
-                label.textContent = style["stanza:key"];
-                const input = document.createElement("input");
-                input.type =
-                  style["stanza:type"] === "color"
-                    ? "color"
-                    : style["stanza:type"] === "number"
-                    ? "number"
-                    : "text";
-                input.name = style["stanza:key"];
-                input.value = style["stanza:default"] ?? "";
-                input.placeholder = style["stanza:default"] ?? "";
-                label.appendChild(input);
-                li.appendChild(label);
-                stylesUl.appendChild(li);
-              });
-            }
-          } catch (err) {
-            console.error("metadata.json取得エラー:", err);
-          }
-        });
-
-        // tagからスタンザ要素生成
-        if (tag) {
-          // createComponentにtagを渡す
-          const stanza = this.createComponent({
-            ...stanzaConfig,
-            tag,
-          });
-          stanzaWrapper.appendChild(stanza);
-        }
-
-        stanzasContainer.appendChild(stanzaWrapper);
-      } else if (tag) {
-        const stanza = this.createComponent({
-          ...stanzaConfig,
-          tag,
-        });
-        stanzasContainer.appendChild(stanza);
-      }
-    });
-
-    // データファイルを読み込んでエディタに設定
-    try {
-      const dataResponse = await fetch(config.dataSource.url);
-      const dataText = await dataResponse.text();
-
-      // エディタが初期化されるまで待機してからデータを設定
-      const setEditorData = () => {
-        if (this.editorManager.inputEditor) {
-          this.editorManager.setDataValue(dataText);
-          this.editorManager.updateStanzasData(dataText);
-        } else {
-          // エディタがまだ初期化されていない場合、少し待ってから再試行
-          setTimeout(setEditorData, 100);
-        }
-      };
-      setEditorData();
-    } catch (error) {
-      console.error(
-        `データファイル読み込みエラー: ${config.dataSource.url}`,
-        error
-      );
-    }
-  }
-
-  /**
-   * データソース要素を作成
-   */
-  createDataSource(dataSourceConfig) {
-    const elem = document.createElement("togostanza--data-source");
-    elem.setAttribute("url", dataSourceConfig.url);
-    elem.setAttribute("receiver", dataSourceConfig.receiver);
-    elem.setAttribute("target-attribute", "data-url");
-    return elem;
-  }
-
-  /**
-   * スクリプト要素を生成
-   */
-  createScript(src) {
-    console.log(`Creating script with src: ${this.baseURL + src}`);
-    const script = document.createElement("script");
-    script.type = "module";
-    script.src = this.baseURL + src;
-    script.async = true;
-    return script;
-  }
-
-  /**
-   * コンポーネント要素を生成
-   */
-  createComponent(item) {
-    const elem = document.createElement(item.tag);
-
-    if (item.attributes) {
-      Object.keys(item.attributes).forEach((key) => {
-        elem.setAttribute(key, item.attributes[key]);
-      });
-    }
-
-    if (item.cssVariables) {
-      // CSS変数を要素のstyle属性に直接設定
-      Object.keys(item.cssVariables).forEach((varName) => {
-        let value = item.cssVariables[varName];
-        elem.style.setProperty(varName, value);
-      });
-    }
-
-    return elem;
-  }
-
-  /**
-   * color-schemes.json を読み込み、カラースキーマサンプルボタンを生成する
-   */
-  initColorSchemeButtons() {
-    fetch("./color-schemes.json")
-      .then((response) => response.json())
-      .then((colorSchemes) => {
-        const styleTab = document.getElementById("ColorSchemeEditorTab");
-        if (!styleTab) return;
-
-        const schemeContainer = document.createElement("div");
-        schemeContainer.id = "ColorSchemes";
-
-        // 見出しを追加
-        const heading = document.createElement("h3");
-        heading.textContent = "Sample color schemes";
-        schemeContainer.appendChild(heading);
-
-        colorSchemes.forEach((scheme) => {
-          const btn = document.createElement("button");
-          btn.className = "btn";
-
-          // カラースキームの背景色とフォント色を適用
-          btn.style.backgroundColor =
-            scheme["--togostanza-theme-background_color"];
-          btn.style.color = scheme["--togostanza-theme-text_color"];
-          btn.style.borderColor = scheme["--togostanza-theme-border_color"];
-
-          // 表示用のラベル
-          const label = document.createElement("label");
-          label.textContent = scheme.name;
-          btn.appendChild(label);
-
-          const sampleContainer = document.createElement("div");
-          sampleContainer.className = "sample";
-          sampleContainer.style.backgroundColor =
-            scheme["--togostanza-theme-background_color"];
-          for (let i = 0; i < 6; i++) {
-            const colorKey = `--togostanza-theme-series_${i}_color`;
-            const box = document.createElement("div");
-            box.className = "box";
-            box.style.backgroundColor = scheme[colorKey];
-            sampleContainer.appendChild(box);
-          }
-          btn.appendChild(sampleContainer);
-
-          btn.addEventListener("click", () => {
-            const schemeCopy = { ...scheme };
-            delete schemeCopy.name;
-            const jsonText = JSON.stringify(schemeCopy, null, 2);
-            this.editorManager.setStyleValue(jsonText);
-            this.editorManager.applyStyleFromEditor(jsonText);
-          });
-          schemeContainer.appendChild(btn);
-        });
-        styleTab.insertBefore(schemeContainer, styleTab.firstChild);
-      })
-      .catch((err) => console.error("Failed to load color schemes:", err));
   }
 }
