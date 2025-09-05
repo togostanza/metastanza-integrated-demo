@@ -1,3 +1,5 @@
+import MetadataManager from './MetadataManager.js';
+
 /**
  * ContentManager - コンテンツとスタンザの管理を行うクラス
  * DOM要素の生成、スクリプト読み込み、スタンザ作成を担当
@@ -7,6 +9,7 @@ export default class ContentManager {
     this.appConfig = appConfig;
     this.baseURL = baseURL;
     this.loadedScripts = new Set(); // 読み込み済みスクリプトの管理
+    this.metadataManager = new MetadataManager();
   }
 
   /**
@@ -82,9 +85,8 @@ export default class ContentManager {
       heading.textContent = stanzaConfig.title;
       stanzaWrapper.appendChild(heading);
 
-      // メタデータ取得処理は MetadataManager に委譲する予定
-      // TODO: MetadataManager への移行
-      this.addMetadataClickHandler(heading, stanzaId);
+      // メタデータ取得処理は MetadataManager に委譲
+      this.metadataManager.addMetadataClickHandler(heading, stanzaId);
 
       // tagからスタンザ要素生成
       if (tag) {
@@ -103,73 +105,6 @@ export default class ContentManager {
       });
       stanzasContainer.appendChild(stanza);
     }
-  }
-
-  /**
-   * メタデータクリックハンドラーを追加（後でMetadataManagerに移行予定）
-   */
-  addMetadataClickHandler(heading, stanzaId) {
-    heading.addEventListener("click", async (e) => {
-      if (!stanzaId) return;
-      const url = `https://raw.githubusercontent.com/togostanza/metastanza-devel/main/stanzas/${stanzaId}/metadata.json`;
-      try {
-        const res = await fetch(url);
-        if (!res.ok) throw new Error("取得失敗");
-        const metadata = await res.json();
-
-        // 既存フォームのul要素を取得
-        const paramsUl = document.querySelector("#StanzaParamsContainer ul");
-        const stylesUl = document.querySelector("#StanzaStylesContainer ul");
-        if (paramsUl) paramsUl.innerHTML = "";
-        if (stylesUl) stylesUl.innerHTML = "";
-
-        // stanza:parameter
-        if (Array.isArray(metadata["stanza:parameter"])) {
-          metadata["stanza:parameter"].forEach((parameter) => {
-            const key = parameter["stanza:key"];
-            if (key === "data-url" || key === "data-type") return;
-            const li = document.createElement("li");
-            const label = document.createElement("label");
-            label.innerHTML = `<span>${parameter["stanza:key"]}</span>`;
-            const input = document.createElement("input");
-            input.type = "text";
-            input.name = parameter["stanza:key"];
-            input.value =
-              parameter["stanza:default"] ??
-              parameter["stanza:example"] ??
-              "";
-            input.placeholder = parameter["stanza:example"] ?? "";
-            label.appendChild(input);
-            li.appendChild(label);
-            paramsUl.appendChild(li);
-          });
-        }
-
-        // stanza:style
-        if (Array.isArray(metadata["stanza:style"])) {
-          metadata["stanza:style"].forEach((style) => {
-            const li = document.createElement("li");
-            const label = document.createElement("label");
-            label.innerHTML = `<span>${style["stanza:key"]}</span>`;
-            const input = document.createElement("input");
-            input.type =
-              style["stanza:type"] === "color"
-                ? "color"
-                : style["stanza:type"] === "number"
-                  ? "number"
-                  : "text";
-            input.name = style["stanza:key"];
-            input.value = style["stanza:default"] ?? "";
-            input.placeholder = style["stanza:default"] ?? "";
-            label.appendChild(input);
-            li.appendChild(label);
-            stylesUl.appendChild(li);
-          });
-        }
-      } catch (err) {
-        console.error("metadata.json取得エラー:", err);
-      }
-    });
   }
 
   /**

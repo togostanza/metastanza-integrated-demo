@@ -1,5 +1,6 @@
 import ContentManager from './ContentManager.js';
 import ColorSchemeManager from './ColorSchemeManager.js';
+import RouterManager from './RouterManager.js';
 
 /**
  * AppManager - アプリケーション全体の管理を行うクラス
@@ -22,9 +23,10 @@ export default class AppManager {
       ? "http://localhost:8080/"
       : "https://togostanza.github.io/metastanza-devel/";
 
-    // ContentManagerは設定読み込み後に初期化
+    // 各種マネージャー（設定読み込み後に初期化）
     this.contentManager = null;
     this.colorSchemeManager = new ColorSchemeManager(editorManager);
+    this.routerManager = new RouterManager(this);
   }
   /**
    * アプリケーション初期化
@@ -44,14 +46,14 @@ export default class AppManager {
       // ContentManagerを初期化
       this.contentManager = new ContentManager(this.appConfig, this.baseURL);
 
-      // URL から初期データタイプを取得
-      const hash = window.location.hash.replace("#", "");
-      if (hash && this.appConfig.dataTypes[hash]) {
-        this.currentDataType = hash;
-      }
+      // ルーター初期化と初期データタイプ取得
+      this.currentDataType = this.routerManager.init();
 
       // グローバルナビゲーションのイベントリスナーを設定
-      this.setupGlobalNavigation();
+      this.routerManager.setupGlobalNavigation();
+
+      // コンソール開閉機能を初期化
+      this.consoleManager.init();
 
       // エディタとタブを初期化（データ読み込み前に実行）
       this.editorManager.init();
@@ -64,52 +66,9 @@ export default class AppManager {
       // 保存された状態を復元（エディタ初期化後）
       this.restoreState();
 
-      // ハッシュ変更イベントリスナーを設定
-      window.addEventListener("hashchange", this.handleHashChange.bind(this));
     } catch (error) {
       console.error("アプリケーション初期化エラー:", error);
     }
-  }
-
-  /**
-   * グローバルナビゲーション設定
-   */
-  setupGlobalNavigation() {
-    const navLinks = document.querySelectorAll(
-      ".global-navigation a[data-page]"
-    );
-
-    navLinks.forEach((link) => {
-      link.addEventListener("click", (e) => {
-        e.preventDefault();
-        const dataType = link.getAttribute("data-page");
-        this.navigateToDataType(dataType);
-      });
-    });
-
-    // コンソール開閉機能を初期化
-    this.consoleManager.init();
-
-    // 初期状態を設定
-    this.updateGlobalNavigationState(this.currentDataType);
-  }
-
-  /**
-   * グローバルナビゲーション状態の更新
-   */
-  updateGlobalNavigationState(dataType) {
-    const navLinks = document.querySelectorAll(
-      ".global-navigation a[data-page]"
-    );
-    navLinks.forEach((link) => {
-      link.classList.toggle(
-        "-active",
-        link.getAttribute("data-page") === dataType
-      );
-    });
-
-    // body の data-page 属性も更新
-    document.body.setAttribute("data-page", dataType);
   }
 
   /**
@@ -121,39 +80,14 @@ export default class AppManager {
   }
 
   /**
-   * データタイプへの遷移
-   */
-  navigateToDataType(dataType) {
-    if (dataType === this.currentDataType) return;
-
-    // URLハッシュを更新
-    window.location.hash = dataType;
-  }
-
-  /**
-   * ハッシュ変更時の処理
-   */
-  async handleHashChange() {
-    const hash = window.location.hash.replace("#", "");
-    const dataType = hash || "matrix";
-
-    if (
-      dataType !== this.currentDataType &&
-      this.appConfig.dataTypes[dataType]
-    ) {
-      await this.loadDataType(dataType);
-    }
-  }
-
-  /**
-   * 指定されたデータタイプを読み込み
+   * 指定されたデータタイプを読み込み（RouterManagerから呼ばれる）
    */
   async loadDataType(dataType) {
     try {
       console.log(`Loading data type: ${dataType}`);
 
       // ナビゲーションの状態更新
-      this.updateGlobalNavigationState(dataType);
+      this.routerManager.updateGlobalNavigationState(dataType);
 
       // 既存のコンテンツをクリア
       this.contentManager.clearCurrentContent();
@@ -162,6 +96,7 @@ export default class AppManager {
       await this.contentManager.loadDataTypeContent(dataType, this.editorManager);
 
       this.currentDataType = dataType;
+      this.routerManager.setCurrentDataType(dataType);
     } catch (error) {
       console.error(`データタイプ "${dataType}" の読み込みエラー:`, error);
     }
