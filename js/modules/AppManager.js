@@ -43,8 +43,8 @@ export default class AppManager {
       const response = await fetch("./app-config.json");
       this.appConfig = await response.json();
 
-      // ContentManagerを初期化
-      this.contentManager = new ContentManager(this.appConfig, this.baseURL);
+      // ContentManagerを初期化（TabManagerの参照を渡す）
+      this.contentManager = new ContentManager(this.appConfig, this.baseURL, this.tabManager);
 
       // ルーター初期化と初期データタイプ取得
       this.currentDataType = this.routerManager.init();

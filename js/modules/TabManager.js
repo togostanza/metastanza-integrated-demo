@@ -54,6 +54,11 @@ class TabManager {
       content.classList.toggle("-active", content.id === targetTab);
     });
 
+    // 状態を保存
+    if (this.stateManager) {
+      this.stateManager.saveActiveTab(targetTab);
+    }
+
     // エディタのリフレッシュ（遅延実行で確実に実行）
     setTimeout(() => {
       this.refreshEditor(targetTab);

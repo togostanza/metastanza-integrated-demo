@@ -3,8 +3,9 @@
  * metadata.json の取得、フォーム生成、パラメータ管理を担当
  */
 export default class MetadataManager {
-  constructor() {
+  constructor(tabManager = null) {
     this.baseMetadataUrl = "https://raw.githubusercontent.com/togostanza/metastanza-devel/main/stanzas";
+    this.tabManager = tabManager;
   }
 
   /**
@@ -30,6 +31,11 @@ export default class MetadataManager {
       this.clearExistingForms();
       this.generateParameterForm(metadata["stanza:parameter"], stanzaId);
       this.generateStyleForm(metadata["stanza:style"], stanzaId);
+
+      // StanzaPramasTabをアクティブに切り替え
+      if (this.tabManager) {
+        this.tabManager.setActiveTab("StanzaPramasTab");
+      }
 
     } catch (err) {
       console.error("metadata.json取得エラー:", err);

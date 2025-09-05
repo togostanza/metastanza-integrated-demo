@@ -5,11 +5,11 @@ import MetadataManager from './MetadataManager.js';
  * DOM要素の生成、スクリプト読み込み、スタンザ作成を担当
  */
 export default class ContentManager {
-  constructor(appConfig, baseURL) {
+  constructor(appConfig, baseURL, tabManager = null) {
     this.appConfig = appConfig;
     this.baseURL = baseURL;
     this.loadedScripts = new Set(); // 読み込み済みスクリプトの管理
-    this.metadataManager = new MetadataManager();
+    this.metadataManager = new MetadataManager(tabManager);
   }
 
   /**
