@@ -21,6 +21,7 @@
             margin-top: 8px;
           }
           > label {
+            text-align: left;
             > span {
               font-size: 12px;
               line-height: 18px;
@@ -29,6 +30,9 @@
             }
             > input {
               width: 100%;
+              &[type="checkbox"] {
+                width: auto;
+              }
             }
           }
         }
