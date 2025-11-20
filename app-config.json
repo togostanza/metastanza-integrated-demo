@@ -268,9 +268,9 @@
           "attributes": {
             "data-url": "",
             "data-type": "json",
+            "node-id_key": "id",
             "node-value_key": "size",
             "node-label_key": "name",
-            "node-values_visible": true,
             "node-color_key": "color",
             "node-color_blend": "normal",
             "node-corner_radius": "0",
