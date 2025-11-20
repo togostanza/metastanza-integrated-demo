@@ -216,7 +216,7 @@
       "description": "Hierarchical data visualization with tree structures",
       "dataSource": {
         "url": "./data/tree-data.json",
-        "receiver": "togostanza-tree, togostanza-sunburst, togostanza-treemap"
+        "receiver": "togostanza-column-tree, togostanza-tree, togostanza-sunburst, togostanza-treemap"
       },
       "stanzas": [
         {
@@ -308,7 +308,7 @@
       "description": "Network and relationship visualization",
       "dataSource": {
         "url": "./data/graph-data.json",
-        "receiver": "togostanza-force-graph, togostanza-chord-diagram"
+        "receiver": "togostanza-force-graph, togostanza-chord-diagram, togostanza-layered-graph"
       },
       "stanzas": [
         {
