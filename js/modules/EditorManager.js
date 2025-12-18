@@ -38,7 +38,9 @@ class EditorManager {
       theme: "default",
     });
 
-    const heightData = window.getComputedStyle(dataTextarea).getPropertyValue("height");
+    const heightData = window
+      .getComputedStyle(dataTextarea)
+      .getPropertyValue("height");
     this.inputEditor.setSize(null, heightData);
 
     // データ変更時の処理
@@ -72,7 +74,9 @@ class EditorManager {
       theme: "default",
     });
 
-    const heightStyle = window.getComputedStyle(styleTextarea).getPropertyValue("height");
+    const heightStyle = window
+      .getComputedStyle(styleTextarea)
+      .getPropertyValue("height");
     this.styleEditor.setSize(null, heightStyle);
 
     // 初期状態で入力する CSS 変数定義
@@ -84,7 +88,7 @@ class EditorManager {
       "--togostanza-theme-series_4_color": "#f57f5b",
       "--togostanza-theme-series_5_color": "#f75976",
       "--togostanza-theme-background_color": "#ecefef",
-      "--togostanza-theme-text_color": "#000000",
+      "--togostanza-fonts-font_color_primary": "#000000",
       "--togostanza-theme-border_color": "#000000",
     };
     const defaultCode = JSON.stringify(defaultStyle, null, 2);
@@ -104,7 +108,7 @@ class EditorManager {
     // エディタ変更時の処理
     this.styleEditor.on("change", () => {
       const val = this.styleEditor.getValue();
-      console.log('Style editor changed:', val);
+      console.log("Style editor changed:", val);
       try {
         JSON.parse(val); // バリデーション
         this.applyStyleFromEditor(val); // 内部でapplyColorSchemeToStanzasも呼ばれる
@@ -138,12 +142,12 @@ class EditorManager {
     try {
       const cssVars = JSON.parse(jsonString);
 
-      console.log('Applying CSS variables:', cssVars);
+      console.log("Applying CSS variables:", cssVars);
 
       // document.documentElementにも適用（グローバル）
       const root = document.documentElement;
       Object.entries(cssVars).forEach(([key, value]) => {
-        if (key.startsWith('--')) {
+        if (key.startsWith("--")) {
           root.style.setProperty(key, value);
         }
       });
@@ -151,7 +155,7 @@ class EditorManager {
       // スタンザ要素への適用は内部メソッドを使用
       this.applyColorSchemeToStanzas(cssVars);
 
-      console.log('Applied CSS variables successfully');
+      console.log("Applied CSS variables successfully");
     } catch (e) {
       console.error("Failed to apply styles:", e);
     }
@@ -182,9 +186,9 @@ class EditorManager {
    * @param {string} editorType - 'data' または 'style'
    */
   refreshEditor(editorType) {
-    if (editorType === 'data' && this.inputEditor) {
+    if (editorType === "data" && this.inputEditor) {
       this.inputEditor.refresh();
-    } else if (editorType === 'style' && this.styleEditor) {
+    } else if (editorType === "style" && this.styleEditor) {
       this.styleEditor.refresh();
     }
   }
@@ -193,11 +197,11 @@ class EditorManager {
    * エディタ準備完了イベントを発火
    */
   dispatchEditorsReady() {
-    const event = new CustomEvent('editorsReady', {
+    const event = new CustomEvent("editorsReady", {
       detail: {
         inputEditor: this.inputEditor,
-        styleEditor: this.styleEditor
-      }
+        styleEditor: this.styleEditor,
+      },
     });
     document.dispatchEvent(event);
   }

@@ -17,7 +17,7 @@
       height: 100%;
       cursor: pointer;
       transition: background-color 0.2s ease;
-      color: var(--togostanza-theme-text_color, #333);
+      color: var(--togostanza-fonts-font_color_primary, #333);
 
       &:hover {
         background-color: rgba(0, 0, 0, 0.1);

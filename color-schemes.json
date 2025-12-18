@@ -8,7 +8,7 @@
     "--togostanza-theme-series_4_color": "#f57f5b",
     "--togostanza-theme-series_5_color": "#f75976",
     "--togostanza-theme-background_color": "#ecefef",
-    "--togostanza-theme-text_color": "#000000",
+    "--togostanza-fonts-font_color_primary": "#000000",
     "--togostanza-theme-border_color": "#000000"
   },
   {
@@ -20,7 +20,7 @@
     "--togostanza-theme-series_4_color": "#ff4247",
     "--togostanza-theme-series_5_color": "#00fffa",
     "--togostanza-theme-background_color": "#000000",
-    "--togostanza-theme-text_color": "#ffffff",
+    "--togostanza-fonts-font_color_primary": "#ffffff",
     "--togostanza-theme-border_color": "#ffffff"
   },
   {
@@ -32,7 +32,7 @@
     "--togostanza-theme-series_4_color": "#AFAFAF",
     "--togostanza-theme-series_5_color": "#D3D3D3",
     "--togostanza-theme-background_color": "#FFFFFF",
-    "--togostanza-theme-text_color": "#000000",
+    "--togostanza-fonts-font_color_primary": "#000000",
     "--togostanza-theme-border_color": "#000000"
   },
   {
@@ -44,7 +44,7 @@
     "--togostanza-theme-series_4_color": "#909d00",
     "--togostanza-theme-series_5_color": "#005524",
     "--togostanza-theme-background_color": "#E6E3E3",
-    "--togostanza-theme-text_color": "#000000",
+    "--togostanza-fonts-font_color_primary": "#000000",
     "--togostanza-theme-border_color": "#000000"
   },
   {
@@ -56,7 +56,7 @@
     "--togostanza-theme-series_4_color": "#d19177",
     "--togostanza-theme-series_5_color": "#edc0c3",
     "--togostanza-theme-background_color": "#FFFFFF",
-    "--togostanza-theme-text_color": "#000000",
+    "--togostanza-fonts-font_color_primary": "#000000",
     "--togostanza-theme-border_color": "#000000"
   },
   {
@@ -68,7 +68,7 @@
     "--togostanza-theme-series_4_color": "#AED6C8",
     "--togostanza-theme-series_5_color": "#C4D6F5",
     "--togostanza-theme-background_color": "#FFFFFF",
-    "--togostanza-theme-text_color": "#000000",
+    "--togostanza-fonts-font_color_primary": "#000000",
     "--togostanza-theme-border_color": "#000000"
   },
   {
@@ -80,7 +80,7 @@
     "--togostanza-theme-series_4_color": "#f2f2f2",
     "--togostanza-theme-series_5_color": "#ffffff",
     "--togostanza-theme-background_color": "#FFFFFF",
-    "--togostanza-theme-text_color": "#5c5c5c",
+    "--togostanza-fonts-font_color_primary": "#5c5c5c",
     "--togostanza-theme-border_color": "#5c5c5c"
   },
   {
@@ -92,8 +92,7 @@
     "--togostanza-theme-series_4_color": "#421838",
     "--togostanza-theme-series_5_color": "#face4b",
     "--togostanza-theme-background_color": "#FFFFFF",
-    "--togostanza-theme-text_color": "#000000",
+    "--togostanza-fonts-font_color_primary": "#000000",
     "--togostanza-theme-border_color": "#000000"
   }
-
 ]

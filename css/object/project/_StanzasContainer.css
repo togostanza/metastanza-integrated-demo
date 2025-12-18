@@ -24,7 +24,7 @@
     max-width: calc(100% - 12px);
     > h3 {
       font-size: 12px;
-      color: var(--togostanza-theme-text_color);
+      color: var(--togostanza-fonts-font_color_primary);
       margin-bottom: 4px;
       cursor: pointer;
     }
