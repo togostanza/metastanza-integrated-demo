@@ -91,6 +91,5 @@ export default class ColorSchemeManager {
     delete schemeCopy.name;
     const jsonText = JSON.stringify(schemeCopy, null, 2);
     this.editorManager.setStyleValue(jsonText);
-    this.editorManager.applyStyleFromEditor(jsonText);
   }
 }
